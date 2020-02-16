@@ -1,0 +1,81 @@
+\documentclass[12pt]{article}
+
+% Basic packages
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[small,bf,center]{caption}
+\usepackage{subfig}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage[autostyle]{csquotes}
+
+% Packages for automated tables
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{standalone}
+\usepackage{pdflscape}
+
+\onehalfspacing
+\textwidth=6.0in
+\textheight=8.5in
+\begin{document}
+
+\title{My Paper}
+\author{Julian Reif\thanks{University of Illinois and NBER.}}
+\maketitle
+
+\begin{abstract}
+\noindent 
+This paper provides an example of a document with tables and figures that were automated using Stata.
+\end{abstract}
+
+\clearpage
+
+\section{Summary}
+
+This example paper includes tables and figures that were created using Stata and outputted into the \textbf{/analysis/results} project folder. Copy the contents of that folder to \textbf{/paper} to update the tables and figures in this document.
+
+Table \ref{tab:my_summary_stats} reports summary statistics for Stata's \textbf{auto.dta} dataset.%
+%
+\footnote{Type \textbf{sysuse auto, clear} at the Stata prompt to load this dataset.}
+%
+The average price of automobiles in this dataset is \$6,165. The price distribution, iillustrated in Figure \ref{fig:price_histogram}, is skewed right.
+
+I estimate the association between automobile prices and fuel efficiency using the following linear model:
+\begin{align}
+PRICE_i&=\alpha + \beta X_i + \varepsilon \label{eqn:model} 
+\end{align}
+The outcome variable, $PRICE_i$, is the price of automobile $i$. The parameter of interest is $\beta$, a vector of coefficients. In my first specification (``spec 1''), the vector $X_i$ includes miles per gallon. The second specification (``spec 2'') also includes the car's weight. I estimate this model using ordinary least squares and report standard errors that are robust to heteroskedasticity. The analysis is performed first using Stata, and then repeated using R.
+
+Table \ref{tab:my_regressions} reports my Stata estimates, separately for domestic and foreign cars. Column (1) reports that an increase in fuel efficiency of 1 mile per gallon is associated with a \$329 reduction in the price of domestic automobiles. Column (2) shows that this association becomes positive and insignificant when I also include weight as a regressor. Columns (3) and (4) show that these associations are similar for foreign automobiles. 
+
+Table \ref{tab:my_regressions_with_r} compares these Stata estimates to estimates from R. Panel A reproduces the Stata estimates that were presented in Table \ref{tab:my_regressions}.  Panel B of Table \ref{tab:my_regressions_with_r} reports estimates when I repeat this analysis in R using the \textbf{lm\_robust} command from the \textit{estimatr} package. The point estimates and the standard errors are identical across both software packages.
+
+\clearpage
+\section{Figures and Tables}
+
+
+%%%
+% Figure: Price histogram
+%%%
+\begin{figure}[ht]
+\caption{Automobile prices}\label{fig:price_histogram}
+\begin{center}
+{\includegraphics[width=1\textwidth]{./figures/price_histogram.pdf}}
+\end{center}
+\footnotesize {Notes: Data were obtained from Stata's built-in auto dataset.}
+\end{figure}
+\clearpage
+
+%%%
+% Tables
+%%%
+
+\input{tables/my_summary_stats.tex}
+\input{tables/my_regressions.tex}
+\input{tables/my_regressions_with_r.tex}
+
+\end{document}

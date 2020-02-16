@@ -1,0 +1,112 @@
+* 00000005
+*! version 1.0.0
+* Do not erase or edit this file
+* It is used by Stata to track the ado and help
+* files you have installed.
+
+S http://fmwww.bc.edu/repec/bocode/r
+N regsave.pkg
+D 22 Dec 2019
+U 1
+d 'REGSAVE': module to save regression results to a Stata-formatted dataset
+d 
+d  regsave fetches output from Stata's e() macros, scalars, and
+d matrices and stores them in  a Stata-formatted dataset. This
+d command provides a user-friendly way to manipulate a large number
+d  of regression results by allowing the user to apply Stata's data
+d manipulation commands to those  results. When combined with the
+d table option and the outsheet command, it also provides an easy
+d way to create tables that can be opened by, or copy and pasted
+d into, other programs such as MS Excel.
+d 
+d KW: regression
+d KW: output
+d KW: tables
+d KW: formatting
+d KW: outsheet
+d 
+d Requires: Stata version 8
+d 
+d Distribution-Date: 20190409
+d 
+d Author: Julian Reif , University of Chicago
+d Support: email jreif@@uchicago.edu
+d 
+f r\regsave.ado
+f r\regsave_tbl.ado
+f r\regsave.hlp
+f r\regsave_tbl.hlp
+e
+S http://fmwww.bc.edu/repec/bocode/t
+N texsave.pkg
+D 22 Dec 2019
+U 2
+d 'TEXSAVE': module to save a dataset in LaTeX format
+d 
+d  texsave saves the dataset currently in memory to a file in LaTeX
+d format. It includes macro code that can be read by Scientific
+d Word (SW) so that SW-specific features are available for your
+d table.
+d 
+d KW: data management
+d KW: text files
+d KW: LaTeX
+d 
+d Requires: Stata version 10
+d 
+d Distribution-Date: 20180110
+d 
+d Author: Julian Reif , University of Chicago
+d Support: email jreif@@uchicago.edu
+d 
+f t\texsave.ado
+f t\texsave.sthlp
+f a\appendfile.ado
+f a\appendfile.hlp
+e
+S http://fmwww.bc.edu/repec/bocode/r
+N rscript.pkg
+D 22 Dec 2019
+U 3
+d 'RSCRIPT': module to call an R script from Stata
+d 
+d   rscript calls the R script filename.R from Stata. It displays
+d the R output (and errors, if applicable) in the    Stata console. d
+d KW: R
+d KW: programming
+d 
+d Requires: Stata version 12
+d 
+d Distribution-Date: 20190914
+d 
+d Author: David Molitor, University of Illinois
+d Support: email  dmolitor@@illinois.edu
+d 
+d Author: Julian Reif , University of Illinois
+d Support: email  jreif@@illinois.edu
+d 
+f r\rscript.ado
+f r\rscript.sthlp
+e
+S https://raw.githubusercontent.com/reifjulian/regsave/master
+N regsave.pkg
+D  3 Jan 2020
+U 4
+d regsave. Extract and store regression results.
+d Julian Reif, University of Illinois (jreif@illinois.edu)
+f r/regsave.ado
+f r/regsave.hlp
+f r/regsave_tbl.ado
+f r/regsave_tbl.hlp
+e
+S https://raw.githubusercontent.com/reifjulian/texsave/master
+N texsave.pkg
+D  3 Jan 2020
+U 5
+d texsave. Save dataset in LaTeX format.
+d Julian Reif, University of Illinois (jreif@illinois.edu)
+f t/texsave.ado
+f t/texsave.sthlp
+f a/appendfile.ado
+f a/appendfile.hlp
+e

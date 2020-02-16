@@ -1,0 +1,32 @@
+alo_star_men            Replication data for Lin 2013
+commarobust             Build lm_robust object from lm fit
+declaration_to_condition_pr_mat
+                        Builds condition probability matrices for
+                        Horvitz-Thompson estimation from 'randomizr'
+                        declaration
+difference_in_means     Design-based difference-in-means estimator
+estimatr                estimatr
+estimatr_glancers       Glance at an estimatr object
+estimatr_tidiers        Tidy an estimatr object
+extract.robust_default
+                        Extract model data for 'texreg' package
+gen_pr_matrix_cluster   Generate condition probability matrix given
+                        clusters and probabilities
+horvitz_thompson        Horvitz-Thompson estimator for two-armed trials
+iv_robust               Two-Stage Least Squares Instrumental Variables
+                        Regression
+lh_robust               Linear Hypothesis for Ordinary Least Squares
+                        with Robust Standard Errors
+lm_lin                  Linear regression with the Lin (2013) covariate
+                        adjustment
+lm_robust               Ordinary Least Squares with Robust Standard
+                        Errors
+lm_robust_fit           Internal method that creates linear fits
+na.omit_detailed.data.frame
+                        Extra logging on na.omit handler
+permutations_to_condition_pr_mat
+                        Builds condition probability matrices for
+                        Horvitz-Thompson estimation from permutation
+                        matrix
+predict.lm_robust       Predict method for 'lm_robust' object
+starprep                Prepare model fits for stargazer

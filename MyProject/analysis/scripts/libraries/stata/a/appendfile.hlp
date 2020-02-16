@@ -1,0 +1,38 @@
+{smcl}
+help {hi:appendfile}
+{hline}
+{title:Title}
+
+{p 4 4 2}{cmd:appendfile} {hline 2} Append two text files together.
+
+
+{title:Syntax}
+
+{p 8 14 2}{cmd:appendfile} {it:file1 file2}
+
+
+{title:Description}
+
+{p 4 4 2}{cmd:appendfile} appends {it:file1} to the end of {it:file2}.
+
+
+{title:Examples}
+
+{col 8}{cmd:. appendfile file1.csv file2.csv}
+	
+
+{title:Author}
+
+{p 4 4 2}Julian Reif, University of Illinois
+
+{p 4 4 2}jreif@illinois.edu
+
+
+{p 4 4 2}Thanks to Nils Enevoldsen for helpful feedback.
+
+
+{title:Also see}
+
+{p 4 4 2}
+{help file write:file write}
+

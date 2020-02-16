@@ -1,0 +1,311 @@
+{smcl}
+help {hi:regsave}
+{hline}
+{title:Title}
+
+{p 4 4 2}{cmd:regsave} {hline 2} Extract and store regression results.
+
+{title:Syntax}
+
+{p 8 14 2}{cmd:regsave} [{it:coeflist}] [{cmd:using} {it:filename}] [, {cmdab:t:stat} {cmdab:p:val} {cmd:ci} {cmdab:l:evel(}#{cmd:)} {cmd:nose} {cmdab:cmd:line} 
+{cmd:autoid} {cmd:covar(}{it:coeflist}{cmd:)} 
+{cmd:detail(}{it:type}{cmd:)} {cmd:coefmat(}{it:matname}{cmd:)} {cmd:varmat(}{it:matname}{cmd:)} {cmd:rtable}
+{cmd:df(}{it:#}{cmd:)} {cmd:double} {cmdab:addlab:el(}{it:newvarname1, label1, newvarname2, label2, ...}{cmd:)} 
+{cmd:addvar(}{it:name1, coef1, stderr1, name2, coef2, stderr2, ...}{cmd:)} {cmd:table(}{it:table_suboptions}{cmd:)} {cmd:saveold(}{it:version #}{cmd:)} {cmd:append} {cmd:replace}]
+
+{p 4 4 2}where
+
+{p 8 14 2}{it:table_suboptions} are
+
+{p 12 14 2}{cmd:table(}{it:name} [, {cmd:order(}{it:string}{cmd:)} {cmd:format(}{it:%}{help fmt}{cmd:)} {cmd:sigfig(}{it:#}{cmd:)} 
+{cmdab:paren:theses(}{it:statlist}{cmd:)} {cmdab:brack:ets(}{it:statlist}{cmd:)} {cmdab:aster:isk}{cmd:(}{help numlist}{cmd:)}]{cmd:)}
+
+{p 8 14 2}{it: coeflist} corresponds to names of regressors for estimation results currently stored in {cmd:e()},
+
+{p 8 14 2}{it: type} can be either {it:all}, {it:scalars}, or {it:macros}, and
+
+{p 8 14 2}{it: statlist} is one or more of the following: {it: coef, stderr, tstat, pval, ci_lower, ci_upper}
+
+
+{title:Description}
+
+{p 4 4 2}{cmd:regsave} fetches estimation results from {cmd:e()} and stores them in "wide" format (default) or "table" format:
+
+{p 8 14 2}1. By default, results are stored in wide format. Use this format when you want to further analyze your regression results using Stata.
+
+{p 8 14 2}2. If you specify the {cmd:table()} option, results are stored in table format.  You can then {help outsheet:outsheet} those results to a text file, or
+use {help texsave:texsave} (if installed) to output your table in LaTeX format (see example 6 below). Use the {cmd:table()} option when you want to create a 
+publication-quality table.
+
+{p 4 4 2}The helper command {help regsave_tbl:regsave_tbl} converts the dataset in memory from wide format to table format.
+
+{title:Options}
+
+{p 4 8 2}
+{cmd:tstat} calculates t-statistics by dividing {it:coef} by {it:stderr}.
+
+
+{p 4 8 2}
+{cmd:pval} calculates two-tailed p-values using the t-statistic and the residual degrees of freedom (as retrieved from {cmd:e(df_r)} or as specified in {cmd:df()}).  
+If the residual degrees of freedom are unavailable, the p-value is calculated by assuming normality.
+
+
+{p 4 8 2}
+{cmd:ci} calculates confidence intervals according to the confidence level set by {cmd:level} (default controlled by {help set level}) and the residual degrees of freedom 
+(as retrieved from {cmd:e(df_r)} or as specified in {cmd:df()}).
+If the residual degrees of freedom are unavailable, the confidence interval is calculated by assuming normality.
+
+
+{p 4 8 2}
+{cmd:level(}#{cmd:)} specifies the confidence level, as a percentage, for confidence intervals.  The default is level(95) or as set by {help set level}.
+
+
+{p 4 8 2}
+{cmd:nose} drops standard errors from the reported results.
+
+
+{p 4 8 2}
+{cmd:cmdline} stores the Stata command code that produced the estimation results, if it's available from {cmd:e(cmdline)}.
+
+
+{p 4 8 2}
+{cmd:autoid} provides an id number for your saved results. This is useful when saving a large number of results to the same dataset. {cmd:autoid} can be used as a complement to and/or substitute for {cmd:addlabel()}.
+
+
+{p 4 8 2}
+{cmd:covar(}{it:coeflist}{cmd:)} instructs Stata to store all possible combinations of covariances for the variables specified in {it:coeflist}.
+
+
+{p 4 8 2}
+{cmd:detail(}{it:type}{cmd:)} stores additional statistics.  If {it:type} is {it:all}, {cmd:regsave} retrieves all results available in {cmd:e()}.  The user may alternatively specify
+a subset of those results: either {it:scalars} or {it:macros}.
+
+
+{p 4 8 2}
+{cmd:coefmat(}{it:matname}{cmd:)} instructs Stata to retrieve coefficient estimates from {it:matname} instead of {cmd:e(b)}, the default.  See the notes section below for more information.
+
+
+{p 4 8 2}
+{cmd:varmat(}{it:matname}{cmd:)} instructs Stata to retrieve variance estimates from {it:matname} instead of {cmd:e(V)}, the default.  See the notes section below for more information.
+
+
+{p 4 8 2}
+{cmd:rtable} instructs {cmd:regsave} to fetch estimation results from {cmd:r(table)} rather than {cmd:e()}. This is helpful when an estimation command reports results that differ from what is stored in {cmd:e()}. 
+See the notes section below (and also example 7) for more information.
+
+
+{p 4 8 2}
+{cmd:df(}{it:#}{cmd:)} instructs Stata to calculate p-values and confidence intervals using # as the degrees of freedom instead of what is stored in {cmd:e(df_r)}. 
+{it:#} can be specified as missing ('.') or as any real number greater than 0.
+If {it:#} is set to missing, {cmd:regsave} assumes normality.
+
+
+{p 4 8 2}
+{cmd:double} specifies that all numeric statistics be stored as doubles instead of floats.
+
+
+{p 4 8 2}
+{cmd:addlabel(}{it:newvarname1, label1, newvarname2, label2, ...}{cmd:)} instructs Stata to create additional variables containing label data.  The user-specified {it:label1} is stored in {it:newvarname1}, {it:label2}
+is stored in {it:newvarname2}, etc.  This is a good way to label your results when storing lots of regression results together in one dataset.
+It is also a good way to store additional statistics that are not automatically retrieved by {cmd:regsave} (see example 4 below).
+
+
+{p 4 8 2}
+{cmd:addvar(}{it:name1, coef1, stderr1, name2, coef2, stderr2, ...}{cmd:)} allows the user to store estimates for variables that are not currently stored in {cmd:e(b)} and {cmd:e(V)} (see example 5 below).
+
+
+{p 4 8 2}
+{cmd:table(}{it:name, suboptions}{cmd:)} stores estimates in a table format, with standard errors (and t-statistic and p-values, if specified)
+listed below coefficient estimates in a single column.  {it:name} specifies the name of the column.  
+
+{p 8 14 2}{ul:{it: suboptions}}:
+
+{p 8 14 2}{cmd:order(}{it:string}{cmd:)} allows the user to specify the table's row order.  The name {it:regvars} can be used to refer to all regression variables retrieved by {cmd:regsave} (see example 6 below).  
+
+{p 8 14 2}{cmd:format(}{it:%}{help fmt}{cmd:)} allows you to specify the formats of the numbers in your table.
+For example, a format of %7.2f specifies that numbers are to be rounded to two decimal places.  See {help format:[D] format} for details.  
+
+{p 8 14 2}{cmd:sigfig(}{it:#}{cmd:)} allows you to specify the number of significant figures for the numbers in your table.
+This is equivalent to specifying {cmd:format(}{it:%12.#gc}{cmd:)} for some integer {it:#} and then filling in leading and trailing zeros.
+
+{p 8 14 2}{cmd:parentheses(}{it:statlist}{cmd:)} puts parentheses around {it:statlist}.  
+
+{p 8 14 2}{cmd:brackets(}{it:statlist}{cmd:)} puts brackets around {it:statlist}.
+
+{p 8 14 2}{cmd:asterisk(}{help numlist}{cmd:)} allows you to specify up to three (descending) significance levels for asterisks.  
+For example, {cmd:asterisk(}5 1{cmd:)} place a */** next to coefficients that are significant at the 5/1% level, respectively.
+Specifying {cmd:asterisk()} sets a default, which places a */**/*** next to coefficients that are significant at the 10/5/1% level.
+
+
+{p 4 8 2}
+{cmd:saveold(}{it:version #}{cmd:)} uses Stata's {help saveold} command to save data in memory to file in an older Stata format.
+
+
+{p 4 8 2}
+{cmd:append} appends the regression results to the Stata dataset {it:filename}.
+
+
+{p 4 8 2}
+{cmd:replace} overwrites {it:filename}.
+
+
+{title:Notes}
+
+{p 4 4 2}
+By default, Stata retrieves coefficient and variance estimates from {cmd:e(b)} and {cmd:e(V)}, respectively.  One exception is if the user executes {cmd:regsave} after running a {cmd:dprobit} estimation.  
+In that case, {cmd:regsave} retrieves the estimates from {cmd:e(dfdx)} and {cmd:e(se_dfdx)}.
+Use options {cmd:coefmat(}{it:matname}{cmd:)} and {cmd:varmat(}{it:matname}{cmd:)} if you want to retrieve estimates from matrices that differ from these defaults.
+Note that {cmd:regsave} will take the square root of {cmd:varmat(}{it:matname}{cmd:)} unless the string "se" is detected in {it:matname} (in which case it assumes that standard errors, not variances, are reported).
+
+{p 4 4 2}
+Alternatively, specify the {cmd:rtable} option to make {cmd:regsave} fetch results from {cmd:r(table)}. This is useful for commands which report output that differs from what is stored in {cmd:e()} (e.g., example 7).
+
+
+{title:List of retrieved items}
+
+{p 4 4 2}{cmd:regsave} automatically retrieves the following items from {cmd:e()} when they are available:
+
+
+{col 8}Matrices
+{col 10}{cmd:e(b)}{col 28} Coefficient estimates (can be overridden with option {cmd:coefmat(}{it:matname}{cmd:)})
+{col 10}{cmd:e(V)}{col 28} Variance-covariance matrix (can be overridden with option {cmd:varmat(}{it:matname}{cmd:)})
+
+{col 8}Scalars
+{col 10}{cmd:e(N)}{col 28} Number of observations
+{col 10}{cmd:e(r2)}{col 28} R-squared
+
+
+{p 4 4 2}If {cmd:detail(}{it:all}{cmd:)} is specified, {cmd:regsave} retrieves all available statistics from {cmd:e()}.
+
+
+{title:Saved results}
+
+{p 4 4 2}{cmd:regsave} saves the following scalars to {cmd:r()}:
+
+{col 10}{cmd:r(N)}{col 28} Number of rows in the newly created dataset
+{col 10}{cmd:r(k)}{col 28} Number of columns in the newly created dataset
+
+
+{title:Examples}
+
+{p 4 4 2}1. Replace contents of the active dataset with regression results:
+
+{col 8}{cmd:. {stata sysuse auto.dta, clear}}
+
+{col 8}{cmd:. {stata regress price mpg trunk headroom length}}
+
+{col 8}{cmd:. {stata regsave}}
+
+{col 8}{cmd:. {stata list}}
+
+
+{p 4 4 2}2. Save regression results to a file:
+
+{col 8}{cmd:. {stata sysuse auto.dta, clear}}
+
+{col 8}{cmd:. {stata regress price mpg trunk headroom length}}
+
+{col 8}{cmd:. {stata regsave using results, replace}}
+
+
+{p 4 4 2}3. Store regression results in table format:
+
+{col 8}{cmd:. {stata sysuse auto.dta, clear}}
+
+{col 8}{cmd:. {stata regress price mpg trunk headroom length}}
+
+{col 8}{cmd:. {stata regsave, tstat pval table(regression_1, parentheses(stderr) brackets(tstat pval))}}
+
+{col 8}{cmd:. {stata list}}
+
+
+{p 4 4 2}4. Save multiple regression results to a file and label them:
+
+{col 8}{cmd:. {stata sysuse auto.dta, clear}}
+
+{col 8}{cmd:. {stata regress price mpg trunk headroom length if gear_ratio > 3}}
+
+{col 8}{cmd:. {stata regsave using results, addlabel(subsample, gear ratio > 3, dataset, auto) replace}}
+
+{col 8}{cmd:. {stata regress price mpg trunk headroom length if gear_ratio <= 3}}
+
+{col 8}{cmd:. {stata regsave using results, addlabel(subsample, gear ratio <=3, dataset, auto) append}}
+
+{col 8}{cmd:. {stata use results, clear}}
+
+{col 8}{cmd:. {stata list}}
+
+
+{p 4 4 2}5. Include coefficient and standard error estimates for an additional variable:
+
+{col 8}{cmd:. {stata sysuse auto.dta, clear}}
+
+{col 8}{cmd:. {stata regress price mpg trunk headroom length}}
+
+{col 8}{cmd:. {stata local mycoef = _b[mpg]*5}}
+
+{col 8}{cmd:. {stata local mystderr = _se[mpg]*5}}
+
+{col 8}{cmd:. {stata regsave, addvar(mpg_5, `mycoef', `mystderr')}}
+
+{col 8}{cmd:. {stata list}}
+
+
+{p 4 4 2}6. Save multiple regression results and output as a LaTeX table
+(requires installing {stata ssc describe texsave:texsave}):
+
+{col 8}{cmd:. {stata sysuse auto.dta, clear}}
+
+{col 8}{cmd:. {stata regress price mpg trunk}}
+
+{col 8}{cmd:. {stata regsave using results, table(reg1, format(%5.2f) parentheses(stderr) asterisk(10 5) order(regvars r2 N)) replace}}
+
+{col 8}{cmd:. {stata regress price mpg trunk headroom}}
+
+{col 8}{cmd:. {stata regsave using results, table(reg2, format(%5.2f) parentheses(stderr) asterisk(10 5) order(regvars r2 N)) append}}
+
+{col 8}{cmd:. {stata regress price mpg trunk headroom length}}
+
+{col 8}{cmd:. {stata regsave using results, table(reg3, format(%5.2f) parentheses(stderr) asterisk(10 5) order(regvars r2 N)) append}}
+
+{col 8}{cmd:. {stata use results, clear}}
+
+{col 8}{cmd:. {stata drop if strpos(var,"_cons")!=0}}
+
+{col 8}{cmd:. {stata replace var = subinstr(var,"_coef","",.)}}
+
+{col 8}{cmd:. {stata replace var = "" if strpos(var,"_stderr")!=0}}
+
+{col 8}{cmd:. {stata replace var = "R-squared" if var == "r2"}}
+
+{col 8}{cmd:. {stata texsave using "table.tex", title("My estimates") footnote("A */** next to the coefficient indicates significance at the 10/5% level.") nonames autonumber hlines(-2) replace}}
+
+
+{p 4 4 2}7. Save incidence-rate ratios, which are not stored in {cmd:e(b)}:
+
+{col 8}{cmd:. {stata webuse airline, clear}}
+
+{col 8}{cmd:. {stata poisson injuries XYZowned, exposure(n) irr}}
+
+{col 8}{cmd:. {stata regsave, t pval ci rtable}}
+
+{col 8}{cmd:. {stata list}}
+
+
+{title:Author}
+
+{p 4 4 2}Julian Reif, University of Illinois
+
+{p 4 4 2}jreif@illinois.edu
+
+
+{title:Also see}
+
+{p 4 4 2}
+{help regsave_tbl:regsave_tbl},
+{help estimates store:estimates store},
+{help outreg2:outreg2} (if installed),
+{help sortobs:sortobs} (if installed),
+{help texsave:texsave} (if installed),
+{help svret:svret} (if installed)
+

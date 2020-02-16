@@ -1,0 +1,32 @@
+\documentclass{article}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage[margin=1in]{geometry}
+\begin{document}
+
+\begin{table}[tbp] \centering
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+
+\caption{Association between automobile price and fuel efficiency}
+\label{tab:my_regressions}
+\begin{tabularx}{\linewidth}{lCCCC}
+
+\toprule
+&{(1)}&{(2)}&{(3)}&{(4)} \tabularnewline \midrule
+& \multicolumn{2}{c}{Domestic} & \multicolumn{2}{c}{Foreign}  \tabularnewline \cmidrule(lr){2-3} \cmidrule(lr){4-5} \tabularnewline
+{}&{Spec 1}&{Spec 2}&{Spec 1}&{Spec 2} \tabularnewline
+\midrule \addlinespace[\belowrulesep]
+Miles per gallon&-329***&238&-250**&-19.8 \tabularnewline
+&(81.2)&(203)&(88.2)&(51.7) \tabularnewline
+Weight (pounds)&&4.42***&&5.16*** \tabularnewline
+&&(1.34)&&(0.770) \tabularnewline
+\midrule N&52&52&22&22 \tabularnewline
+\(R^2\)&0.254&0.483&0.399&0.785 \tabularnewline
+\bottomrule \addlinespace[\belowrulesep]
+
+\end{tabularx}
+\begin{flushleft}
+\footnotesize Notes: Outcome variable is price (1978 dollars). Columns (1) and (2) report estimates of \(\beta\) from equation (\ref{eqn:model}) for domestic automobiles. Columns (3) and (4) report estimates for foreign automobiles. Robust standard errors are reported in parentheses. A */**/*** indicates significance at the 10/5/1\% levels.
+\end{flushleft}
+\end{table}
+\end{document}

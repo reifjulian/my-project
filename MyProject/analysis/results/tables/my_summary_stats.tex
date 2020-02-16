@@ -1,0 +1,27 @@
+\documentclass{article}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage[margin=1in]{geometry}
+\begin{document}
+
+\begin{table}[tbp] \centering
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+
+\caption{Summary statistics}
+\label{tab:my_summary_stats}
+\begin{tabularx}{\linewidth}{lCCCCC}
+
+\toprule
+{}&{Mean}&{Stdev.}&{Min}&{Max}&{Count} \tabularnewline
+\midrule \addlinespace[\belowrulesep]
+Weight (pounds)&3,019&777&1,760&4,840&0 \tabularnewline
+Miles per gallon&21.3&5.79&12&41&0 \tabularnewline
+Price (1978 dollars)&6,165&2,949&3,291&15,906&0 \tabularnewline
+\bottomrule \addlinespace[\belowrulesep]
+
+\end{tabularx}
+\begin{flushleft}
+\footnotesize Notes: Count reports the number of non-missing values for the variable.
+\end{flushleft}
+\end{table}
+\end{document}

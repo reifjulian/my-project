@@ -1,0 +1,66 @@
+{smcl}
+help {hi:regsave_tbl}
+{hline}
+{title:Title}
+
+{p 4 4 2}{cmd:regsave_tbl} {hline 2} Convert results saved by {help regsave:regsave} from wide format to table format.
+
+{title:Syntax}
+
+{p 8 14 2}{cmd:regsave_tbl} [if] [in], {cmd:name(}{it:name}{cmd:)} [{cmd:order(}{it:string}{cmd:)} {cmd:format(}{it:%}{help fmt}{cmd:)} {cmd:sigfig(}{it:#}{cmd:)} 
+{cmdab:paren:theses(}{it:statlist}{cmd:)} {cmdab:brack:ets(}{it:statlist}{cmd:)} {cmdab:aster:isk}{cmd:(}{help numlist}{cmd:)}]
+
+
+{title:Description}
+
+{p 4 4 2}{cmd:regsave} allows you to save regression results in either a "wide" format or a "table" format. In some cases, you may want to first save results in the wide format, and then
+later convert those results to table format. {cmd:regsave_tbl} performs this conversion. See example 2 below. 
+
+{p 4 4 2}{cmd:regsave_tbl} is a helper command designed only for use with unaltered datasets created by {cmd:regsave}. Using it outside of this context may generate errors.
+
+
+{title:Options}
+
+{p 4 4 2}See {cmd:table()} suboptions in the {help regsave:regsave} help file.
+
+
+{title:Examples}
+
+{p 4 4 2}1. Save regression results in table format using {cmd:regsave}:
+
+{col 8}{cmd:. {stata sysuse auto.dta, clear}}
+
+{col 8}{cmd:. {stata regress price mpg trunk headroom length}}
+
+{col 8}{cmd:. {stata regsave, tstat pval table(regression_1, parentheses(stderr) brackets(tstat pval))}}
+
+{col 8}{cmd:. {stata list}}
+
+
+{p 4 4 2}2. Save regression results in wide format using {cmd:regsave}, and then convert to table format using {cmd:regsave_tbl}:
+
+{col 8}{cmd:. {stata sysuse auto.dta, clear}}
+
+{col 8}{cmd:. {stata regress price mpg trunk headroom length}}
+
+{col 8}{cmd:. {stata regsave, tstat pval}}
+
+{col 8}{cmd:. {stata list}}
+
+{col 8}{cmd:. {stata regsave_tbl, name(regression_1) parentheses(stderr) brackets(tstat pval)}}
+
+{col 8}{cmd:. {stata list}}
+
+
+{title:Author}
+
+{p 4 4 2}Julian Reif, University of Illinois
+
+{p 4 4 2}jreif@illinois.edu
+
+
+{title:Also see}
+
+{p 4 4 2}
+{help regsave:regsave}
+

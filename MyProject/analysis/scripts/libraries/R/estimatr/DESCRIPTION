@@ -40,5 +40,5 @@ Author: Graeme Blair [aut, cre],
 Maintainer: Graeme Blair <graeme.blair@ucla.edu>
 Repository: CRAN
 Date/Publication: 2019-09-09 05:10:06 UTC
-Built: R 3.6.2; x86_64-w64-mingw32; 2020-02-11 06:01:32 UTC; windows
-Archs: i386, x64
+Built: R 3.6.0; x86_64-apple-darwin15.6.0; 2019-09-10 13:05:02 UTC; unix
+Archs: estimatr.so.dSYM

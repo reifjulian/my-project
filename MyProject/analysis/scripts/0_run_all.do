@@ -18,15 +18,15 @@
 * User must define two global macros in order to run the analysis:
 * (1) "MyProject" points to the project folder
 * (2) "RSCRIPT_PATH" points to the folder containing the executables for R-3.4.0
-* global MyProject "C:/Users/jdoe/my_project"
+* global MyProject "C:/Users/jdoe/MyProject"
 * global RSCRIPT_PATH "C:/Program Files/R/R-3.4.0/bin/x64"
 
 * To disable the R portion of the analysis, set the following flag to 1
-global DisableR 0
+global DisableR = 0
 
 * Confirm that the globals for the project root directory and the R executable have been defined
 assert !missing("$MyProject")
-if !$DisableR assert !missing("$RSCRIPT_PATH")
+if "$DisableR"!="1" assert !missing("$RSCRIPT_PATH")
 
 * Log session
 clear 
@@ -38,7 +38,6 @@ local logfile "$MyProject/analysis/scripts/logs/log_`datetime'.smcl"
 log using "`logfile'"
 di "Begin date and time: $S_DATE $S_TIME"
 
-
 * All required Stata packages are available in the /libraries folder
 adopath ++ "$MyProject/analysis/scripts/libraries/stata"
 mata: mata mlib index
@@ -48,7 +47,7 @@ adopath ++ "$MyProject/analysis/scripts/functions"
 
 * Stata and R version control
 version 15
-if !$DisableR rscript using "$MyProject/analysis/scripts/functions/_confirm_version.R"
+if "$DisableR"!="1" rscript using "$MyProject/analysis/scripts/functions/_confirm_version.R"
 
 * Create directories for output files
 cap mkdir "$MyProject/analysis/results"

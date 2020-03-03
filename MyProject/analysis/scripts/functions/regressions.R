@@ -5,20 +5,16 @@ args = commandArgs(trailingOnly = "TRUE")
 if (length(args)) {
   dataset <- args[1]
   output <- args[2]
-  MyProject <- args[3]
 } else {
   MyProject <- Sys.getenv(c("MyProject"))
   dataset <- file.path(MyProject, "analysis/data/proc/auto.dta")
   output <- file.path(MyProject, "analysis/results/intermediate/my_lm_regressions.dta")
 }
 
-# Local (non-tidyverse) libraries are stored in the project
-lib = file.path(MyProject, "analysis/scripts/libraries/R")
-
 # Load required libraries
 library(tidyverse)
 library(haven)
-library(estimatr, lib.loc = lib)
+library(estimatr)
 
 my_data <- read_dta(dataset)
 

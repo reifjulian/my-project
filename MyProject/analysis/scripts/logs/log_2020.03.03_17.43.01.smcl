@@ -1,0 +1,825 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/logs/log_2020.03.03_17.43.01.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 3 Mar 2020, 17:43:01
+{txt}
+{com}. di "Begin date and time: $S_DATE $S_TIME"
+{res}Begin date and time:  3 Mar 2020 17:43:01
+{txt}
+{com}. 
+. * All required Stata packages are available in the /libraries folder
+. adopath ++ "$MyProject/analysis/scripts/libraries/stata"
+{txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/libraries/stata{txt}"
+  [2]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
+  [3]  (SITE)      "{res}C:\Program Files\Stata16\ado\site/{txt}"
+  [4]              "{res}.{txt}"
+  [5]  (PERSONAL)  "{res}C:\Users\jreif\ado\personal/{txt}"
+  [6]  (PLUS)      "{res}c:\ado\plus/{txt}"
+  [7]  (OLDPLACE)  "{res}c:\ado/{txt}"
+
+{com}. mata: mata mlib index
+{txt}.mlib libraries to be searched are now
+    lmatabase;lmataado;lmataerm;lmatafc;lmatagsem;lmatalasso;lmatamcmc;lmatameta;lmatami;lmatamixlog;lmatanumlib;lmataopt;lmatapath;lmatapostest;lmatapss;lmatasem;lmatasp;lmatasvy;lmatatab;lparallel
+
+{com}. 
+. * Stata programs and R scripts are stored in /functions
+. adopath ++ "$MyProject/analysis/scripts/functions"
+{txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/functions{txt}"
+  [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/libraries/stata{txt}"
+  [3]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
+  [4]  (SITE)      "{res}C:\Program Files\Stata16\ado\site/{txt}"
+  [5]              "{res}.{txt}"
+  [6]  (PERSONAL)  "{res}C:\Users\jreif\ado\personal/{txt}"
+  [7]  (PLUS)      "{res}c:\ado\plus/{txt}"
+  [8]  (OLDPLACE)  "{res}c:\ado/{txt}"
+
+{com}. 
+. * Stata and R version control
+. version 15
+{txt}
+{com}. if "$DisableR"!="1" rscript using "$MyProject/analysis/scripts/functions/_confirm_version.R"
+{res}Running R script: C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/functions/_confirm_version.R
+
+
+Begin R output:
+________________________________________________________________________________
+{ul:stdout}:
+
+
+{ul:stderr}:
+________________________________________________________________________________
+...end R output
+
+{txt}
+{com}. 
+. * Create directories for output files
+. cap mkdir "$MyProject/analysis/results"
+{txt}
+{com}. cap mkdir "$MyProject/analysis/results/figures"
+{txt}
+{com}. cap mkdir "$MyProject/analysis/results/intermediate"
+{txt}
+{com}. cap mkdir "$MyProject/analysis/results/tables"
+{txt}
+{com}. 
+. * Run project analysis
+. do "$MyProject/analysis/scripts/1_process_raw_data.do"
+{txt}
+{com}. ************
+. * Preamble: these two lines of code are included so that individual scripts can be run standalone (if desired)
+. ************
+. adopath ++ "$MyProject/analysis/scripts/libraries/stata"
+{txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/libraries/stata{txt}"
+  [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/functions{txt}"
+  [3]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
+  [4]  (SITE)      "{res}C:\Program Files\Stata16\ado\site/{txt}"
+  [5]              "{res}.{txt}"
+  [6]  (PERSONAL)  "{res}C:\Users\jreif\ado\personal/{txt}"
+  [7]  (PLUS)      "{res}c:\ado\plus/{txt}"
+  [8]  (OLDPLACE)  "{res}c:\ado/{txt}"
+
+{com}. adopath ++ "$MyProject/analysis/scripts/functions"
+{txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/functions{txt}"
+  [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/libraries/stata{txt}"
+  [3]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
+  [4]  (SITE)      "{res}C:\Program Files\Stata16\ado\site/{txt}"
+  [5]              "{res}.{txt}"
+  [6]  (PERSONAL)  "{res}C:\Users\jreif\ado\personal/{txt}"
+  [7]  (PLUS)      "{res}c:\ado\plus/{txt}"
+  [8]  (OLDPLACE)  "{res}c:\ado/{txt}"
+
+{com}. 
+. ************
+. * SCRIPT: 1_process_raw_data.do
+. * PURPOSE: imports the raw data and saves it in Stata readable format
+. ************
+. 
+. 
+. 
+. cap mkdir "$MyProject/analysis/data/proc"
+{txt}
+{com}. cap mkdir "$MyProject/analysis/data/proc/intermediate"
+{txt}
+{com}. 
+. 
+. insheet using "$MyProject/analysis/data/raw/auto.csv", comma clear
+{txt}(12 vars, 74 obs)
+
+{com}. 
+. compress
+{txt}  (0 bytes saved)
+
+{com}. save "$MyProject/analysis/data/proc/intermediate/auto_uncleaned.dta", replace
+{txt}file C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/data/proc/intermediate/auto_uncleaned.dta saved
+
+{com}. 
+. ** EOF
+. 
+{txt}end of do-file
+
+{com}. do "$MyProject/analysis/scripts/2_clean_data.do"
+{txt}
+{com}. ************
+. * Preamble: these two lines of code are included so that individual scripts can be run standalone (if desired)
+. ************
+. adopath ++ "$MyProject/analysis/scripts/libraries/stata"
+{txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/libraries/stata{txt}"
+  [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/functions{txt}"
+  [3]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
+  [4]  (SITE)      "{res}C:\Program Files\Stata16\ado\site/{txt}"
+  [5]              "{res}.{txt}"
+  [6]  (PERSONAL)  "{res}C:\Users\jreif\ado\personal/{txt}"
+  [7]  (PLUS)      "{res}c:\ado\plus/{txt}"
+  [8]  (OLDPLACE)  "{res}c:\ado/{txt}"
+
+{com}. adopath ++ "$MyProject/analysis/scripts/functions"
+{txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/functions{txt}"
+  [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/libraries/stata{txt}"
+  [3]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
+  [4]  (SITE)      "{res}C:\Program Files\Stata16\ado\site/{txt}"
+  [5]              "{res}.{txt}"
+  [6]  (PERSONAL)  "{res}C:\Users\jreif\ado\personal/{txt}"
+  [7]  (PLUS)      "{res}c:\ado\plus/{txt}"
+  [8]  (OLDPLACE)  "{res}c:\ado/{txt}"
+
+{com}. 
+. ************
+. * SCRIPT: 2_clean_data.do
+. * PURPOSE: processes the main dataset in preparation for analysis
+. ************
+. 
+. use "$MyProject/analysis/data/proc/intermediate/auto_uncleaned.dta", clear
+{txt}
+{com}. 
+. * Replace missing values with median for that variable
+. foreach v of varlist * {c -(}
+{txt}  2{com}.         cap confirm numeric var `v'
+{txt}  3{com}.         if _rc continue
+{txt}  4{com}.         
+.         gen imp_`v' = mi(`v')
+{txt}  5{com}.         label var imp_`v' "Imputed value for `v'"
+{txt}  6{com}.         summ `v', detail
+{txt}  7{com}.         replace `v' = r(p50) if mi(`v')
+{txt}  8{com}. {c )-}
+
+                            {txt}price
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}     3291           3291
+{txt} 5%    {res}     3748           3299
+{txt}10%    {res}     3895           3667       {txt}Obs         {res}         74
+{txt}25%    {res}     4195           3748       {txt}Sum of Wgt. {res}         74
+
+{txt}50%    {res}   5006.5                      {txt}Mean          {res} 6165.257
+                        {txt}Largest       Std. Dev.     {res} 2949.496
+{txt}75%    {res}     6342          13466
+{txt}90%    {res}    11385          13594       {txt}Variance      {res}  8699526
+{txt}95%    {res}    13466          14500       {txt}Skewness      {res} 1.653434
+{txt}99%    {res}    15906          15906       {txt}Kurtosis      {res} 4.819188
+{txt}(0 real changes made)
+
+                             mpg
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}       12             12
+{txt} 5%    {res}       14             12
+{txt}10%    {res}       14             14       {txt}Obs         {res}         74
+{txt}25%    {res}       18             14       {txt}Sum of Wgt. {res}         74
+
+{txt}50%    {res}       20                      {txt}Mean          {res}  21.2973
+                        {txt}Largest       Std. Dev.     {res} 5.785503
+{txt}75%    {res}       25             34
+{txt}90%    {res}       29             35       {txt}Variance      {res} 33.47205
+{txt}95%    {res}       34             35       {txt}Skewness      {res} .9487176
+{txt}99%    {res}       41             41       {txt}Kurtosis      {res} 3.975005
+{txt}(0 real changes made)
+
+                            rep78
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}        1              1
+{txt} 5%    {res}        2              1
+{txt}10%    {res}        2              2       {txt}Obs         {res}         69
+{txt}25%    {res}        3              2       {txt}Sum of Wgt. {res}         69
+
+{txt}50%    {res}        3                      {txt}Mean          {res} 3.405797
+                        {txt}Largest       Std. Dev.     {res} .9899323
+{txt}75%    {res}        4              5
+{txt}90%    {res}        5              5       {txt}Variance      {res} .9799659
+{txt}95%    {res}        5              5       {txt}Skewness      {res}-.0570331
+{txt}99%    {res}        5              5       {txt}Kurtosis      {res} 2.678086
+{txt}(5 real changes made)
+
+                          headroom
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}      1.5            1.5
+{txt} 5%    {res}      1.5            1.5
+{txt}10%    {res}        2            1.5       {txt}Obs         {res}         74
+{txt}25%    {res}      2.5            1.5       {txt}Sum of Wgt. {res}         74
+
+{txt}50%    {res}        3                      {txt}Mean          {res} 2.993243
+                        {txt}Largest       Std. Dev.     {res} .8459948
+{txt}75%    {res}      3.5            4.5
+{txt}90%    {res}        4            4.5       {txt}Variance      {res} .7157071
+{txt}95%    {res}      4.5            4.5       {txt}Skewness      {res} .1408651
+{txt}99%    {res}        5              5       {txt}Kurtosis      {res} 2.208453
+{txt}(0 real changes made)
+
+                            trunk
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}        5              5
+{txt} 5%    {res}        7              6
+{txt}10%    {res}        8              7       {txt}Obs         {res}         74
+{txt}25%    {res}       10              7       {txt}Sum of Wgt. {res}         74
+
+{txt}50%    {res}       14                      {txt}Mean          {res} 13.75676
+                        {txt}Largest       Std. Dev.     {res} 4.277404
+{txt}75%    {res}       17             21
+{txt}90%    {res}       20             21       {txt}Variance      {res} 18.29619
+{txt}95%    {res}       21             22       {txt}Skewness      {res} .0292034
+{txt}99%    {res}       23             23       {txt}Kurtosis      {res} 2.192052
+{txt}(0 real changes made)
+
+                           weight
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}     1760           1760
+{txt} 5%    {res}     1830           1800
+{txt}10%    {res}     2020           1800       {txt}Obs         {res}         74
+{txt}25%    {res}     2240           1830       {txt}Sum of Wgt. {res}         74
+
+{txt}50%    {res}     3190                      {txt}Mean          {res} 3019.459
+                        {txt}Largest       Std. Dev.     {res} 777.1936
+{txt}75%    {res}     3600           4290
+{txt}90%    {res}     4060           4330       {txt}Variance      {res} 604029.8
+{txt}95%    {res}     4290           4720       {txt}Skewness      {res} .1481164
+{txt}99%    {res}     4840           4840       {txt}Kurtosis      {res} 2.118403
+{txt}(0 real changes made)
+
+                           length
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}      142            142
+{txt} 5%    {res}      154            147
+{txt}10%    {res}      157            149       {txt}Obs         {res}         74
+{txt}25%    {res}      170            154       {txt}Sum of Wgt. {res}         74
+
+{txt}50%    {res}    192.5                      {txt}Mean          {res} 187.9324
+                        {txt}Largest       Std. Dev.     {res} 22.26634
+{txt}75%    {res}      204            221
+{txt}90%    {res}      218            222       {txt}Variance      {res} 495.7899
+{txt}95%    {res}      221            230       {txt}Skewness      {res}-.0409746
+{txt}99%    {res}      233            233       {txt}Kurtosis      {res}  2.04156
+{txt}(0 real changes made)
+
+                            turn
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}       31             31
+{txt} 5%    {res}       33             32
+{txt}10%    {res}       34             33       {txt}Obs         {res}         74
+{txt}25%    {res}       36             33       {txt}Sum of Wgt. {res}         74
+
+{txt}50%    {res}       40                      {txt}Mean          {res} 39.64865
+                        {txt}Largest       Std. Dev.     {res} 4.399354
+{txt}75%    {res}       43             46
+{txt}90%    {res}       45             48       {txt}Variance      {res} 19.35431
+{txt}95%    {res}       46             48       {txt}Skewness      {res} .1238259
+{txt}99%    {res}       51             51       {txt}Kurtosis      {res} 2.229458
+{txt}(0 real changes made)
+
+                        displacement
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}       79             79
+{txt} 5%    {res}       86             85
+{txt}10%    {res}       97             86       {txt}Obs         {res}         74
+{txt}25%    {res}      119             86       {txt}Sum of Wgt. {res}         74
+
+{txt}50%    {res}      196                      {txt}Mean          {res} 197.2973
+                        {txt}Largest       Std. Dev.     {res} 91.83722
+{txt}75%    {res}      250            350
+{txt}90%    {res}      350            400       {txt}Variance      {res} 8434.075
+{txt}95%    {res}      350            400       {txt}Skewness      {res} .5916565
+{txt}99%    {res}      425            425       {txt}Kurtosis      {res} 2.375577
+{txt}(0 real changes made)
+
+                         gear_ratio
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}     2.19           2.19
+{txt} 5%    {res}     2.28           2.24
+{txt}10%    {res}     2.43           2.26       {txt}Obs         {res}         74
+{txt}25%    {res}     2.73           2.28       {txt}Sum of Wgt. {res}         74
+
+{txt}50%    {res}    2.955                      {txt}Mean          {res} 3.014865
+                        {txt}Largest       Std. Dev.     {res} .4562871
+{txt}75%    {res}     3.37           3.78
+{txt}90%    {res}     3.72           3.78       {txt}Variance      {res} .2081979
+{txt}95%    {res}     3.78           3.81       {txt}Skewness      {res} .2191658
+{txt}99%    {res}     3.89           3.89       {txt}Kurtosis      {res} 2.101812
+{txt}(0 real changes made)
+
+{com}. 
+. compress
+  {txt}variable {bf}imp_price{sf} was {bf}{res}float{sf}{txt} now {bf}{res}byte{sf}
+  {txt}variable {bf}imp_mpg{sf} was {bf}{res}float{sf}{txt} now {bf}{res}byte{sf}
+  {txt}variable {bf}imp_rep78{sf} was {bf}{res}float{sf}{txt} now {bf}{res}byte{sf}
+  {txt}variable {bf}imp_headroom{sf} was {bf}{res}float{sf}{txt} now {bf}{res}byte{sf}
+  {txt}variable {bf}imp_trunk{sf} was {bf}{res}float{sf}{txt} now {bf}{res}byte{sf}
+  {txt}variable {bf}imp_weight{sf} was {bf}{res}float{sf}{txt} now {bf}{res}byte{sf}
+  {txt}variable {bf}imp_length{sf} was {bf}{res}float{sf}{txt} now {bf}{res}byte{sf}
+  {txt}variable {bf}imp_turn{sf} was {bf}{res}float{sf}{txt} now {bf}{res}byte{sf}
+  {txt}variable {bf}imp_displacement{sf} was {bf}{res}float{sf}{txt} now {bf}{res}byte{sf}
+  {txt}variable {bf}imp_gear_ratio{sf} was {bf}{res}float{sf}{txt} now {bf}{res}byte{sf}
+{txt}  (2,220 bytes saved)
+
+{com}. save "$MyProject/analysis/data/proc/auto.dta", replace
+{txt}file C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/data/proc/auto.dta saved
+
+{com}. 
+. ** EOF
+. 
+{txt}end of do-file
+
+{com}. do "$MyProject/analysis/scripts/3_regressions.do"
+{txt}
+{com}. ************
+. * Preamble: these two lines of code are included so that individual scripts can be run standalone (if desired)
+. ************
+. adopath ++ "$MyProject/analysis/scripts/libraries/stata"
+{txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/libraries/stata{txt}"
+  [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/functions{txt}"
+  [3]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
+  [4]  (SITE)      "{res}C:\Program Files\Stata16\ado\site/{txt}"
+  [5]              "{res}.{txt}"
+  [6]  (PERSONAL)  "{res}C:\Users\jreif\ado\personal/{txt}"
+  [7]  (PLUS)      "{res}c:\ado\plus/{txt}"
+  [8]  (OLDPLACE)  "{res}c:\ado/{txt}"
+
+{com}. adopath ++ "$MyProject/analysis/scripts/functions"
+{txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/functions{txt}"
+  [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/libraries/stata{txt}"
+  [3]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
+  [4]  (SITE)      "{res}C:\Program Files\Stata16\ado\site/{txt}"
+  [5]              "{res}.{txt}"
+  [6]  (PERSONAL)  "{res}C:\Users\jreif\ado\personal/{txt}"
+  [7]  (PLUS)      "{res}c:\ado\plus/{txt}"
+  [8]  (OLDPLACE)  "{res}c:\ado/{txt}"
+
+{com}. 
+. ************
+. * SCRIPT: 3_regressions.do
+. * PURPOSE: estimates regression models and saves the resulting output
+. ************
+. 
+. tempfile results
+{txt}
+{com}. use "$MyProject/analysis/data/proc/auto.dta", clear
+{txt}
+{com}. 
+. local replace replace
+{txt}
+{com}. foreach rhs in "mpg" "mpg weight" {c -(}
+{txt}  2{com}.         
+.         * Domestic cars
+.         reg price `rhs' if foreign=="Domestic", robust
+{txt}  3{com}.         regsave using "`results'", t p autoid `replace' addlabel(rhs,"`rhs'",origin,Domestic) 
+{txt}  4{com}.         local replace append
+{txt}  5{com}.         
+.         * Foreign cars
+.         reg price `rhs' if foreign=="Foreign", robust
+{txt}  6{com}.         regsave using "`results'", t p autoid append addlabel(rhs,"`rhs'",origin,"Foreign") 
+{txt}  7{com}.                 
+. {c )-}
+
+{txt}Linear regression                               Number of obs     = {res}        52
+                                                {txt}F(1, 50)          =  {res}    16.44
+                                                {txt}Prob > F          = {res}    0.0002
+                                                {txt}R-squared         = {res}    0.2543
+                                                {txt}Root MSE          =    {res} 2701.1
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       price{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}mpg {c |}{col 14}{res}{space 2}-329.2551{col 26}{space 2}  81.1942{col 37}{space 1}   -4.06{col 46}{space 3}0.000{col 54}{space 4}-492.3384{col 67}{space 3}-166.1717
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 12600.54{col 26}{space 2} 1777.731{col 37}{space 1}    7.09{col 46}{space 3}0.000{col 54}{space 4} 9029.859{col 67}{space 3} 16171.22
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}(note: file C:\Users\jreif\AppData\Local\Temp\ST_3654_000001.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_3654_000001.tmp saved
+
+Linear regression                               Number of obs     = {res}        22
+                                                {txt}F(1, 20)          =  {res}     8.05
+                                                {txt}Prob > F          = {res}    0.0102
+                                                {txt}R-squared         = {res}    0.3985
+                                                {txt}Root MSE          =    {res} 2083.6
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       price{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}mpg {c |}{col 14}{res}{space 2}-250.3668{col 26}{space 2} 88.22545{col 37}{space 1}   -2.84{col 46}{space 3}0.010{col 54}{space 4}-434.4019{col 67}{space 3}-66.33174
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 12586.95{col 26}{space 2} 2352.589{col 37}{space 1}    5.35{col 46}{space 3}0.000{col 54}{space 4} 7679.535{col 67}{space 3} 17494.37
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}{p 0 7 2}
+(note: variable
+origin was 
+str7, now str8 to accommodate using data's values)
+{p_end}
+file C:\Users\jreif\AppData\Local\Temp\ST_3654_000001.tmp saved
+
+Linear regression                               Number of obs     = {res}        52
+                                                {txt}F(2, 49)          =  {res}    18.88
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.4830
+                                                {txt}Root MSE          =    {res}   2272
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       price{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}mpg {c |}{col 14}{res}{space 2}  237.691{col 26}{space 2} 202.6121{col 37}{space 1}    1.17{col 46}{space 3}0.246{col 54}{space 4}-169.4733{col 67}{space 3} 644.8552
+{txt}{space 6}weight {c |}{col 14}{res}{space 2} 4.415037{col 26}{space 2} 1.338438{col 37}{space 1}    3.30{col 46}{space 3}0.002{col 54}{space 4} 1.725346{col 67}{space 3} 7.104728
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-13285.44{col 26}{space 2} 8279.718{col 37}{space 1}   -1.60{col 46}{space 3}0.115{col 54}{space 4}-29924.16{col 67}{space 3} 3353.272
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}file C:\Users\jreif\AppData\Local\Temp\ST_3654_000001.tmp saved
+
+Linear regression                               Number of obs     = {res}        22
+                                                {txt}F(2, 19)          =  {res}    49.02
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.7855
+                                                {txt}Root MSE          =    {res} 1276.7
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       price{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}mpg {c |}{col 14}{res}{space 2}-19.77737{col 26}{space 2} 51.73445{col 37}{space 1}   -0.38{col 46}{space 3}0.706{col 54}{space 4}-128.0588{col 67}{space 3} 88.50408
+{txt}{space 6}weight {c |}{col 14}{res}{space 2} 5.155842{col 26}{space 2}  .769729{col 37}{space 1}    6.70{col 46}{space 3}0.000{col 54}{space 4} 3.544781{col 67}{space 3} 6.766904
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-5065.841{col 26}{space 2} 2885.351{col 37}{space 1}   -1.76{col 46}{space 3}0.095{col 54}{space 4}-11104.95{col 67}{space 3} 973.2692
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}{p 0 7 2}
+(note: variable
+origin was 
+str7, now str8 to accommodate using data's values)
+{p_end}
+file C:\Users\jreif\AppData\Local\Temp\ST_3654_000001.tmp saved
+
+{com}. 
+. use "`results'", clear
+{txt}
+{com}. save "$MyProject/analysis/results/intermediate/my_regressions.dta", replace
+{txt}file C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/results/intermediate/my_regressions.dta saved
+
+{com}. 
+. * R regressions. First argument: input file. Second argument: output file.
+. if "$DisableR"!="1" rscript using "$MyProject/analysis/scripts/functions/regressions.R", args("$MyProject/analysis/data/proc/auto.dta" "$MyProject/analysis/results/intermediate/my_lm_regressions.dta")
+{res}Running R script: C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/functions/regressions.R
+Args: "C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/data/proc/auto.dta" "C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/results/intermediate/my_lm_regressions.dta"
+
+
+Begin R output:
+________________________________________________________________________________
+{ul:stdout}:
+
+
+{ul:stderr}:
+-- Attaching packages --------------------------------------- tidyverse 1.3.0 --
+v ggplot2 3.2.1     v purrr   0.3.3
+v tibble  2.1.3     v dplyr   0.8.4
+v tidyr   1.0.2     v stringr 1.4.0
+v readr   1.3.1     v forcats 0.5.0
+-- Conflicts ------------------------------------------ tidyverse_conflicts() --
+x dplyr::filter() masks stats::filter()
+x dplyr::lag()    masks stats::lag()
+Warning message:
+package 'forcats' was built under R version 3.6.3 
+________________________________________________________________________________
+...end R output
+
+{txt}
+{com}. 
+. ** EOF
+. 
+{txt}end of do-file
+
+{com}. do "$MyProject/analysis/scripts/4_make_tables_figures.do"
+{txt}
+{com}. ************
+. * Preamble: these two lines of code are included so that individual scripts can be run standalone (if desired)
+. ************
+. adopath ++ "$MyProject/analysis/scripts/libraries/stata"
+{txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/libraries/stata{txt}"
+  [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/functions{txt}"
+  [3]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
+  [4]  (SITE)      "{res}C:\Program Files\Stata16\ado\site/{txt}"
+  [5]              "{res}.{txt}"
+  [6]  (PERSONAL)  "{res}C:\Users\jreif\ado\personal/{txt}"
+  [7]  (PLUS)      "{res}c:\ado\plus/{txt}"
+  [8]  (OLDPLACE)  "{res}c:\ado/{txt}"
+
+{com}. adopath ++ "$MyProject/analysis/scripts/functions"
+{txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/functions{txt}"
+  [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/libraries/stata{txt}"
+  [3]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
+  [4]  (SITE)      "{res}C:\Program Files\Stata16\ado\site/{txt}"
+  [5]              "{res}.{txt}"
+  [6]  (PERSONAL)  "{res}C:\Users\jreif\ado\personal/{txt}"
+  [7]  (PLUS)      "{res}c:\ado\plus/{txt}"
+  [8]  (OLDPLACE)  "{res}c:\ado/{txt}"
+
+{com}. 
+. ************
+. * SCRIPT: 4_make_tables_figures.do
+. * PURPOSE: creates the LaTeX tables for the paper
+. ************
+. 
+. ********************************
+. * Price histogram              *
+. ********************************
+. 
+. use "$MyProject/analysis/data/proc/auto.dta", clear
+{txt}
+{com}. format price %12.0fc
+{txt}
+{com}. histogram price, frequency xtitle("Price (1978 dollars)") graphregion(fcolor(white))
+{txt}(bin={res}8{txt}, start={res}3291{txt}, width={res}1576.875{txt})
+{res}{txt}
+{com}. graph export "$MyProject/analysis/results/figures/price_histogram.pdf", as(pdf) replace
+{txt}(file C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/results/figures/price_histogram.pdf written in PDF format)
+
+{com}. 
+. ********************************
+. * Descriptive statistics table *
+. ********************************
+. tempfile tmp
+{txt}
+{com}. preserve
+{txt}
+{com}. local run_no = 0
+{txt}
+{com}. foreach v in price mpg weight {c -(}
+{txt}  2{com}. 
+.         assert inlist(imp_`v',0,1)
+{txt}  3{com}.         gen non_missing = 1 - imp_`v'
+{txt}  4{com}. 
+.         collapse (mean) mean=`v' (sd) sd=`v' (min) min=`v' (max) max=`v' (sum) count=imp_`v', fast
+{txt}  5{com}. 
+.         gen var = "`v'"
+{txt}  6{com}.         if `run_no'>0 append using "`tmp'"
+{txt}  7{com}.         save "`tmp'", replace
+{txt}  8{com}.         local run_no = `run_no'+1
+{txt}  9{com}.         restore, preserve
+{txt} 10{com}. {c )-}
+{txt}(note: file C:\Users\jreif\AppData\Local\Temp\ST_3654_000001.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_3654_000001.tmp saved
+{p 0 7 2}
+(note: variable
+min was 
+byte, now int to accommodate using data's values)
+{p_end}
+{p 0 7 2}
+(note: variable
+max was 
+byte, now int to accommodate using data's values)
+{p_end}
+{p 0 7 2}
+(note: variable
+var was 
+str3, now str5 to accommodate using data's values)
+{p_end}
+file C:\Users\jreif\AppData\Local\Temp\ST_3654_000001.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_3654_000001.tmp saved
+
+{com}. restore, not
+{txt}
+{com}. use "`tmp'", clear
+{txt}
+{com}. order var
+{txt}
+{com}. 
+. * Page 2: "The average price of automobiles in this dataset is $6,165."
+. assert abs(mean-6165.26)<0.01 if var=="price"
+{txt}
+{com}. 
+. tostring mean sd min max, format(%9.3gc) replace force
+{txt}mean was {res:float} now {res:str5}
+mean was forced to string; some loss of information
+sd was {res:float} now {res:str5}
+sd was forced to string; some loss of information
+min was {res:int} now {res:str5}
+min was forced to string; some loss of information
+max was {res:int} now {res:str6}
+max was forced to string; some loss of information
+
+{com}. tostring count, format(%9.0gc) replace
+{txt}count was {res:double} now {res:str1}
+
+{com}. 
+. label var mean "Mean"
+{txt}
+{com}. label var sd "Stdev."
+{txt}
+{com}. label var min "Min"
+{txt}
+{com}. label var max "Max"
+{txt}
+{com}. label var count "Count"
+{txt}
+{com}. 
+. * Run Stata program (stored in /functions)
+. clean_vars var
+{txt}variable {bf}var{sf} was {bf}{res}str6{sf}{txt} now {bf}{res}str16{sf}
+{txt}(1 real change made)
+(1 real change made)
+variable {bf}var{sf} was {bf}{res}str16{sf}{txt} now {bf}{res}str20{sf}
+{txt}(1 real change made)
+
+{com}. 
+. local fn "Notes: Count reports the number of non-missing values for the variable."
+{txt}
+{com}. local title "Summary statistics"
+{txt}
+{com}. 
+. texsave using "$MyProject/analysis/results/tables/my_summary_stats.tex", replace varlabels marker(tab:my_summary_stats) title("`title'") footnote("`fn'")
+{txt}
+{com}. 
+. 
+. ***************************
+. * Create regression table *
+. ***************************
+. tempfile my_table
+{txt}
+{com}. use "$MyProject/analysis/results/intermediate/my_regressions.dta", clear
+{txt}
+{com}. 
+. * Merge together the four regressions into one table
+. local run_no = 1
+{txt}
+{com}. local replace replace
+{txt}
+{com}. foreach orig in "Domestic" "Foreign" {c -(}
+{txt}  2{com}.         foreach rhs in "mpg" "mpg weight" {c -(}
+{txt}  3{com}.                 
+.                 regsave_tbl using "`my_table'" if origin=="`orig'" & rhs=="`rhs'", name(col`run_no') asterisk(10 5 1) parentheses(stderr) sigfig(3) `replace'
+{txt}  4{com}.                 
+.                 local run_no = `run_no'+1
+{txt}  5{com}.                 local replace append
+{txt}  6{com}.         {c )-}
+{txt}  7{com}. {c )-}
+{txt}(note: file C:\Users\jreif\AppData\Local\Temp\ST_3654_000003.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_3654_000003.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_3654_000003.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_3654_000003.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_3654_000003.tmp saved
+
+{com}. 
+. * Format the table
+. use "`my_table'", clear
+{txt}
+{com}. drop if inlist(var,"_id","rhs","origin") | strpos(var,"_cons") | strpos(var,"tstat") | strpos(var,"pval")
+{txt}(11 observations deleted)
+
+{com}. 
+. label var col1 "Spec 1"
+{txt}
+{com}. label var col2 "Spec 2"
+{txt}
+{com}. label var col3 "Spec 1"
+{txt}
+{com}. label var col4 "Spec 2"
+{txt}
+{com}. 
+. replace var = "\(R^2\)" if var=="r2"
+{txt}(1 real change made)
+
+{com}. replace var = subinstr(var,"_coef","",1)
+{txt}(2 real changes made)
+
+{com}. replace var = "" if strpos(var,"_stderr")
+{txt}(2 real changes made)
+
+{com}. 
+. * Run Stata program (stored in /functions)
+. clean_vars var
+{txt}variable {bf}var{sf} was {bf}{res}str13{sf}{txt} now {bf}{res}str16{sf}
+{txt}(1 real change made)
+(1 real change made)
+(0 real changes made)
+
+{com}. 
+. local title "Association between automobile price and fuel efficiency"
+{txt}
+{com}. local headerlines "& \multicolumn{c -(}2{c )-}{c -(}c{c )-}{c -(}Domestic{c )-} & \multicolumn{c -(}2{c )-}{c -(}c{c )-}{c -(}Foreign{c )-} " "\cmidrule(lr){c -(}2-3{c )-} \cmidrule(lr){c -(}4-5{c )-}"
+{txt}
+{com}. local fn "Notes: Outcome variable is price (1978 dollars). Columns (1) and (2) report estimates of \(\beta\) from equation (\ref{c -(}eqn:model{c )-}) for domestic automobiles. Columns (3) and (4) report estimates for foreign automobiles. Robust standard errors are reported in parentheses. A */**/*** indicates significance at the 10/5/1\% levels."
+{txt}
+{com}. texsave using "$MyProject/analysis/results/tables/my_regressions.tex", autonumber varlabels hlines(-2) nofix replace marker(tab:my_regressions) title("`title'") headerlines("`headerlines'") footnote("`fn'")
+{txt}
+{com}. preserve
+{txt}
+{com}. 
+. 
+. ***************************
+. * Create regression table: R *
+. ***************************
+. if !$DisableR {c -(}
+. tempfile my_table_r
+. use "$MyProject/analysis/results/intermediate/my_lm_regressions.dta", clear
+. 
+. ren term var
+{res}{com}. ren estimate coef
+{res}{com}. ren std_error stderr
+{res}{com}. ren p_value pval
+{res}{com}. drop statistic conf* df outcome
+. 
+. * Merge together the four regressions into one table
+. local run_no = 1
+. local replace replace
+. foreach orig in "Domestic" "Foreign" {c -(}
+{txt}  2{com}.         foreach rhs in "mpg" "mpg weight" {c -(}
+{txt}  3{com}.                 
+.                 regsave_tbl using "`my_table_r'" if origin=="`orig'" & rhs=="`rhs'", name(col`run_no') asterisk(10 5 1) parentheses(stderr) sigfig(3) `replace'
+{txt}  4{com}.                 
+.                 local run_no = `run_no'+1
+{txt}  5{com}.                 local replace append
+{txt}  6{com}.         {c )-}
+{txt}  7{com}. {c )-}
+{txt}(note: file C:\Users\jreif\AppData\Local\Temp\ST_3654_000005.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_3654_000005.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_3654_000005.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_3654_000005.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_3654_000005.tmp saved
+{com}.         
+. * Format the table
+. use "`my_table_r'", clear
+. drop if inlist(var,"_id","rhs","origin") | strpos(var,"(Intercept)") | strpos(var,"tstat") | strpos(var,"pval")
+{txt}(7 observations deleted)
+{com}. 
+. label var col1 "Spec 1"
+. label var col2 "Spec 2"
+. label var col3 "Spec 1"
+. label var col4 "Spec 2"
+. 
+. replace var = "\(R^2\)" if var=="r2"
+{txt}(0 real changes made)
+{com}. replace var = subinstr(var,"_coef","",1)
+{txt}(2 real changes made)
+{com}. replace var = "" if strpos(var,"_stderr")
+{txt}(2 real changes made)
+{com}. 
+. * Append to prior table, reformat, and output
+. save "`my_table_r'", replace
+{txt}file C:\Users\jreif\AppData\Local\Temp\ST_3654_000005.tmp saved
+{com}. restore
+. append using "`my_table_r'"
+{txt}{p 0 7 2}
+(note: variable
+var was 
+str16, now str18 to accommodate using data's values)
+{p_end}
+{com}. drop if var=="N" | strpos(var,"R^2")
+{txt}(2 observations deleted)
+{com}. ingap 1 5
+. 
+. replace var = "A. Stata output (regress)" in 1 if mi(var)
+{txt}variable {bf}var{sf} was {bf}{res}str18{sf}{txt} now {bf}{res}str25{sf}
+{txt}(1 real change made)
+{com}. replace var = "B. R output (lm\_robust)" in 6 if mi(var)
+{txt}(1 real change made)
+{com}. 
+. * Run Stata program (stored in /functions)
+. clean_vars var
+{txt}(1 real change made)
+(1 real change made)
+(0 real changes made)
+{com}. 
+. * Same output as previous table above, so reuse the same footnote and headerlines
+. local title "Association between automobile price and fuel efficiency, Stata and R"
+. texsave using "$MyProject/analysis/results/tables/my_regressions_with_r.tex", autonumber varlabels hlines(1 6) nofix replace marker(tab:my_regressions_with_r) title("`title'") headerlines("`headerlines'") footnote("`fn'") bold("A." "B.")
+. {c )-}
+{txt}
+{com}. 
+. 
+. ** EOF
+. 
+{txt}end of do-file
+
+{com}. 
+. * End log
+. di "End date and time: $S_DATE $S_TIME"
+{res}End date and time:  3 Mar 2020 17:43:08
+{txt}
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/logs/log_2020.03.03_17.43.01.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res} 3 Mar 2020, 17:43:08
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

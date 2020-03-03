@@ -9,13 +9,8 @@ adopath ++ "$MyProject/analysis/scripts/functions"
 * PURPOSE: estimates regression models and saves the resulting output
 ************
 
-cap mkdir "$MyProject/results"
-cap mkdir "$MyProject/results/intermediate"
-
 tempfile results
-
 use "$MyProject/analysis/data/proc/auto.dta", clear
-
 
 local replace replace
 foreach rhs in "mpg" "mpg weight" {
@@ -34,7 +29,7 @@ foreach rhs in "mpg" "mpg weight" {
 use "`results'", clear
 save "$MyProject/analysis/results/intermediate/my_regressions.dta", replace
 
-* R regressions. First argument: input file. Second argument: output file. Third argument: project directory (for R library)
-if !$DisableR rscript using "$MyProject/analysis/scripts/functions/regressions.R", args("$MyProject/analysis/data/proc/auto.dta" "$MyProject/analysis/results/intermediate/my_lm_regressions.dta" "$MyProject")
+* R regressions. First argument: input file. Second argument: output file.
+if "$DisableR"!="1" rscript using "$MyProject/analysis/scripts/functions/regressions.R", args("$MyProject/analysis/data/proc/auto.dta" "$MyProject/analysis/results/intermediate/my_lm_regressions.dta")
 
 ** EOF

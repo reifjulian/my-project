@@ -1,12 +1,12 @@
 {smcl}
 {com}{sf}{ul off}{txt}{.-}
       name:  {res}<unnamed>
-       {txt}log:  {res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/logs/log_2020.03.03_17.43.01.smcl
+       {txt}log:  {res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/logs/log_2020.03.08_09.31.52.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res} 3 Mar 2020, 17:43:01
+ {txt}opened on:  {res} 8 Mar 2020, 09:31:52
 {txt}
 {com}. di "Begin date and time: $S_DATE $S_TIME"
-{res}Begin date and time:  3 Mar 2020 17:43:01
+{res}Begin date and time:  8 Mar 2020 09:31:52
 {txt}
 {com}. 
 . * All required Stata packages are available in the /libraries folder
@@ -15,23 +15,23 @@
   [2]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
   [3]  (SITE)      "{res}C:\Program Files\Stata16\ado\site/{txt}"
   [4]              "{res}.{txt}"
-  [5]  (PERSONAL)  "{res}C:\Users\jreif\ado\personal/{txt}"
+  [5]  (PERSONAL)  "{res}c:\ado\personal/{txt}"
   [6]  (PLUS)      "{res}c:\ado\plus/{txt}"
   [7]  (OLDPLACE)  "{res}c:\ado/{txt}"
 
 {com}. mata: mata mlib index
 {txt}.mlib libraries to be searched are now
-    lmatabase;lmataado;lmataerm;lmatafc;lmatagsem;lmatalasso;lmatamcmc;lmatameta;lmatami;lmatamixlog;lmatanumlib;lmataopt;lmatapath;lmatapostest;lmatapss;lmatasem;lmatasp;lmatasvy;lmatatab;lparallel
+    lmatabase;lmataado;lmataerm;lmatafc;lmatagsem;lmatalasso;lmatamcmc;lmatameta;lmatami;lmatamixlog;lmatanumlib;lmataopt;lmatapath;lmatapostest;lmatapss;lmatasem;lmatasp;lmatasvy;lmatatab;lftools;lreghdfe
 
 {com}. 
-. * Stata programs and R scripts are stored in /functions
-. adopath ++ "$MyProject/analysis/scripts/functions"
-{txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/functions{txt}"
+. * Stata programs and R scripts are stored in /programs
+. adopath ++ "$MyProject/analysis/scripts/programs"
+{txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/programs{txt}"
   [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/libraries/stata{txt}"
   [3]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
   [4]  (SITE)      "{res}C:\Program Files\Stata16\ado\site/{txt}"
   [5]              "{res}.{txt}"
-  [6]  (PERSONAL)  "{res}C:\Users\jreif\ado\personal/{txt}"
+  [6]  (PERSONAL)  "{res}c:\ado\personal/{txt}"
   [7]  (PLUS)      "{res}c:\ado\plus/{txt}"
   [8]  (OLDPLACE)  "{res}c:\ado/{txt}"
 
@@ -39,8 +39,8 @@
 . * Stata and R version control
 . version 15
 {txt}
-{com}. if "$DisableR"!="1" rscript using "$MyProject/analysis/scripts/functions/_confirm_version.R"
-{res}Running R script: C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/functions/_confirm_version.R
+{com}. if "$DisableR"!="1" rscript using "$MyProject/analysis/scripts/programs/_confirm_version.R"
+{res}Running R script: C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/programs/_confirm_version.R
 
 
 Begin R output:
@@ -72,21 +72,21 @@ ________________________________________________________________________________
 . ************
 . adopath ++ "$MyProject/analysis/scripts/libraries/stata"
 {txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/libraries/stata{txt}"
-  [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/functions{txt}"
+  [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/programs{txt}"
   [3]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
   [4]  (SITE)      "{res}C:\Program Files\Stata16\ado\site/{txt}"
   [5]              "{res}.{txt}"
-  [6]  (PERSONAL)  "{res}C:\Users\jreif\ado\personal/{txt}"
+  [6]  (PERSONAL)  "{res}c:\ado\personal/{txt}"
   [7]  (PLUS)      "{res}c:\ado\plus/{txt}"
   [8]  (OLDPLACE)  "{res}c:\ado/{txt}"
 
-{com}. adopath ++ "$MyProject/analysis/scripts/functions"
-{txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/functions{txt}"
+{com}. adopath ++ "$MyProject/analysis/scripts/programs"
+{txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/programs{txt}"
   [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/libraries/stata{txt}"
   [3]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
   [4]  (SITE)      "{res}C:\Program Files\Stata16\ado\site/{txt}"
   [5]              "{res}.{txt}"
-  [6]  (PERSONAL)  "{res}C:\Users\jreif\ado\personal/{txt}"
+  [6]  (PERSONAL)  "{res}c:\ado\personal/{txt}"
   [7]  (PLUS)      "{res}c:\ado\plus/{txt}"
   [8]  (OLDPLACE)  "{res}c:\ado/{txt}"
 
@@ -126,21 +126,21 @@ ________________________________________________________________________________
 . ************
 . adopath ++ "$MyProject/analysis/scripts/libraries/stata"
 {txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/libraries/stata{txt}"
-  [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/functions{txt}"
+  [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/programs{txt}"
   [3]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
   [4]  (SITE)      "{res}C:\Program Files\Stata16\ado\site/{txt}"
   [5]              "{res}.{txt}"
-  [6]  (PERSONAL)  "{res}C:\Users\jreif\ado\personal/{txt}"
+  [6]  (PERSONAL)  "{res}c:\ado\personal/{txt}"
   [7]  (PLUS)      "{res}c:\ado\plus/{txt}"
   [8]  (OLDPLACE)  "{res}c:\ado/{txt}"
 
-{com}. adopath ++ "$MyProject/analysis/scripts/functions"
-{txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/functions{txt}"
+{com}. adopath ++ "$MyProject/analysis/scripts/programs"
+{txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/programs{txt}"
   [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/libraries/stata{txt}"
   [3]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
   [4]  (SITE)      "{res}C:\Program Files\Stata16\ado\site/{txt}"
   [5]              "{res}.{txt}"
-  [6]  (PERSONAL)  "{res}C:\Users\jreif\ado\personal/{txt}"
+  [6]  (PERSONAL)  "{res}c:\ado\personal/{txt}"
   [7]  (PLUS)      "{res}c:\ado\plus/{txt}"
   [8]  (OLDPLACE)  "{res}c:\ado/{txt}"
 
@@ -353,21 +353,21 @@ ________________________________________________________________________________
 . ************
 . adopath ++ "$MyProject/analysis/scripts/libraries/stata"
 {txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/libraries/stata{txt}"
-  [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/functions{txt}"
+  [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/programs{txt}"
   [3]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
   [4]  (SITE)      "{res}C:\Program Files\Stata16\ado\site/{txt}"
   [5]              "{res}.{txt}"
-  [6]  (PERSONAL)  "{res}C:\Users\jreif\ado\personal/{txt}"
+  [6]  (PERSONAL)  "{res}c:\ado\personal/{txt}"
   [7]  (PLUS)      "{res}c:\ado\plus/{txt}"
   [8]  (OLDPLACE)  "{res}c:\ado/{txt}"
 
-{com}. adopath ++ "$MyProject/analysis/scripts/functions"
-{txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/functions{txt}"
+{com}. adopath ++ "$MyProject/analysis/scripts/programs"
+{txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/programs{txt}"
   [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/libraries/stata{txt}"
   [3]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
   [4]  (SITE)      "{res}C:\Program Files\Stata16\ado\site/{txt}"
   [5]              "{res}.{txt}"
-  [6]  (PERSONAL)  "{res}C:\Users\jreif\ado\personal/{txt}"
+  [6]  (PERSONAL)  "{res}c:\ado\personal/{txt}"
   [7]  (PLUS)      "{res}c:\ado\plus/{txt}"
   [8]  (OLDPLACE)  "{res}c:\ado/{txt}"
 
@@ -410,8 +410,8 @@ ________________________________________________________________________________
 {space 9}mpg {c |}{col 14}{res}{space 2}-329.2551{col 26}{space 2}  81.1942{col 37}{space 1}   -4.06{col 46}{space 3}0.000{col 54}{space 4}-492.3384{col 67}{space 3}-166.1717
 {txt}{space 7}_cons {c |}{col 14}{res}{space 2} 12600.54{col 26}{space 2} 1777.731{col 37}{space 1}    7.09{col 46}{space 3}0.000{col 54}{space 4} 9029.859{col 67}{space 3} 16171.22
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{res}{txt}(note: file C:\Users\jreif\AppData\Local\Temp\ST_3654_000001.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_3654_000001.tmp saved
+{res}{txt}(note: file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000001.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000001.tmp saved
 
 Linear regression                               Number of obs     = {res}        22
                                                 {txt}F(1, 20)          =  {res}     8.05
@@ -431,7 +431,7 @@ Linear regression                               Number of obs     = {res}       
 origin was 
 str7, now str8 to accommodate using data's values)
 {p_end}
-file C:\Users\jreif\AppData\Local\Temp\ST_3654_000001.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000001.tmp saved
 
 Linear regression                               Number of obs     = {res}        52
                                                 {txt}F(2, 49)          =  {res}    18.88
@@ -447,7 +447,7 @@ Linear regression                               Number of obs     = {res}       
 {txt}{space 6}weight {c |}{col 14}{res}{space 2} 4.415037{col 26}{space 2} 1.338438{col 37}{space 1}    3.30{col 46}{space 3}0.002{col 54}{space 4} 1.725346{col 67}{space 3} 7.104728
 {txt}{space 7}_cons {c |}{col 14}{res}{space 2}-13285.44{col 26}{space 2} 8279.718{col 37}{space 1}   -1.60{col 46}{space 3}0.115{col 54}{space 4}-29924.16{col 67}{space 3} 3353.272
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{res}{txt}file C:\Users\jreif\AppData\Local\Temp\ST_3654_000001.tmp saved
+{res}{txt}file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000001.tmp saved
 
 Linear regression                               Number of obs     = {res}        22
                                                 {txt}F(2, 19)          =  {res}    49.02
@@ -468,7 +468,7 @@ Linear regression                               Number of obs     = {res}       
 origin was 
 str7, now str8 to accommodate using data's values)
 {p_end}
-file C:\Users\jreif\AppData\Local\Temp\ST_3654_000001.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000001.tmp saved
 
 {com}. 
 . use "`results'", clear
@@ -478,8 +478,8 @@ file C:\Users\jreif\AppData\Local\Temp\ST_3654_000001.tmp saved
 
 {com}. 
 . * R regressions. First argument: input file. Second argument: output file.
-. if "$DisableR"!="1" rscript using "$MyProject/analysis/scripts/functions/regressions.R", args("$MyProject/analysis/data/proc/auto.dta" "$MyProject/analysis/results/intermediate/my_lm_regressions.dta")
-{res}Running R script: C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/functions/regressions.R
+. if "$DisableR"!="1" rscript using "$MyProject/analysis/scripts/programs/regressions.R", args("$MyProject/analysis/data/proc/auto.dta" "$MyProject/analysis/results/intermediate/my_lm_regressions.dta")
+{res}Running R script: C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/programs/regressions.R
 Args: "C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/data/proc/auto.dta" "C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/results/intermediate/my_lm_regressions.dta"
 
 
@@ -493,12 +493,12 @@ ________________________________________________________________________________
 v ggplot2 3.2.1     v purrr   0.3.3
 v tibble  2.1.3     v dplyr   0.8.4
 v tidyr   1.0.2     v stringr 1.4.0
-v readr   1.3.1     v forcats 0.5.0
+v readr   1.3.1     v forcats 0.4.0
 -- Conflicts ------------------------------------------ tidyverse_conflicts() --
 x dplyr::filter() masks stats::filter()
 x dplyr::lag()    masks stats::lag()
 Warning message:
-package 'forcats' was built under R version 3.6.3 
+package 'estimatr' was built under R version 3.6.3 
 ________________________________________________________________________________
 ...end R output
 
@@ -515,21 +515,21 @@ ________________________________________________________________________________
 . ************
 . adopath ++ "$MyProject/analysis/scripts/libraries/stata"
 {txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/libraries/stata{txt}"
-  [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/functions{txt}"
+  [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/programs{txt}"
   [3]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
   [4]  (SITE)      "{res}C:\Program Files\Stata16\ado\site/{txt}"
   [5]              "{res}.{txt}"
-  [6]  (PERSONAL)  "{res}C:\Users\jreif\ado\personal/{txt}"
+  [6]  (PERSONAL)  "{res}c:\ado\personal/{txt}"
   [7]  (PLUS)      "{res}c:\ado\plus/{txt}"
   [8]  (OLDPLACE)  "{res}c:\ado/{txt}"
 
-{com}. adopath ++ "$MyProject/analysis/scripts/functions"
-{txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/functions{txt}"
+{com}. adopath ++ "$MyProject/analysis/scripts/programs"
+{txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/programs{txt}"
   [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/libraries/stata{txt}"
   [3]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
   [4]  (SITE)      "{res}C:\Program Files\Stata16\ado\site/{txt}"
   [5]              "{res}.{txt}"
-  [6]  (PERSONAL)  "{res}C:\Users\jreif\ado\personal/{txt}"
+  [6]  (PERSONAL)  "{res}c:\ado\personal/{txt}"
   [7]  (PLUS)      "{res}c:\ado\plus/{txt}"
   [8]  (OLDPLACE)  "{res}c:\ado/{txt}"
 
@@ -576,8 +576,8 @@ ________________________________________________________________________________
 {txt}  8{com}.         local run_no = `run_no'+1
 {txt}  9{com}.         restore, preserve
 {txt} 10{com}. {c )-}
-{txt}(note: file C:\Users\jreif\AppData\Local\Temp\ST_3654_000001.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_3654_000001.tmp saved
+{txt}(note: file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000001.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000001.tmp saved
 {p 0 7 2}
 (note: variable
 min was 
@@ -593,8 +593,8 @@ byte, now int to accommodate using data's values)
 var was 
 str3, now str5 to accommodate using data's values)
 {p_end}
-file C:\Users\jreif\AppData\Local\Temp\ST_3654_000001.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_3654_000001.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000001.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000001.tmp saved
 
 {com}. restore, not
 {txt}
@@ -632,7 +632,7 @@ max was forced to string; some loss of information
 {com}. label var count "Count"
 {txt}
 {com}. 
-. * Run Stata program (stored in /functions)
+. * Run Stata program (stored in /programs)
 . clean_vars var
 {txt}variable {bf}var{sf} was {bf}{res}str6{sf}{txt} now {bf}{res}str16{sf}
 {txt}(1 real change made)
@@ -672,11 +672,11 @@ variable {bf}var{sf} was {bf}{res}str16{sf}{txt} now {bf}{res}str20{sf}
 {txt}  5{com}.                 local replace append
 {txt}  6{com}.         {c )-}
 {txt}  7{com}. {c )-}
-{txt}(note: file C:\Users\jreif\AppData\Local\Temp\ST_3654_000003.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_3654_000003.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_3654_000003.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_3654_000003.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_3654_000003.tmp saved
+{txt}(note: file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000003.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000003.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000003.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000003.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000003.tmp saved
 
 {com}. 
 . * Format the table
@@ -750,11 +750,11 @@ file C:\Users\jreif\AppData\Local\Temp\ST_3654_000003.tmp saved
 {txt}  5{com}.                 local replace append
 {txt}  6{com}.         {c )-}
 {txt}  7{com}. {c )-}
-{txt}(note: file C:\Users\jreif\AppData\Local\Temp\ST_3654_000005.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_3654_000005.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_3654_000005.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_3654_000005.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_3654_000005.tmp saved
+{txt}(note: file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000005.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000005.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000005.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000005.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000005.tmp saved
 {com}.         
 . * Format the table
 . use "`my_table_r'", clear
@@ -775,7 +775,7 @@ file C:\Users\jreif\AppData\Local\Temp\ST_3654_000005.tmp saved
 {com}. 
 . * Append to prior table, reformat, and output
 . save "`my_table_r'", replace
-{txt}file C:\Users\jreif\AppData\Local\Temp\ST_3654_000005.tmp saved
+{txt}file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000005.tmp saved
 {com}. restore
 . append using "`my_table_r'"
 {txt}{p 0 7 2}
@@ -813,13 +813,13 @@ str16, now str18 to accommodate using data's values)
 {com}. 
 . * End log
 . di "End date and time: $S_DATE $S_TIME"
-{res}End date and time:  3 Mar 2020 17:43:08
+{res}End date and time:  8 Mar 2020 09:32:04
 {txt}
 {com}. log close
       {txt}name:  {res}<unnamed>
-       {txt}log:  {res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/logs/log_2020.03.03_17.43.01.smcl
+       {txt}log:  {res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/logs/log_2020.03.08_09.31.52.smcl
   {txt}log type:  {res}smcl
- {txt}closed on:  {res} 3 Mar 2020, 17:43:08
+ {txt}closed on:  {res} 8 Mar 2020, 09:32:04
 {txt}{.-}
 {smcl}
 {txt}{sf}{ul off}

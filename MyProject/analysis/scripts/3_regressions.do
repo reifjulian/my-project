@@ -2,7 +2,7 @@
 * Preamble: these two lines of code are included so that individual scripts can be run standalone (if desired)
 ************
 adopath ++ "$MyProject/analysis/scripts/libraries/stata"
-adopath ++ "$MyProject/analysis/scripts/functions"
+adopath ++ "$MyProject/analysis/scripts/programs"
 
 ************
 * SCRIPT: 3_regressions.do
@@ -30,6 +30,6 @@ use "`results'", clear
 save "$MyProject/analysis/results/intermediate/my_regressions.dta", replace
 
 * R regressions. First argument: input file. Second argument: output file.
-if "$DisableR"!="1" rscript using "$MyProject/analysis/scripts/functions/regressions.R", args("$MyProject/analysis/data/proc/auto.dta" "$MyProject/analysis/results/intermediate/my_lm_regressions.dta")
+if "$DisableR"!="1" rscript using "$MyProject/analysis/scripts/programs/regressions.R", args("$MyProject/analysis/data/proc/auto.dta" "$MyProject/analysis/results/intermediate/my_lm_regressions.dta")
 
 ** EOF

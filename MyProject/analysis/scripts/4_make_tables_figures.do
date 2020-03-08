@@ -2,7 +2,7 @@
 * Preamble: these two lines of code are included so that individual scripts can be run standalone (if desired)
 ************
 adopath ++ "$MyProject/analysis/scripts/libraries/stata"
-adopath ++ "$MyProject/analysis/scripts/functions"
+adopath ++ "$MyProject/analysis/scripts/programs"
 
 ************
 * SCRIPT: 4_make_tables_figures.do
@@ -53,7 +53,7 @@ label var min "Min"
 label var max "Max"
 label var count "Count"
 
-* Run Stata program (stored in /functions)
+* Run Stata program (stored in /programs)
 clean_vars var
 
 local fn "Notes: Count reports the number of non-missing values for the variable."

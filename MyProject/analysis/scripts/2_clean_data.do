@@ -2,7 +2,7 @@
 * Preamble: these two lines of code are included so that individual scripts can be run standalone (if desired)
 ************
 adopath ++ "$MyProject/analysis/scripts/libraries/stata"
-adopath ++ "$MyProject/analysis/scripts/functions"
+adopath ++ "$MyProject/analysis/scripts/programs"
 
 ************
 * SCRIPT: 2_clean_data.do

@@ -42,12 +42,12 @@ di "Begin date and time: $S_DATE $S_TIME"
 adopath ++ "$MyProject/analysis/scripts/libraries/stata"
 mata: mata mlib index
 
-* Stata programs and R scripts are stored in /functions
-adopath ++ "$MyProject/analysis/scripts/functions"
+* Stata programs and R scripts are stored in /programs
+adopath ++ "$MyProject/analysis/scripts/programs"
 
 * Stata and R version control
 version 15
-if "$DisableR"!="1" rscript using "$MyProject/analysis/scripts/functions/_confirm_version.R"
+if "$DisableR"!="1" rscript using "$MyProject/analysis/scripts/programs/_confirm_version.R"
 
 * Create directories for output files
 cap mkdir "$MyProject/analysis/results"

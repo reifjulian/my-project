@@ -1,8 +1,8 @@
 ************
 * Preamble: these two lines of code are included so that individual scripts can be run standalone (if desired)
 ************
-adopath ++ "$MyProject/analysis/scripts/libraries/stata"
-adopath ++ "$MyProject/analysis/scripts/programs"
+adopath ++ "$MyProject/scripts/libraries/stata"
+adopath ++ "$MyProject/scripts/programs"
 
 ************
 * SCRIPT: 1_process_raw_data.do
@@ -11,13 +11,13 @@ adopath ++ "$MyProject/analysis/scripts/programs"
 
 
 
-cap mkdir "$MyProject/analysis/data/proc"
-cap mkdir "$MyProject/analysis/data/proc/intermediate"
+cap mkdir "$MyProject/data/proc"
+cap mkdir "$MyProject/data/proc/intermediate"
 
 
-insheet using "$MyProject/analysis/data/raw/auto.csv", comma clear
+insheet using "$MyProject/data/raw/auto.csv", comma clear
 
 compress
-save "$MyProject/analysis/data/proc/intermediate/auto_uncleaned.dta", replace
+save "$MyProject/data/proc/intermediate/auto_uncleaned.dta", replace
 
 ** EOF

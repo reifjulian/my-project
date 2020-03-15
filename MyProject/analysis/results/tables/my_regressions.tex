@@ -9,19 +9,19 @@
 
 \caption{Association between automobile price and fuel efficiency}
 \label{tab:my_regressions}
-\begin{tabularx}{\linewidth}{lCCCC}
+\begin{tabularx}{\linewidth}{lCCCCCC}
 
 \toprule
-&{(1)}&{(2)}&{(3)}&{(4)} \tabularnewline \midrule
+&{(1)}&{(2)}&{(3)}&{(4)}&{(5)}&{(6)} \tabularnewline \midrule
 & \multicolumn{2}{c}{Domestic} & \multicolumn{2}{c}{Foreign}  \tabularnewline \cmidrule(lr){2-3} \cmidrule(lr){4-5} \tabularnewline
-{}&{Spec 1}&{Spec 2}&{Spec 1}&{Spec 2} \tabularnewline
+{}&{}&{}&{Spec 1}&{Spec 2}&{Spec 1}&{Spec 2} \tabularnewline
 \midrule \addlinespace[\belowrulesep]
-Miles per gallon&-329***&238&-250**&-19.8 \tabularnewline
-&(81.2)&(203)&(88.2)&(51.7) \tabularnewline
-Weight (pounds)&&4.42***&&5.16*** \tabularnewline
-&&(1.34)&&(0.770) \tabularnewline
-\midrule N&52&52&22&22 \tabularnewline
-\(R^2\)&0.254&0.483&0.399&0.785 \tabularnewline
+Miles per gallon&3&3&-329***&238&-250**&-19.8 \tabularnewline
+&3&3&(81.2)&(203)&(88.2)&(51.7) \tabularnewline
+Weight (pounds)&3&&&4.42***&&5.16*** \tabularnewline
+&2&&&(1.34)&&(0.770) \tabularnewline
+\midrule N&2&2&52&52&22&22 \tabularnewline
+\(R^2\)&3&3&0.254&0.483&0.399&0.785 \tabularnewline
 \bottomrule \addlinespace[\belowrulesep]
 
 \end{tabularx}

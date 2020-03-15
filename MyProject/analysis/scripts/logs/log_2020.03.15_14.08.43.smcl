@@ -1,16 +1,16 @@
 {smcl}
 {com}{sf}{ul off}{txt}{.-}
       name:  {res}<unnamed>
-       {txt}log:  {res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/logs/log_2020.03.08_09.31.52.smcl
+       {txt}log:  {res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/logs/log_2020.03.15_14.08.43.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res} 8 Mar 2020, 09:31:52
+ {txt}opened on:  {res}15 Mar 2020, 14:08:43
 {txt}
 {com}. di "Begin date and time: $S_DATE $S_TIME"
-{res}Begin date and time:  8 Mar 2020 09:31:52
+{res}Begin date and time: 15 Mar 2020 14:08:43
 {txt}
 {com}. 
 . * All required Stata packages are available in the /libraries folder
-. adopath ++ "$MyProject/analysis/scripts/libraries/stata"
+. adopath ++ "$MyProject/scripts/libraries/stata"
 {txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/libraries/stata{txt}"
   [2]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
   [3]  (SITE)      "{res}C:\Program Files\Stata16\ado\site/{txt}"
@@ -25,7 +25,7 @@
 
 {com}. 
 . * Stata programs and R scripts are stored in /programs
-. adopath ++ "$MyProject/analysis/scripts/programs"
+. adopath ++ "$MyProject/scripts/programs"
 {txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/programs{txt}"
   [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/libraries/stata{txt}"
   [3]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
@@ -39,7 +39,7 @@
 . * Stata and R version control
 . version 15
 {txt}
-{com}. if "$DisableR"!="1" rscript using "$MyProject/analysis/scripts/programs/_confirm_version.R"
+{com}. if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/_confirm_version.R"
 {res}Running R script: C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/programs/_confirm_version.R
 
 
@@ -55,22 +55,22 @@ ________________________________________________________________________________
 {txt}
 {com}. 
 . * Create directories for output files
-. cap mkdir "$MyProject/analysis/results"
+. cap mkdir "$MyProject/results"
 {txt}
-{com}. cap mkdir "$MyProject/analysis/results/figures"
+{com}. cap mkdir "$MyProject/results/figures"
 {txt}
-{com}. cap mkdir "$MyProject/analysis/results/intermediate"
+{com}. cap mkdir "$MyProject/results/intermediate"
 {txt}
-{com}. cap mkdir "$MyProject/analysis/results/tables"
+{com}. cap mkdir "$MyProject/results/tables"
 {txt}
 {com}. 
 . * Run project analysis
-. do "$MyProject/analysis/scripts/1_process_raw_data.do"
+. do "$MyProject/scripts/1_process_raw_data.do"
 {txt}
 {com}. ************
 . * Preamble: these two lines of code are included so that individual scripts can be run standalone (if desired)
 . ************
-. adopath ++ "$MyProject/analysis/scripts/libraries/stata"
+. adopath ++ "$MyProject/scripts/libraries/stata"
 {txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/libraries/stata{txt}"
   [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/programs{txt}"
   [3]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
@@ -80,7 +80,7 @@ ________________________________________________________________________________
   [7]  (PLUS)      "{res}c:\ado\plus/{txt}"
   [8]  (OLDPLACE)  "{res}c:\ado/{txt}"
 
-{com}. adopath ++ "$MyProject/analysis/scripts/programs"
+{com}. adopath ++ "$MyProject/scripts/programs"
 {txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/programs{txt}"
   [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/libraries/stata{txt}"
   [3]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
@@ -98,20 +98,20 @@ ________________________________________________________________________________
 . 
 . 
 . 
-. cap mkdir "$MyProject/analysis/data/proc"
+. cap mkdir "$MyProject/data/proc"
 {txt}
-{com}. cap mkdir "$MyProject/analysis/data/proc/intermediate"
+{com}. cap mkdir "$MyProject/data/proc/intermediate"
 {txt}
 {com}. 
 . 
-. insheet using "$MyProject/analysis/data/raw/auto.csv", comma clear
+. insheet using "$MyProject/data/raw/auto.csv", comma clear
 {txt}(12 vars, 74 obs)
 
 {com}. 
 . compress
 {txt}  (0 bytes saved)
 
-{com}. save "$MyProject/analysis/data/proc/intermediate/auto_uncleaned.dta", replace
+{com}. save "$MyProject/data/proc/intermediate/auto_uncleaned.dta", replace
 {txt}file C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/data/proc/intermediate/auto_uncleaned.dta saved
 
 {com}. 
@@ -119,12 +119,12 @@ ________________________________________________________________________________
 . 
 {txt}end of do-file
 
-{com}. do "$MyProject/analysis/scripts/2_clean_data.do"
+{com}. do "$MyProject/scripts/2_clean_data.do"
 {txt}
 {com}. ************
 . * Preamble: these two lines of code are included so that individual scripts can be run standalone (if desired)
 . ************
-. adopath ++ "$MyProject/analysis/scripts/libraries/stata"
+. adopath ++ "$MyProject/scripts/libraries/stata"
 {txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/libraries/stata{txt}"
   [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/programs{txt}"
   [3]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
@@ -134,7 +134,7 @@ ________________________________________________________________________________
   [7]  (PLUS)      "{res}c:\ado\plus/{txt}"
   [8]  (OLDPLACE)  "{res}c:\ado/{txt}"
 
-{com}. adopath ++ "$MyProject/analysis/scripts/programs"
+{com}. adopath ++ "$MyProject/scripts/programs"
 {txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/programs{txt}"
   [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/libraries/stata{txt}"
   [3]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
@@ -150,7 +150,7 @@ ________________________________________________________________________________
 . * PURPOSE: processes the main dataset in preparation for analysis
 . ************
 . 
-. use "$MyProject/analysis/data/proc/intermediate/auto_uncleaned.dta", clear
+. use "$MyProject/data/proc/intermediate/auto_uncleaned.dta", clear
 {txt}
 {com}. 
 . * Replace missing values with median for that variable
@@ -338,7 +338,7 @@ ________________________________________________________________________________
   {txt}variable {bf}imp_gear_ratio{sf} was {bf}{res}float{sf}{txt} now {bf}{res}byte{sf}
 {txt}  (2,220 bytes saved)
 
-{com}. save "$MyProject/analysis/data/proc/auto.dta", replace
+{com}. save "$MyProject/data/proc/auto.dta", replace
 {txt}file C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/data/proc/auto.dta saved
 
 {com}. 
@@ -346,12 +346,12 @@ ________________________________________________________________________________
 . 
 {txt}end of do-file
 
-{com}. do "$MyProject/analysis/scripts/3_regressions.do"
+{com}. do "$MyProject/scripts/3_regressions.do"
 {txt}
 {com}. ************
 . * Preamble: these two lines of code are included so that individual scripts can be run standalone (if desired)
 . ************
-. adopath ++ "$MyProject/analysis/scripts/libraries/stata"
+. adopath ++ "$MyProject/scripts/libraries/stata"
 {txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/libraries/stata{txt}"
   [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/programs{txt}"
   [3]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
@@ -361,7 +361,7 @@ ________________________________________________________________________________
   [7]  (PLUS)      "{res}c:\ado\plus/{txt}"
   [8]  (OLDPLACE)  "{res}c:\ado/{txt}"
 
-{com}. adopath ++ "$MyProject/analysis/scripts/programs"
+{com}. adopath ++ "$MyProject/scripts/programs"
 {txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/programs{txt}"
   [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/libraries/stata{txt}"
   [3]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
@@ -379,7 +379,7 @@ ________________________________________________________________________________
 . 
 . tempfile results
 {txt}
-{com}. use "$MyProject/analysis/data/proc/auto.dta", clear
+{com}. use "$MyProject/data/proc/auto.dta", clear
 {txt}
 {com}. 
 . local replace replace
@@ -410,8 +410,8 @@ ________________________________________________________________________________
 {space 9}mpg {c |}{col 14}{res}{space 2}-329.2551{col 26}{space 2}  81.1942{col 37}{space 1}   -4.06{col 46}{space 3}0.000{col 54}{space 4}-492.3384{col 67}{space 3}-166.1717
 {txt}{space 7}_cons {c |}{col 14}{res}{space 2} 12600.54{col 26}{space 2} 1777.731{col 37}{space 1}    7.09{col 46}{space 3}0.000{col 54}{space 4} 9029.859{col 67}{space 3} 16171.22
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{res}{txt}(note: file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000001.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000001.tmp saved
+{res}{txt}(note: file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000001.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000001.tmp saved
 
 Linear regression                               Number of obs     = {res}        22
                                                 {txt}F(1, 20)          =  {res}     8.05
@@ -431,7 +431,7 @@ Linear regression                               Number of obs     = {res}       
 origin was 
 str7, now str8 to accommodate using data's values)
 {p_end}
-file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000001.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000001.tmp saved
 
 Linear regression                               Number of obs     = {res}        52
                                                 {txt}F(2, 49)          =  {res}    18.88
@@ -447,7 +447,7 @@ Linear regression                               Number of obs     = {res}       
 {txt}{space 6}weight {c |}{col 14}{res}{space 2} 4.415037{col 26}{space 2} 1.338438{col 37}{space 1}    3.30{col 46}{space 3}0.002{col 54}{space 4} 1.725346{col 67}{space 3} 7.104728
 {txt}{space 7}_cons {c |}{col 14}{res}{space 2}-13285.44{col 26}{space 2} 8279.718{col 37}{space 1}   -1.60{col 46}{space 3}0.115{col 54}{space 4}-29924.16{col 67}{space 3} 3353.272
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{res}{txt}file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000001.tmp saved
+{res}{txt}file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000001.tmp saved
 
 Linear regression                               Number of obs     = {res}        22
                                                 {txt}F(2, 19)          =  {res}    49.02
@@ -468,17 +468,17 @@ Linear regression                               Number of obs     = {res}       
 origin was 
 str7, now str8 to accommodate using data's values)
 {p_end}
-file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000001.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000001.tmp saved
 
 {com}. 
 . use "`results'", clear
 {txt}
-{com}. save "$MyProject/analysis/results/intermediate/my_regressions.dta", replace
+{com}. save "$MyProject/results/intermediate/my_regressions.dta", replace
 {txt}file C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/results/intermediate/my_regressions.dta saved
 
 {com}. 
 . * R regressions. First argument: input file. Second argument: output file.
-. if "$DisableR"!="1" rscript using "$MyProject/analysis/scripts/programs/regressions.R", args("$MyProject/analysis/data/proc/auto.dta" "$MyProject/analysis/results/intermediate/my_lm_regressions.dta")
+. if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/regressions.R", args("$MyProject/data/proc/auto.dta" "$MyProject/results/intermediate/my_lm_regressions.dta")
 {res}Running R script: C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/programs/regressions.R
 Args: "C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/data/proc/auto.dta" "C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/results/intermediate/my_lm_regressions.dta"
 
@@ -490,13 +490,24 @@ ________________________________________________________________________________
 
 {ul:stderr}:
 -- Attaching packages --------------------------------------- tidyverse 1.3.0 --
-v ggplot2 3.2.1     v purrr   0.3.3
-v tibble  2.1.3     v dplyr   0.8.4
+v ggplot2 3.3.0     v purrr   0.3.3
+v tibble  2.1.3     v dplyr   0.8.5
 v tidyr   1.0.2     v stringr 1.4.0
-v readr   1.3.1     v forcats 0.4.0
+v readr   1.3.1     v forcats 0.5.0
 -- Conflicts ------------------------------------------ tidyverse_conflicts() --
 x dplyr::filter() masks stats::filter()
 x dplyr::lag()    masks stats::lag()
+Warning messages:
+1: package 'tidyverse' was built under R version 3.6.3 
+2: package 'ggplot2' was built under R version 3.6.3 
+3: package 'tidyr' was built under R version 3.6.3 
+4: package 'readr' was built under R version 3.6.3 
+5: package 'purrr' was built under R version 3.6.3 
+6: package 'dplyr' was built under R version 3.6.3 
+7: package 'stringr' was built under R version 3.6.3 
+8: package 'forcats' was built under R version 3.6.3 
+Warning message:
+package 'haven' was built under R version 3.6.3 
 Warning message:
 package 'estimatr' was built under R version 3.6.3 
 ________________________________________________________________________________
@@ -508,12 +519,12 @@ ________________________________________________________________________________
 . 
 {txt}end of do-file
 
-{com}. do "$MyProject/analysis/scripts/4_make_tables_figures.do"
+{com}. do "$MyProject/scripts/4_make_tables_figures.do"
 {txt}
 {com}. ************
 . * Preamble: these two lines of code are included so that individual scripts can be run standalone (if desired)
 . ************
-. adopath ++ "$MyProject/analysis/scripts/libraries/stata"
+. adopath ++ "$MyProject/scripts/libraries/stata"
 {txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/libraries/stata{txt}"
   [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/programs{txt}"
   [3]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
@@ -523,7 +534,7 @@ ________________________________________________________________________________
   [7]  (PLUS)      "{res}c:\ado\plus/{txt}"
   [8]  (OLDPLACE)  "{res}c:\ado/{txt}"
 
-{com}. adopath ++ "$MyProject/analysis/scripts/programs"
+{com}. adopath ++ "$MyProject/scripts/programs"
 {txt}  [1]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/programs{txt}"
   [2]              "{res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/libraries/stata{txt}"
   [3]  (BASE)      "{res}C:\Program Files\Stata16\ado\base/{txt}"
@@ -543,14 +554,14 @@ ________________________________________________________________________________
 . * Price histogram              *
 . ********************************
 . 
-. use "$MyProject/analysis/data/proc/auto.dta", clear
+. use "$MyProject/data/proc/auto.dta", clear
 {txt}
 {com}. format price %12.0fc
 {txt}
 {com}. histogram price, frequency xtitle("Price (1978 dollars)") graphregion(fcolor(white))
 {txt}(bin={res}8{txt}, start={res}3291{txt}, width={res}1576.875{txt})
 {res}{txt}
-{com}. graph export "$MyProject/analysis/results/figures/price_histogram.pdf", as(pdf) replace
+{com}. graph export "$MyProject/results/figures/price_histogram.pdf", as(pdf) replace
 {txt}(file C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/results/figures/price_histogram.pdf written in PDF format)
 
 {com}. 
@@ -576,8 +587,8 @@ ________________________________________________________________________________
 {txt}  8{com}.         local run_no = `run_no'+1
 {txt}  9{com}.         restore, preserve
 {txt} 10{com}. {c )-}
-{txt}(note: file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000001.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000001.tmp saved
+{txt}(note: file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000001.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000001.tmp saved
 {p 0 7 2}
 (note: variable
 min was 
@@ -593,8 +604,8 @@ byte, now int to accommodate using data's values)
 var was 
 str3, now str5 to accommodate using data's values)
 {p_end}
-file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000001.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000001.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000001.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000001.tmp saved
 
 {com}. restore, not
 {txt}
@@ -646,7 +657,7 @@ variable {bf}var{sf} was {bf}{res}str16{sf}{txt} now {bf}{res}str20{sf}
 {com}. local title "Summary statistics"
 {txt}
 {com}. 
-. texsave using "$MyProject/analysis/results/tables/my_summary_stats.tex", replace varlabels marker(tab:my_summary_stats) title("`title'") footnote("`fn'")
+. texsave using "$MyProject/results/tables/my_summary_stats.tex", replace varlabels marker(tab:my_summary_stats) title("`title'") footnote("`fn'")
 {txt}
 {com}. 
 . 
@@ -655,7 +666,7 @@ variable {bf}var{sf} was {bf}{res}str16{sf}{txt} now {bf}{res}str20{sf}
 . ***************************
 . tempfile my_table
 {txt}
-{com}. use "$MyProject/analysis/results/intermediate/my_regressions.dta", clear
+{com}. use "$MyProject/results/intermediate/my_regressions.dta", clear
 {txt}
 {com}. 
 . * Merge together the four regressions into one table
@@ -672,11 +683,12 @@ variable {bf}var{sf} was {bf}{res}str16{sf}{txt} now {bf}{res}str20{sf}
 {txt}  5{com}.                 local replace append
 {txt}  6{com}.         {c )-}
 {txt}  7{com}. {c )-}
-{txt}(note: file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000003.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000003.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000003.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000003.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000003.tmp saved
+{txt}(note: file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000003.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000003.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000003.tmp saved
+{res}Warning: width of using dataset has not increased. Values may have been overwritten.
+{txt}file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000003.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000003.tmp saved
 
 {com}. 
 . * Format the table
@@ -719,7 +731,7 @@ file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000003.tmp saved
 {txt}
 {com}. local fn "Notes: Outcome variable is price (1978 dollars). Columns (1) and (2) report estimates of \(\beta\) from equation (\ref{c -(}eqn:model{c )-}) for domestic automobiles. Columns (3) and (4) report estimates for foreign automobiles. Robust standard errors are reported in parentheses. A */**/*** indicates significance at the 10/5/1\% levels."
 {txt}
-{com}. texsave using "$MyProject/analysis/results/tables/my_regressions.tex", autonumber varlabels hlines(-2) nofix replace marker(tab:my_regressions) title("`title'") headerlines("`headerlines'") footnote("`fn'")
+{com}. texsave using "$MyProject/results/tables/my_regressions.tex", autonumber varlabels hlines(-2) nofix replace marker(tab:my_regressions) title("`title'") headerlines("`headerlines'") footnote("`fn'")
 {txt}
 {com}. preserve
 {txt}
@@ -730,7 +742,7 @@ file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000003.tmp saved
 . ***************************
 . if !$DisableR {c -(}
 . tempfile my_table_r
-. use "$MyProject/analysis/results/intermediate/my_lm_regressions.dta", clear
+. use "$MyProject/results/intermediate/my_lm_regressions.dta", clear
 . 
 . ren term var
 {res}{com}. ren estimate coef
@@ -750,11 +762,12 @@ file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000003.tmp saved
 {txt}  5{com}.                 local replace append
 {txt}  6{com}.         {c )-}
 {txt}  7{com}. {c )-}
-{txt}(note: file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000005.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000005.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000005.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000005.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000005.tmp saved
+{txt}(note: file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000005.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000005.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000005.tmp saved
+{res}Warning: width of using dataset has not increased. Values may have been overwritten.
+{txt}file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000005.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000005.tmp saved
 {com}.         
 . * Format the table
 . use "`my_table_r'", clear
@@ -775,7 +788,7 @@ file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000005.tmp saved
 {com}. 
 . * Append to prior table, reformat, and output
 . save "`my_table_r'", replace
-{txt}file C:\Users\jreif\AppData\Local\Temp\ST_5a94_000005.tmp saved
+{txt}file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000005.tmp saved
 {com}. restore
 . append using "`my_table_r'"
 {txt}{p 0 7 2}
@@ -801,7 +814,7 @@ str16, now str18 to accommodate using data's values)
 {com}. 
 . * Same output as previous table above, so reuse the same footnote and headerlines
 . local title "Association between automobile price and fuel efficiency, Stata and R"
-. texsave using "$MyProject/analysis/results/tables/my_regressions_with_r.tex", autonumber varlabels hlines(1 6) nofix replace marker(tab:my_regressions_with_r) title("`title'") headerlines("`headerlines'") footnote("`fn'") bold("A." "B.")
+. texsave using "$MyProject/results/tables/my_regressions_with_r.tex", autonumber varlabels hlines(1 6) nofix replace marker(tab:my_regressions_with_r) title("`title'") headerlines("`headerlines'") footnote("`fn'") bold("A." "B.")
 . {c )-}
 {txt}
 {com}. 
@@ -813,13 +826,13 @@ str16, now str18 to accommodate using data's values)
 {com}. 
 . * End log
 . di "End date and time: $S_DATE $S_TIME"
-{res}End date and time:  8 Mar 2020 09:32:04
+{res}End date and time: 15 Mar 2020 14:08:47
 {txt}
 {com}. log close
       {txt}name:  {res}<unnamed>
-       {txt}log:  {res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/logs/log_2020.03.08_09.31.52.smcl
+       {txt}log:  {res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/logs/log_2020.03.15_14.08.43.smcl
   {txt}log type:  {res}smcl
- {txt}closed on:  {res} 8 Mar 2020, 09:32:04
+ {txt}closed on:  {res}15 Mar 2020, 14:08:47
 {txt}{.-}
 {smcl}
 {txt}{sf}{ul off}

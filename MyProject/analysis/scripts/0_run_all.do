@@ -31,35 +31,35 @@ if "$DisableR"!="1" assert !missing("$RSCRIPT_PATH")
 * Log session
 clear 
 set more off
-cap mkdir "$MyProject/analysis/scripts/logs"
+cap mkdir "$MyProject/scripts/logs"
 cap log close
 local datetime : di %tcCCYY.NN.DD!_HH.MM.SS `=clock("$S_DATE $S_TIME", "DMYhms")'
-local logfile "$MyProject/analysis/scripts/logs/log_`datetime'.smcl"
+local logfile "$MyProject/scripts/logs/log_`datetime'.smcl"
 log using "`logfile'"
 di "Begin date and time: $S_DATE $S_TIME"
 
 * All required Stata packages are available in the /libraries folder
-adopath ++ "$MyProject/analysis/scripts/libraries/stata"
+adopath ++ "$MyProject/scripts/libraries/stata"
 mata: mata mlib index
 
 * Stata programs and R scripts are stored in /programs
-adopath ++ "$MyProject/analysis/scripts/programs"
+adopath ++ "$MyProject/scripts/programs"
 
 * Stata and R version control
 version 15
-if "$DisableR"!="1" rscript using "$MyProject/analysis/scripts/programs/_confirm_version.R"
+if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/_confirm_version.R"
 
 * Create directories for output files
-cap mkdir "$MyProject/analysis/results"
-cap mkdir "$MyProject/analysis/results/figures"
-cap mkdir "$MyProject/analysis/results/intermediate"
-cap mkdir "$MyProject/analysis/results/tables"
+cap mkdir "$MyProject/results"
+cap mkdir "$MyProject/results/figures"
+cap mkdir "$MyProject/results/intermediate"
+cap mkdir "$MyProject/results/tables"
 
 * Run project analysis
-do "$MyProject/analysis/scripts/1_process_raw_data.do"
-do "$MyProject/analysis/scripts/2_clean_data.do"
-do "$MyProject/analysis/scripts/3_regressions.do"
-do "$MyProject/analysis/scripts/4_make_tables_figures.do"
+do "$MyProject/scripts/1_process_raw_data.do"
+do "$MyProject/scripts/2_clean_data.do"
+do "$MyProject/scripts/3_regressions.do"
+do "$MyProject/scripts/4_make_tables_figures.do"
 
 * End log
 di "End date and time: $S_DATE $S_TIME"

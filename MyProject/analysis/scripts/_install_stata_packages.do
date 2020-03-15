@@ -5,9 +5,9 @@
 *******
 
 * Create and define a local installation directory for the packages
-cap mkdir "$MyProject/analysis/scripts/libraries"
-cap mkdir "$MyProject/analysis/scripts/libraries/stata"
-net set ado "$MyProject/analysis/scripts/libraries/stata"
+cap mkdir "$MyProject/scripts/libraries"
+cap mkdir "$MyProject/scripts/libraries/stata"
+net set ado "$MyProject/scripts/libraries/stata"
 
 
 * Install latest developer's version of the package from GitHub

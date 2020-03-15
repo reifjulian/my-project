@@ -21,7 +21,6 @@ if(any(!installed)) {
 					paste(packages[!installed], collapse = ', '),
 					"\n\nPlease install these packages before continuing. To install, type install.packages(\"X\") at the R prompt, where X is the name of the package.")
 	stop(vers_ex_msg)
-	stop("hi")
 }
 
 # Ensure that tidyverse is version 1.3.0 or later

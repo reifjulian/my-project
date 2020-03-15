@@ -1,15 +1,15 @@
 ************
 * Preamble: these two lines of code are included so that individual scripts can be run standalone (if desired)
 ************
-adopath ++ "$MyProject/analysis/scripts/libraries/stata"
-adopath ++ "$MyProject/analysis/scripts/programs"
+adopath ++ "$MyProject/scripts/libraries/stata"
+adopath ++ "$MyProject/scripts/programs"
 
 ************
 * SCRIPT: 2_clean_data.do
 * PURPOSE: processes the main dataset in preparation for analysis
 ************
 
-use "$MyProject/analysis/data/proc/intermediate/auto_uncleaned.dta", clear
+use "$MyProject/data/proc/intermediate/auto_uncleaned.dta", clear
 
 * Replace missing values with median for that variable
 foreach v of varlist * {
@@ -23,6 +23,6 @@ foreach v of varlist * {
 }
 
 compress
-save "$MyProject/analysis/data/proc/auto.dta", replace
+save "$MyProject/data/proc/auto.dta", replace
 
 ** EOF

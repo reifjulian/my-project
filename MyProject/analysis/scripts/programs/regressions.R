@@ -7,14 +7,17 @@ if (length(args)) {
   output <- args[2]
 } else {
   MyProject <- Sys.getenv(c("MyProject"))
-  dataset <- file.path(MyProject, "analysis/data/proc/auto.dta")
-  output <- file.path(MyProject, "analysis/results/intermediate/my_lm_regressions.dta")
+  dataset <- file.path(MyProject, "data/proc/auto.dta")
+  output <- file.path(MyProject, "results/intermediate/my_lm_regressions.dta")
 }
 
 # Load required libraries
 library(tidyverse)
 library(haven)
 library(estimatr)
+
+# Example of how to load a package from a project-specific library (provided for pedagogical purposes only)
+# library(estimatr,lib = file.path(Sys.getenv(c("MyProject")), "scripts/libraries/R/windows/"))
 
 my_data <- read_dta(dataset)
 

@@ -76,7 +76,7 @@ program define regsave, rclass
 						
 		local 0 `"`table'"'
 		local tbl_command `"`0'"'
-		syntax namelist(max=1) [, order(string) format(string) sigfig(numlist integer min=1 max=1 >=1 <=20) PARENtheses(namelist max=4) BRACKets(namelist max=4) *]
+		syntax namelist(max=1) [, order(string) format(string) sigfig(numlist integer min=1 max=1 >=1 <=16) PARENtheses(namelist max=4) BRACKets(namelist max=4) *]
 		local table `"`namelist'"'
 		
 		local 0 `", `options'"'

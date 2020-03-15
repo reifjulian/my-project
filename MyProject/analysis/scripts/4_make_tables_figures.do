@@ -1,8 +1,8 @@
 ************
 * Preamble: these two lines of code are included so that individual scripts can be run standalone (if desired)
 ************
-adopath ++ "$MyProject/analysis/scripts/libraries/stata"
-adopath ++ "$MyProject/analysis/scripts/programs"
+adopath ++ "$MyProject/scripts/libraries/stata"
+adopath ++ "$MyProject/scripts/programs"
 
 ************
 * SCRIPT: 4_make_tables_figures.do
@@ -13,10 +13,10 @@ adopath ++ "$MyProject/analysis/scripts/programs"
 * Price histogram              *
 ********************************
 
-use "$MyProject/analysis/data/proc/auto.dta", clear
+use "$MyProject/data/proc/auto.dta", clear
 format price %12.0fc
 histogram price, frequency xtitle("Price (1978 dollars)") graphregion(fcolor(white))
-graph export "$MyProject/analysis/results/figures/price_histogram.pdf", as(pdf) replace
+graph export "$MyProject/results/figures/price_histogram.pdf", as(pdf) replace
 
 ********************************
 * Descriptive statistics table *
@@ -59,14 +59,14 @@ clean_vars var
 local fn "Notes: Count reports the number of non-missing values for the variable."
 local title "Summary statistics"
 
-texsave using "$MyProject/analysis/results/tables/my_summary_stats.tex", replace varlabels marker(tab:my_summary_stats) title("`title'") footnote("`fn'")
+texsave using "$MyProject/results/tables/my_summary_stats.tex", replace varlabels marker(tab:my_summary_stats) title("`title'") footnote("`fn'")
 
 
 ***************************
 * Create regression table *
 ***************************
 tempfile my_table
-use "$MyProject/analysis/results/intermediate/my_regressions.dta", clear
+use "$MyProject/results/intermediate/my_regressions.dta", clear
 
 * Merge together the four regressions into one table
 local run_no = 1
@@ -100,7 +100,7 @@ clean_vars var
 local title "Association between automobile price and fuel efficiency"
 local headerlines "& \multicolumn{2}{c}{Domestic} & \multicolumn{2}{c}{Foreign} " "\cmidrule(lr){2-3} \cmidrule(lr){4-5}"
 local fn "Notes: Outcome variable is price (1978 dollars). Columns (1) and (2) report estimates of \(\beta\) from equation (\ref{eqn:model}) for domestic automobiles. Columns (3) and (4) report estimates for foreign automobiles. Robust standard errors are reported in parentheses. A */**/*** indicates significance at the 10/5/1\% levels."
-texsave using "$MyProject/analysis/results/tables/my_regressions.tex", autonumber varlabels hlines(-2) nofix replace marker(tab:my_regressions) title("`title'") headerlines("`headerlines'") footnote("`fn'")
+texsave using "$MyProject/results/tables/my_regressions.tex", autonumber varlabels hlines(-2) nofix replace marker(tab:my_regressions) title("`title'") headerlines("`headerlines'") footnote("`fn'")
 preserve
 
 
@@ -109,7 +109,7 @@ preserve
 ***************************
 if !$DisableR {
 tempfile my_table_r
-use "$MyProject/analysis/results/intermediate/my_lm_regressions.dta", clear
+use "$MyProject/results/intermediate/my_lm_regressions.dta", clear
 
 ren term var
 ren estimate coef
@@ -158,7 +158,7 @@ clean_vars var
 
 * Same output as previous table above, so reuse the same footnote and headerlines
 local title "Association between automobile price and fuel efficiency, Stata and R"
-texsave using "$MyProject/analysis/results/tables/my_regressions_with_r.tex", autonumber varlabels hlines(1 6) nofix replace marker(tab:my_regressions_with_r) title("`title'") headerlines("`headerlines'") footnote("`fn'") bold("A." "B.")
+texsave using "$MyProject/results/tables/my_regressions_with_r.tex", autonumber varlabels hlines(1 6) nofix replace marker(tab:my_regressions_with_r) title("`title'") headerlines("`headerlines'") footnote("`fn'") bold("A." "B.")
 }
 
 

@@ -1,8 +1,8 @@
 # Sample replication package
 
-This repository includes a short paper and its accompanying replication package. Download this repository by clicking on the green "Clone or download" button above, or by downloading this [zip file](https://github.com/reifjulian/coding-example/archive/master.zip). The folder `MyProject/analysis` is a stand-alone analysis that replicates the figures and tables for the manuscript located in `MyProject/paper`. An accompanying Stata coding guide is available [here](https://reifjulian.github.io/guide).
+This repository includes a short paper and its accompanying replication code. Download this repository by clicking on the green "Clone or download" button above, or by downloading this [zip file](https://github.com/reifjulian/coding-example/archive/master.zip). The folder `MyProject/analysis` is a stand-alone analysis that replicates the figures and tables for the manuscript located in `MyProject/paper`. An accompanying Stata coding guide is available [here](https://reifjulian.github.io/guide).
 
-The analysis was written in Stata and includes a subroutine that was written in *R*. If you don't want to install *R*, follow the instructions in the replication package's [README](analysis/README.pdf) to skip that portion of the analysis.
+The analysis was written in Stata and includes a subroutine that was written in *R*. If you don't want to install *R*, follow the instructions in the [README](MyProject/analysis/README.pdf) to skip that portion of the analysis.
 
 ## Notes
 

@@ -6,7 +6,7 @@ adopath ++ "$MyProject/scripts/programs"
 
 ************
 * SCRIPT: 4_make_tables_figures.do
-* PURPOSE: creates the LaTeX tables for the paper
+* PURPOSE: creates the LaTeX tables and PDF figures for the paper
 ************
 
 ********************************

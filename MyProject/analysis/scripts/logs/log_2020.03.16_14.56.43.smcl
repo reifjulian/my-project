@@ -1,12 +1,31 @@
 {smcl}
 {com}{sf}{ul off}{txt}{.-}
       name:  {res}<unnamed>
-       {txt}log:  {res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/logs/log_2020.03.15_14.08.43.smcl
+       {txt}log:  {res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/logs/log_2020.03.16_14.56.43.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res}15 Mar 2020, 14:08:43
+ {txt}opened on:  {res}16 Mar 2020, 14:56:43
 {txt}
-{com}. di "Begin date and time: $S_DATE $S_TIME"
-{res}Begin date and time: 15 Mar 2020 14:08:43
+{com}. 
+. di "Begin date and time: $S_DATE $S_TIME"
+{res}Begin date and time: 16 Mar 2020 14:56:43
+{txt}
+{com}. di "Stata version: `c(stata_version)'"
+{res}Stata version: 16.1
+{txt}
+{com}. di "Updated as of: `c(born_date)'"
+{res}Updated as of: 18 Feb 2020
+{txt}
+{com}. di "Variant:       `=cond( c(MP),"MP",cond(c(SE),"SE",c(flavor)) )'"
+{res}Variant:       MP
+{txt}
+{com}. di "Processors:    `c(processors)'"
+{res}Processors:    6
+{txt}
+{com}. di "OS:            `c(os)' `c(osdtl)'"
+{res}OS:            Windows 64-bit
+{txt}
+{com}. di "Machine type:  `c(machine_type)'"
+{res}Machine type:  PC (64-bit x86-64)
 {txt}
 {com}. 
 . * All required Stata packages are available in the /libraries folder
@@ -410,8 +429,8 @@ ________________________________________________________________________________
 {space 9}mpg {c |}{col 14}{res}{space 2}-329.2551{col 26}{space 2}  81.1942{col 37}{space 1}   -4.06{col 46}{space 3}0.000{col 54}{space 4}-492.3384{col 67}{space 3}-166.1717
 {txt}{space 7}_cons {c |}{col 14}{res}{space 2} 12600.54{col 26}{space 2} 1777.731{col 37}{space 1}    7.09{col 46}{space 3}0.000{col 54}{space 4} 9029.859{col 67}{space 3} 16171.22
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{res}{txt}(note: file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000001.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000001.tmp saved
+{res}{txt}(note: file C:\Users\jreif\AppData\Local\Temp\ST_4644_000001.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_4644_000001.tmp saved
 
 Linear regression                               Number of obs     = {res}        22
                                                 {txt}F(1, 20)          =  {res}     8.05
@@ -431,7 +450,7 @@ Linear regression                               Number of obs     = {res}       
 origin was 
 str7, now str8 to accommodate using data's values)
 {p_end}
-file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000001.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_4644_000001.tmp saved
 
 Linear regression                               Number of obs     = {res}        52
                                                 {txt}F(2, 49)          =  {res}    18.88
@@ -447,7 +466,7 @@ Linear regression                               Number of obs     = {res}       
 {txt}{space 6}weight {c |}{col 14}{res}{space 2} 4.415037{col 26}{space 2} 1.338438{col 37}{space 1}    3.30{col 46}{space 3}0.002{col 54}{space 4} 1.725346{col 67}{space 3} 7.104728
 {txt}{space 7}_cons {c |}{col 14}{res}{space 2}-13285.44{col 26}{space 2} 8279.718{col 37}{space 1}   -1.60{col 46}{space 3}0.115{col 54}{space 4}-29924.16{col 67}{space 3} 3353.272
 {txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
-{res}{txt}file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000001.tmp saved
+{res}{txt}file C:\Users\jreif\AppData\Local\Temp\ST_4644_000001.tmp saved
 
 Linear regression                               Number of obs     = {res}        22
                                                 {txt}F(2, 19)          =  {res}    49.02
@@ -468,7 +487,7 @@ Linear regression                               Number of obs     = {res}       
 origin was 
 str7, now str8 to accommodate using data's values)
 {p_end}
-file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000001.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_4644_000001.tmp saved
 
 {com}. 
 . use "`results'", clear
@@ -587,8 +606,8 @@ ________________________________________________________________________________
 {txt}  8{com}.         local run_no = `run_no'+1
 {txt}  9{com}.         restore, preserve
 {txt} 10{com}. {c )-}
-{txt}(note: file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000001.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000001.tmp saved
+{txt}(note: file C:\Users\jreif\AppData\Local\Temp\ST_4644_000001.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_4644_000001.tmp saved
 {p 0 7 2}
 (note: variable
 min was 
@@ -604,8 +623,8 @@ byte, now int to accommodate using data's values)
 var was 
 str3, now str5 to accommodate using data's values)
 {p_end}
-file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000001.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000001.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_4644_000001.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_4644_000001.tmp saved
 
 {com}. restore, not
 {txt}
@@ -683,12 +702,12 @@ variable {bf}var{sf} was {bf}{res}str16{sf}{txt} now {bf}{res}str20{sf}
 {txt}  5{com}.                 local replace append
 {txt}  6{com}.         {c )-}
 {txt}  7{com}. {c )-}
-{txt}(note: file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000003.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000003.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000003.tmp saved
+{txt}(note: file C:\Users\jreif\AppData\Local\Temp\ST_4644_000003.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_4644_000003.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_4644_000003.tmp saved
 {res}Warning: width of using dataset has not increased. Values may have been overwritten.
-{txt}file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000003.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000003.tmp saved
+{txt}file C:\Users\jreif\AppData\Local\Temp\ST_4644_000003.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_4644_000003.tmp saved
 
 {com}. 
 . * Format the table
@@ -762,12 +781,12 @@ file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000003.tmp saved
 {txt}  5{com}.                 local replace append
 {txt}  6{com}.         {c )-}
 {txt}  7{com}. {c )-}
-{txt}(note: file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000005.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000005.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000005.tmp saved
+{txt}(note: file C:\Users\jreif\AppData\Local\Temp\ST_4644_000005.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_4644_000005.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_4644_000005.tmp saved
 {res}Warning: width of using dataset has not increased. Values may have been overwritten.
-{txt}file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000005.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000005.tmp saved
+{txt}file C:\Users\jreif\AppData\Local\Temp\ST_4644_000005.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_4644_000005.tmp saved
 {com}.         
 . * Format the table
 . use "`my_table_r'", clear
@@ -788,7 +807,7 @@ file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000005.tmp saved
 {com}. 
 . * Append to prior table, reformat, and output
 . save "`my_table_r'", replace
-{txt}file C:\Users\jreif\AppData\Local\Temp\ST_4d4c_000005.tmp saved
+{txt}file C:\Users\jreif\AppData\Local\Temp\ST_4644_000005.tmp saved
 {com}. restore
 . append using "`my_table_r'"
 {txt}{p 0 7 2}
@@ -826,13 +845,13 @@ str16, now str18 to accommodate using data's values)
 {com}. 
 . * End log
 . di "End date and time: $S_DATE $S_TIME"
-{res}End date and time: 15 Mar 2020 14:08:47
+{res}End date and time: 16 Mar 2020 14:57:00
 {txt}
 {com}. log close
       {txt}name:  {res}<unnamed>
-       {txt}log:  {res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/logs/log_2020.03.15_14.08.43.smcl
+       {txt}log:  {res}C:/Users/jreif/Documents/GitHub/my-project/MyProject/analysis/scripts/logs/log_2020.03.16_14.56.43.smcl
   {txt}log type:  {res}smcl
- {txt}closed on:  {res}15 Mar 2020, 14:08:47
+ {txt}closed on:  {res}16 Mar 2020, 14:57:00
 {txt}{.-}
 {smcl}
 {txt}{sf}{ul off}

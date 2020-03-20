@@ -45,9 +45,12 @@ di "Processors:    `c(processors)'"
 di "OS:            `c(os)' `c(osdtl)'"
 di "Machine type:  `c(machine_type)'"
 
-* All required Stata packages are available in the /libraries folder
+* All required Stata packages are available in the /libraries/stata folder
 adopath ++ "$MyProject/scripts/libraries/stata"
 mata: mata mlib index
+
+* R packages can be installed manually (see README) or installed automatically by uncommenting the following line
+* if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/_install_R_packages.R"
 
 * Stata programs and R scripts are stored in /programs
 adopath ++ "$MyProject/scripts/programs"

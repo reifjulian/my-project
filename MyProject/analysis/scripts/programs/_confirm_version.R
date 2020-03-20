@@ -19,7 +19,7 @@ installed <- packages %in% installed.packages()[, "Package"]
 if(any(!installed)) {
 	vers_ex_msg = paste0("This analysis requires the following add-on R package(s):\n",
 					paste(packages[!installed], collapse = ', '),
-					"\n\nPlease install these packages before continuing. To install, type install.packages(\"X\") at the R prompt, where X is the name of the package.")
+					"\n\nPlease install these packages before continuing. To install, type install.packages(\"X\") at the R prompt, where X is the name of the package.\nAlternatively, run the script /programs/_install_R_packages.R")
 	stop(vers_ex_msg)
 }
 

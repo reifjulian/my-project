@@ -27,8 +27,13 @@ if (!dir.create(lib, showWarnings = FALSE)[1]) {
 #dir.create(file.path(proj_dir, paste0("scripts/libraries/R/",.Platform$OS.type)))
 #lib <-     file.path(proj_dir, paste0("scripts/libraries/R/",.Platform$OS.type))
 
-# Install packages
-lapply(packages, install.packages, lib = lib, type="binary", dependencies=c("Depends", "Imports", "LinkingTo"))
+# Install packages from source (Unix) and from binary otherwise
+if (.Platform$OS.type=="unix") {
+  lapply(packages, install.packages, lib = lib, type="source", dependencies=c("Depends", "Imports", "LinkingTo"))
+} else {
+  lapply(packages, install.packages, lib = lib, type="binary", dependencies=c("Depends", "Imports", "LinkingTo"))
+}
+
 
 
 

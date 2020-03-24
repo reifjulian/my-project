@@ -1,12 +1,14 @@
 ************
-* Preamble: these two lines of code are included so that individual scripts can be run standalone (if desired)
+* SCRIPT: 4_make_tables_figures.do
+* PURPOSE: creates the LaTeX tables and PDF figures for the paper
 ************
+
+* Preamble: these two lines of code are included so scripts can be run individually (rather than called by 0_run_all.do)
 adopath ++ "$MyProject/scripts/libraries/stata"
 adopath ++ "$MyProject/scripts/programs"
 
 ************
-* SCRIPT: 4_make_tables_figures.do
-* PURPOSE: creates the LaTeX tables and PDF figures for the paper
+* Code begins
 ************
 
 ********************************
@@ -29,7 +31,7 @@ foreach v in price mpg weight {
 	assert inlist(imp_`v',0,1)
 	gen non_missing = 1 - imp_`v'
 
-	collapse (mean) mean=`v' (sd) sd=`v' (min) min=`v' (max) max=`v' (sum) count=imp_`v', fast
+	collapse (mean) mean=`v' (sd) sd=`v' (min) min=`v' (max) max=`v' (sum) count=non_missing, fast
 
 	gen var = "`v'"
 	if `run_no'>0 append using "`tmp'"
@@ -107,7 +109,7 @@ preserve
 ***************************
 * Create regression table: R *
 ***************************
-if !$DisableR {
+if "$DisableR"!="1" {
 tempfile my_table_r
 use "$MyProject/results/intermediate/my_lm_regressions.dta", clear
 

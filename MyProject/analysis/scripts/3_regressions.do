@@ -1,12 +1,14 @@
 ************
-* Preamble: these two lines of code are included so that individual scripts can be run standalone (if desired)
+* SCRIPT: 3_regressions.do
+* PURPOSE: estimates regression models and saves the resulting output
 ************
+
+* Preamble: these two lines of code are included so scripts can be run individually (rather than called by 0_run_all.do)
 adopath ++ "$MyProject/scripts/libraries/stata"
 adopath ++ "$MyProject/scripts/programs"
 
 ************
-* SCRIPT: 3_regressions.do
-* PURPOSE: estimates regression models and saves the resulting output
+* Code begins
 ************
 
 tempfile results

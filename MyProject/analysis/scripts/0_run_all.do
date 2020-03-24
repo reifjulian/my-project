@@ -7,8 +7,7 @@
 *   All figures are outputted to /results/figures
 * 
 * SOFTWARE REQUIREMENTS
-*   Analyses run on Windows using Stata version 15 and R-3.4.0
-*   Install R-3.4.0 for Windows from https://cran.r-project.org/bin/windows/base/old/3.4.0/
+*   Analyses run on Windows using Stata version 15 and R-3.6.0
 *
 * TO PERFORM A CLEAN RUN, DELETE THE FOLLOWING TWO FOLDERS:
 *   /results
@@ -17,9 +16,9 @@
 
 * User must define two global macros in order to run the analysis:
 * (1) "MyProject" points to the project folder
-* (2) "RSCRIPT_PATH" points to the folder containing the executables for R-3.4.0
+* (2) "RSCRIPT_PATH" points to the folder containing the executables for R-3.6.0
 * global MyProject "C:/Users/jdoe/MyProject"
-* global RSCRIPT_PATH "C:/Program Files/R/R-3.4.0/bin/x64"
+* global RSCRIPT_PATH "C:/Program Files/R/R-3.6.0/bin/x64"
 
 * To disable the R portion of the analysis, set the following flag to 1
 global DisableR = 0

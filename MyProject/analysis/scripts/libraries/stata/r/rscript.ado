@@ -1,4 +1,5 @@
-*! rscript 1.0.2 4sep2019 by David Molitor and Julian Reif
+*! rscript 1.0.3 23mar2020 by David Molitor and Julian Reif
+* 1.0.3: added support for "~" pathnames
 * 1.0.2: stderr is now parsed by Mata instead of Stata
 * 1.0.1: Updated error handling
 
@@ -25,6 +26,19 @@ program define rscript, nclass
 	}
 	
 	confirm file "`rpath'"
+	
+	* Calling a script using "~" notation causes a fatal error with shell (Unix/Mac). Avoid by converting to absolute path.
+	qui if strpos("`using'","~") {
+		mata: pathsplit(st_local("using"), path = "", fname = "")
+		mata: st_local("path", path)
+		mata: st_local("fname", fname)
+		
+		local workdir_orig "`c(pwd)'"
+		cd `"`path'"'
+		local using "`c(pwd)'/`fname'"
+		cd "`workdir_orig'"
+		confirm file "`using'"
+	}
 	
 	****************
 	* Run the script. Redirect stdout to `out' and stderr to `err'
@@ -87,9 +101,21 @@ program define rscript, nclass
 		display as error "Encountered a problem while parsing stderr"
 		display as error "Mata error code: " _rc
 	}
+	
+	* In a few (rare) cases, a "fatal error" message will be written to stdout rather than stderr
+	cap mata: parse_stdout("`out'")
+	if _rc==198 {
+		display as error "`using' ended with a fatal error"
+		display as error "See stdout output above for details"
+		if "`force'"=="" error 198
+	}
+	else if _rc {
+		display as error "Encountered a problem while parsing stdout"
+		display as error "Mata error code: " _rc
+	}	
 end
 
-* Parse the stderr output file and check whether "error" was printed anywhere
+* Parse the stderr and stdout output files to check for errors
 mata:
 void parse_stderr(string scalar filename)
 {
@@ -104,5 +130,20 @@ void parse_stderr(string scalar filename)
 	
 	fclose(input_fh)
 }
+
+void parse_stdout(string scalar filename)
+{
+	real scalar input_fh
+	string scalar line
+
+	input_fh = fopen(filename, "r")
+	
+	while ((line=fget(input_fh)) != J(0,0,"")) {
+		if (strpos(strlower(line), "fatal error")!=0) exit(error(198))
+	}
+	
+	fclose(input_fh)
+}
+
 end
 ** EOF

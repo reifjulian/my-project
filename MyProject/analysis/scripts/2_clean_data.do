@@ -1,12 +1,14 @@
 ************
-* Preamble: these two lines of code are included so that individual scripts can be run standalone (if desired)
+* SCRIPT: 2_clean_data.do
+* PURPOSE: processes the main dataset in preparation for analysis
 ************
+
+* Preamble: these two lines of code are included so scripts can be run individually (rather than called by 0_run_all.do)
 adopath ++ "$MyProject/scripts/libraries/stata"
 adopath ++ "$MyProject/scripts/programs"
 
 ************
-* SCRIPT: 2_clean_data.do
-* PURPOSE: processes the main dataset in preparation for analysis
+* Code begins
 ************
 
 use "$MyProject/data/proc/intermediate/auto_uncleaned.dta", clear

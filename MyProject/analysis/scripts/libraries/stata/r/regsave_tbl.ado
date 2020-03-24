@@ -1,4 +1,5 @@
-*! regsave_tbl 1.1.6 9jan2020 by Julian Reif
+*! regsave_tbl 1.1.7 24mar2020 by Julian Reif
+* 1.1.7: fixed minor sigfig() bug
 * 1.1.6: fixed bug with sigfig() formatting
 * 1.1.5: fixed bug with sigfig() option and brackets
 * 1.1.4: added sigfig() option. Edited df() option to allow missing.
@@ -398,7 +399,7 @@ program define regsave_tbl, rclass
 			* Variables that were stored as integers (or missing) are exact and shouldn't be altered
 			replace `table' = `orig' if `intvar'==1
 			
-			drop `tmp' `diff' `tail' `numast' `intvar' `orig'
+			drop `tmp' `diff' `tail' `numast' `intvar' `orig' `lngth'
 		}
 	}	
 
@@ -475,14 +476,14 @@ program define regsave_tbl, rclass
 		sort index, stable
 		drop index
 	}
-	
+
 	* Restore dataset if necessary
 	if "`using'"!= "" {
 		`save' "`using'", `replace' `saveold_opts'
 		restore	
 	}
 	else restore, not
-	
+
 	* Return shape of new dataset
 	return clear
 	qui count

@@ -17,7 +17,7 @@ if (!dir.create(lib, showWarnings = FALSE)[1]) {
 }
 
 ########
-# Sample code (lines 20-24) to install packages locally into /scripts/libraries/R instead of usual library path
+# Sample code to install packages locally into /scripts/libraries/R instead of usual library path
 # This code is provided for pedagogical purposes and has been commented out
 # Note: R packages such as tidyverse are large (>100 megabytes)
 ########
@@ -27,13 +27,31 @@ if (!dir.create(lib, showWarnings = FALSE)[1]) {
 #dir.create(file.path(proj_dir, paste0("scripts/libraries/R/",.Platform$OS.type)))
 #lib <-     file.path(proj_dir, paste0("scripts/libraries/R/",.Platform$OS.type))
 
-# Install packages from source (Unix) and from binary otherwise
-if (.Platform$OS.type=="unix") {
-  lapply(packages, install.packages, lib = lib, type="source", dependencies=c("Depends", "Imports", "LinkingTo"))
-} else {
-  lapply(packages, install.packages, lib = lib, type="binary", dependencies=c("Depends", "Imports", "LinkingTo"))
+# Function to determine whether user is running osx, linux, or something else
+get_os <- function(){
+  sysinf <- Sys.info()
+  if (!is.null(sysinf)){
+    os <- sysinf['sysname']
+    if (os == 'Darwin')
+      os <- "osx"
+  } else { ## mystery machine
+    os <- .Platform$OS.type
+    if (grepl("^darwin", R.version$os))
+      os <- "osx"
+    if (grepl("linux-gnu", R.version$os))
+      os <- "linux"
+  }
+  tolower(os)
 }
 
+
+# Install packages from binary, unless system is Unix (where source is only option)
+install_type <- "binary"
+if (.Platform$OS.type=="unix" & get_os()!="osx") {
+  	install_type <- "source"
+}
+
+lapply(packages, install.packages, lib = lib, type = install_type, dependencies=c("Depends", "Imports", "LinkingTo"))
 
 
 

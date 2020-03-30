@@ -16,7 +16,7 @@
 
 * User must define two global macros in order to run the analysis:
 * (1) "MyProject" points to the project folder
-* (2) "RSCRIPT_PATH" points to the folder containing the executables for R-3.6.0
+* (2) "RSCRIPT_PATH" points to the folder containing the executables for R-3.6.0 (or newer)
 * global MyProject "C:/Users/jdoe/MyProject"
 * global RSCRIPT_PATH "C:/Program Files/R/R-3.6.0/bin/x64"
 

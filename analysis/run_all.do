@@ -10,8 +10,8 @@
 *   Analyses run on Windows using Stata version 15 and R-3.6.0
 *
 * TO PERFORM A CLEAN RUN, DELETE THE FOLLOWING TWO FOLDERS:
+*   /processed
 *   /results
-*   /data/proc
 **********************
 
 * User must define two global macros in order to run the analysis:
@@ -33,8 +33,8 @@ set more off
 cap mkdir "$MyProject/scripts/logs"
 cap log close
 local datetime : di %tcCCYY.NN.DD!_HH.MM.SS `=clock("$S_DATE $S_TIME", "DMYhms")'
-local logfile "$MyProject/scripts/logs/log_`datetime'.smcl"
-log using "`logfile'"
+local logfile "$MyProject/scripts/logs/log_`datetime'.txt"
+log using "`logfile'", text
 
 di "Begin date and time: $S_DATE $S_TIME"
 di "Stata version: `c(stata_version)'"
@@ -59,6 +59,9 @@ version 15
 if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/_confirm_version.R"
 
 * Create directories for output files
+cap mkdir "$MyProject/processed"
+cap mkdir "$MyProject/processed/intermediate"
+cap mkdir "$MyProject/results"
 cap mkdir "$MyProject/results"
 cap mkdir "$MyProject/results/figures"
 cap mkdir "$MyProject/results/intermediate"

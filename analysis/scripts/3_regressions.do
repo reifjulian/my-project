@@ -12,7 +12,7 @@ adopath ++ "$MyProject/scripts/programs"
 ************
 
 tempfile results
-use "$MyProject/data/proc/auto.dta", clear
+use "$MyProject/processed/auto.dta", clear
 
 local replace replace
 foreach rhs in "mpg" "mpg weight" {
@@ -32,6 +32,6 @@ use "`results'", clear
 save "$MyProject/results/intermediate/my_regressions.dta", replace
 
 * R regressions. First argument: input file. Second argument: output file.
-if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/regressions.R", args("$MyProject/data/proc/auto.dta" "$MyProject/results/intermediate/my_lm_regressions.dta")
+if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/regressions.R", args("$MyProject/processed/auto.dta" "$MyProject/results/intermediate/my_lm_regressions.dta")
 
 ** EOF

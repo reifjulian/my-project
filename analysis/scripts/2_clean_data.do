@@ -11,7 +11,7 @@ adopath ++ "$MyProject/scripts/programs"
 * Code begins
 ************
 
-use "$MyProject/data/proc/intermediate/auto_uncleaned.dta", clear
+use "$MyProject/processed/intermediate/auto_uncleaned.dta", clear
 
 * Replace missing values with median for that variable
 foreach v of varlist * {
@@ -25,6 +25,6 @@ foreach v of varlist * {
 }
 
 compress
-save "$MyProject/data/proc/auto.dta", replace
+save "$MyProject/processed/auto.dta", replace
 
 ** EOF

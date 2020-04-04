@@ -15,7 +15,7 @@ adopath ++ "$MyProject/scripts/programs"
 * Price histogram              *
 ********************************
 
-use "$MyProject/data/proc/auto.dta", clear
+use "$MyProject/processed/auto.dta", clear
 format price %12.0fc
 histogram price, frequency xtitle("Price (1978 dollars)") graphregion(fcolor(white))
 graph export "$MyProject/results/figures/price_histogram.pdf", as(pdf) replace
@@ -96,11 +96,11 @@ replace var = "\(R^2\)" if var=="r2"
 replace var = subinstr(var,"_coef","",1)
 replace var = "" if strpos(var,"_stderr")
 
-* Run Stata program (stored in /functions)
+* Run program (stored in /programs) to clean variable names
 clean_vars var
 
 local title "Association between automobile price and fuel efficiency"
-local headerlines "& \multicolumn{2}{c}{Domestic} & \multicolumn{2}{c}{Foreign} " "\cmidrule(lr){2-3} \cmidrule(lr){4-5}"
+local headerlines "& \multicolumn{2}{c}{Domestic cars} & \multicolumn{2}{c}{Foreign cars} " "\cmidrule(lr){2-3} \cmidrule(lr){4-5}"
 local fn "Notes: Outcome variable is price (1978 dollars). Columns (1) and (2) report estimates of \(\beta\) from equation (\ref{eqn:model}) for domestic automobiles. Columns (3) and (4) report estimates for foreign automobiles. Robust standard errors are reported in parentheses. A */**/*** indicates significance at the 10/5/1\% levels."
 texsave using "$MyProject/results/tables/my_regressions.tex", autonumber varlabels hlines(-2) nofix replace marker(tab:my_regressions) title("`title'") headerlines("`headerlines'") footnote("`fn'")
 preserve

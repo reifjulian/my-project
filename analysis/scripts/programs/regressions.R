@@ -7,7 +7,7 @@ if (length(args)) {
   output <- args[2]
 } else {
   MyProject <- Sys.getenv(c("MyProject"))
-  dataset <- file.path(MyProject, "data/proc/auto.dta")
+  dataset <- file.path(MyProject, "processed/auto.dta")
   output <- file.path(MyProject, "results/intermediate/my_lm_regressions.dta")
 }
 

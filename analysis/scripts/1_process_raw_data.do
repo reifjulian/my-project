@@ -11,12 +11,9 @@ adopath ++ "$MyProject/scripts/programs"
 * Code begins
 ************
 
-cap mkdir "$MyProject/data/proc"
-cap mkdir "$MyProject/data/proc/intermediate"
-
-insheet using "$MyProject/data/raw/auto.csv", comma clear
+insheet using "$MyProject/data/auto.csv", comma clear
 
 compress
-save "$MyProject/data/proc/intermediate/auto_uncleaned.dta", replace
+save "$MyProject/processed/intermediate/auto_uncleaned.dta", replace
 
 ** EOF

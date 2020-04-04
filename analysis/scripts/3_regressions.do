@@ -25,7 +25,6 @@ foreach rhs in "mpg" "mpg weight" {
 	* Foreign cars
 	reg price `rhs' if foreign=="Foreign", robust
 	regsave using "`results'", t p autoid append addlabel(rhs,"`rhs'",origin,"Foreign") 
-		
 }
 
 use "`results'", clear

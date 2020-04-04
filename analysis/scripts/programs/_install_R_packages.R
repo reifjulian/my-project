@@ -16,17 +16,6 @@ if (!dir.create(lib, showWarnings = FALSE)[1]) {
   dir.create(lib, showWarnings = FALSE, recursive = TRUE)
 }
 
-########
-# Sample code to install packages locally into /scripts/libraries/R instead of usual library path
-# This code is provided for pedagogical purposes and has been commented out
-# Note: R packages such as tidyverse are large (>100 megabytes)
-########
-#proj_dir <- Sys.getenv(c("MyProject"))
-#dir.create(file.path(proj_dir, "scripts/libraries"))
-#dir.create(file.path(proj_dir, "scripts/libraries/R"))
-#dir.create(file.path(proj_dir, paste0("scripts/libraries/R/",.Platform$OS.type)))
-#lib <-     file.path(proj_dir, paste0("scripts/libraries/R/",.Platform$OS.type))
-
 # Function to determine whether user is running osx, linux, or something else
 get_os <- function(){
   sysinf <- Sys.info()
@@ -43,6 +32,22 @@ get_os <- function(){
   }
   tolower(os)
 }
+
+########
+# Sample code to install packages locally into /scripts/libraries/R instead of usual library path
+# This code is provided for pedagogical purposes and has been commented out
+# Note: R packages such as tidyverse are large (>100 megabytes)
+########
+
+#proj_dir <- Sys.getenv(c("MyProject"))
+#dir.create(file.path(proj_dir, "scripts/libraries"))
+#dir.create(file.path(proj_dir, "scripts/libraries/R"))
+#dir.create(file.path(proj_dir, paste0("scripts/libraries/R/",os)))
+#lib <-     file.path(proj_dir, paste0("scripts/libraries/R/",os))
+
+########
+# End of sample code
+########
 
 
 # Install packages from binary, unless system is Unix (where source is only option)

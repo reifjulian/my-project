@@ -83,20 +83,24 @@ foreach orig in "Domestic" "Foreign" {
 	}
 }
 
+***
 * Format the table
+***
 use "`my_table'", clear
 drop if inlist(var,"_id","rhs","origin") | strpos(var,"_cons") | strpos(var,"tstat") | strpos(var,"pval")
 
+* texsave will output these labels as column headers
 label var col1 "Spec 1"
 label var col2 "Spec 2"
 label var col3 "Spec 1"
 label var col4 "Spec 2"
 
+* Display R^2 in LaTeX math mode
 replace var = "\(R^2\)" if var=="r2"
+
+* Clean variable names
 replace var = subinstr(var,"_coef","",1)
 replace var = "" if strpos(var,"_stderr")
-
-* Run program (stored in /programs) to clean variable names
 clean_vars var
 
 local title "Association between automobile price and fuel efficiency"

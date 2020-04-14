@@ -2,7 +2,7 @@
 * OVERVIEW
 *   This script generates tables and figures for the paper:
 *       "My Project" (Julian Reif)
-*   All raw data are stored in /data/raw
+*   All raw data are stored in /data
 *   All tables are outputted to /results/tables
 *   All figures are outputted to /results/figures
 * 

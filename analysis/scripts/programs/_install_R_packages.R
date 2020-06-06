@@ -7,7 +7,8 @@
 packages <- c("tidyverse","estimatr")
 
 # Set repository from which R packages will be downloaded
-options(repos = "https://cran.rstudio.com")
+# Note: the RStudio package manager enables users to install all packages from binary, including for Linux
+options(repos = "https://packagemanager.rstudio.com/all/latest")
 
 # Install new packages to first element of .libPaths() or, if path is not writeable, to default user library path
 lib <- .libPaths()[1]
@@ -16,22 +17,6 @@ if (!dir.create(lib, showWarnings = FALSE)[1]) {
   dir.create(lib, showWarnings = FALSE, recursive = TRUE)
 }
 
-# Function to determine whether user is running osx, linux, or something else
-get_os <- function(){
-  sysinf <- Sys.info()
-  if (!is.null(sysinf)){
-    os <- sysinf['sysname']
-    if (os == 'Darwin')
-      os <- "osx"
-  } else { ## mystery machine
-    os <- .Platform$OS.type
-    if (grepl("^darwin", R.version$os))
-      os <- "osx"
-    if (grepl("linux-gnu", R.version$os))
-      os <- "linux"
-  }
-  tolower(os)
-}
 
 ########
 # Sample code to install packages locally into /scripts/libraries/R instead of usual library path
@@ -49,20 +34,5 @@ get_os <- function(){
 # End of sample code
 ########
 
-
-# Install packages from binary, unless system is Unix (where source is only option)
-install_type <- "binary"
-if (.Platform$OS.type=="unix" & get_os()!="osx") {
-  	install_type <- "source"
-}
-
-lapply(packages, install.packages, lib = lib, type = install_type, dependencies=c("Depends", "Imports", "LinkingTo"))
-
-
-
-
-
-
-
-
-
+# Install packages from binary
+lapply(packages, install.packages, lib = lib, dependencies=c("Depends", "Imports", "LinkingTo"))

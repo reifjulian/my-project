@@ -19,10 +19,28 @@ if (!dir.create(lib, showWarnings = FALSE)[1]) {
 
 
 ########
-# Sample code to install packages locally into /scripts/libraries/R instead of usual library path
+# Sample code to install packages locally into /scripts/libraries/R/os instead of usual library path
 # This code is provided for pedagogical purposes and has been commented out
 # Note: R packages such as tidyverse are large (>100 megabytes)
 ########
+
+# Function to determine whether user is running os is osx, linux, or something else
+#get_os <- function(){
+#  sysinf <- Sys.info()
+#  if (!is.null(sysinf)){
+#    os <- sysinf['sysname']
+#    if (os == 'Darwin')
+#      os <- "osx"
+#  } else { ## mystery machine
+#    os <- .Platform$OS.type
+#    if (grepl("^darwin", R.version$os))
+#      os <- "osx"
+#    if (grepl("linux-gnu", R.version$os))
+#      os <- "linux"
+#  }
+#  tolower(os)
+#}
+# os <- get_os()
 
 #proj_dir <- Sys.getenv(c("MyProject"))
 #dir.create(file.path(proj_dir, "scripts/libraries"))

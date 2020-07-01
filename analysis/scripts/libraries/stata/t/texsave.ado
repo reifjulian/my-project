@@ -1,4 +1,5 @@
-*! texsave 1.4.4 11dec2019 by Julian Reif 
+*! texsave 1.4.5 1jul2020 by Julian Reif 
+* 1.4.5: added new endash option (enabled by default)
 * 1.4.4: added headersep() option
 * 1.4.3: width default changed from \textwidth to \linewidth, to improve landscape tables. Added addlinespace() as footnote suboption. Changed default to \addlinespace[\belowrulesep]
 * 1.4.2: added preamble option.
@@ -20,7 +21,7 @@
 program define texsave, nclass
 	version 10
 
-	syntax [varlist] using/ [if] [in] [, noNAMES SW noFIX title(string) DELIMITer(string) footnote(string asis) headerlines(string asis) headlines(string asis) preamble(string asis) footlines(string asis) frag align(string) LOCation(string) size(string) width(string) marker(string) bold(string) italics(string) underline(string) slanted(string) smallcaps(string) sansserif(string) monospace(string) emphasis(string) VARLABels hlines(numlist) autonumber rowsep(string) headersep(string) LANDscape GEOmetry(string) replace]
+	syntax [varlist] using/ [if] [in] [, noNAMES SW noFIX noENDASH title(string) DELIMITer(string) footnote(string asis) headerlines(string asis) headlines(string asis) preamble(string asis) footlines(string asis) frag align(string) LOCation(string) size(string) width(string) marker(string) bold(string) italics(string) underline(string) slanted(string) smallcaps(string) sansserif(string) monospace(string) emphasis(string) VARLABels hlines(numlist) autonumber rowsep(string) headersep(string) LANDscape GEOmetry(string) replace]
 
 	* Check if appendfile is installed
 	cap appendfile
@@ -225,10 +226,14 @@ program define texsave, nclass
 	*****
 	* Correct chars that cause problems in LaTeX; add bold, italics, underline etc. tags as necessary
 	*****
+	
+	* Header, title, and footer corrections
 	if "`fix'"=="" {		
-		* Header, title, and footer
+		
 		foreach str in "header_colnames" "footnote" "title" {
-			foreach symbol in _ & % # $ ~ {
+		    
+			* Note: $ substitution here does not work
+			foreach symbol in _ % # $ & ~ {
 				if "`str'"=="header_colnames" & "`symbol'"=="&" continue				// Allow &'s in headers since they are delimiters
 				local `str' : subinstr local `str' `"`symbol'"' `"\\`symbol'"', all
 			}
@@ -241,8 +246,11 @@ program define texsave, nclass
 			local `str' : subinstr local `str' `"^"' `"\^{}"', all
 		}
 	}
-	if "`fix'"=="" | `"`bold'`italics'`underline'`slanted'`smallcaps'`sansserif'`monospace'`emphasis'"'!="" {
+	
+	* Dataset corrections
+	if "`fix'"=="" | "`endash'"=="" | `"`bold'`italics'`underline'`slanted'`smallcaps'`sansserif'`monospace'`emphasis'"'!="" {
 		
+		tempvar index_neg
 		local renamed = "yes"
 		
 		* Variables - create new temporary ones that have bad chars stripped out of them and are formatted as specified by user
@@ -254,14 +262,22 @@ program define texsave, nclass
 			capture confirm string var `v'
 			if _rc==0 {
 								
-				* Fix problematic symbols
+				* Fix problematic symbols 
 				if "`fix'"=="" {
-					foreach symbol in _ & % # $ & ~ {
+					foreach symbol in _ % # $ & ~ {
 						qui replace `v' = subinstr(`v',"`symbol'","\\`symbol'",.)
 					}
 					qui replace `v' = subinstr(`v',"{","\{",.)
 					qui replace `v' = subinstr(`v',"}","\}",.)
 					qui replace `v' = subinstr(`v',"^","\^{}",.)
+				}
+				
+				* Reformat negative signs from "-" to "--" (en-dash)
+				* Only reformat negative signs if they are followed by a number and not preceded by an alphabetic character or negative sign
+				if "`endash'"=="" {
+				    qui gen `index_neg' = strpos(`v',"-")
+					qui replace `v' = subinstr(`v',"-","--",1) if real(substr(`v',`index_neg'+1,1))!=. & regexm(substr(`v',`index_neg'-1,1),"[A-Za-z\-]")!=1
+					drop `index_neg'
 				}
 				
 				* Formatting options

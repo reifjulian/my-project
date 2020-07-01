@@ -1,4 +1,4 @@
-* 00000006
+* 00000007
 *! version 1.0.0
 * Do not erase or edit this file
 * It is used by Stata to track the ado and help
@@ -100,4 +100,15 @@ f r\regsave.ado
 f r\regsave.hlp
 f r\regsave_tbl.ado
 f r\regsave_tbl.hlp
+e
+S https://raw.githubusercontent.com/reifjulian/texsave/master
+N texsave.pkg
+D  1 Jul 2020
+U 7
+d texsave. Save dataset in LaTeX format.
+d Julian Reif, University of Illinois (jreif@illinois.edu)
+f t\texsave.ado
+f t\texsave.sthlp
+f a\appendfile.ado
+f a\appendfile.hlp
 e

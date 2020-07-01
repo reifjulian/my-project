@@ -12,7 +12,7 @@
 {cmd:width(}{it:string}{cmd:)} {cmd:align(}{it:string}{cmd:)} {cmdab:loc:ation(}{it:string}{cmd:)}
 {cmd:marker(}{it:string}{cmd:)} {cmd:autonumber} {cmd:hlines(}{it:numlist}{cmd:)} {cmd:footnote(}{it:footnote_options}{cmd:)}
 {cmdab:varlab:els} {cmdab:land:scape}  {cmdab:geo:metry(}{it:string}{cmd:)}
-{cmd:rowsep(}{it:string}{cmd:)} {cmd:frag} {cmd:nonames} {cmd:sw} {cmd:nofix} 
+{cmd:rowsep(}{it:string}{cmd:)} {cmd:frag} {cmd:nonames} {cmd:sw} {cmd:nofix} {cmd:noendash}
 {cmd:preamble(}{it:stringlist}{cmd:)} {cmd:headlines(}{it:stringlist}{cmd:)} {cmd:headerlines(}{it:stringlist}{cmd:)}  
 {cmd:footlines(}{it:stringlist}{cmd:)} {cmd:replace} {it:format_options}]
 
@@ -149,9 +149,13 @@ An alternative is to use the LaTeX package {browse "http://ctan.org/pkg/standalo
 
 
 {p 4 8 2}
-{cmd:nofix} instructs {cmd:texsave} to write out all data, titles and footnotes exactly as they appear in Stata.  Many of the non-alphanumeric characters have special meaning in LaTeX, namely _, %, #, $, &, ~, ^^, \, {, }.
-By default, {cmd:texsave} tries to fix this by adding a backslash (\) in front of these characters.  (It is not always successful, though).
-Specify {cmd:nofix} if you are intentionally outputting LaTeX code and don't want {cmd:texsave} to incorrectly modify it.
+{cmd:nofix} instructs {cmd:texsave} to write out all data, titles and footnotes exactly as they appear in Stata. 
+The following non-alphanumeric characters have special meaning in LaTeX: _ % # $ & ~  ^ \ { }.
+By default, {cmd:texsave} adds a backslash (\) in front of these characters in order to prevent LaTeX compile errors.
+
+
+{p 4 8 2}
+{cmd:noendash} instructs {cmd:texsave} not to convert negative signs in the dataset ("-") to en dashes ("--").
 
 
 {p 4 8 2}

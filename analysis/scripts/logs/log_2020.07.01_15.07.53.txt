@@ -1,18 +1,19 @@
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/logs/log_2020.04.03_17.09.20.txt
+       log:  C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/logs/
+> log_2020.07.01_15.07.53.txt
   log type:  text
- opened on:   3 Apr 2020, 17:09:20
+ opened on:   1 Jul 2020, 15:07:53
 
 . 
 . di "Begin date and time: $S_DATE $S_TIME"
-Begin date and time:  3 Apr 2020 17:09:20
+Begin date and time:  1 Jul 2020 15:07:53
 
 . di "Stata version: `c(stata_version)'"
 Stata version: 16.1
 
 . di "Updated as of: `c(born_date)'"
-Updated as of: 18 Feb 2020
+Updated as of: 30 Jun 2020
 
 . di "Variant:       `=cond( c(MP),"MP",cond(c(SE),"SE",c(flavor)) )'"
 Variant:       MP
@@ -29,7 +30,8 @@ Machine type:  PC (64-bit x86-64)
 . 
 . * All required Stata packages are available in the /libraries/stata folder
 . adopath ++ "$MyProject/scripts/libraries/stata"
-  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
+  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/script
+> s/libraries/stata"
   [2]  (BASE)      "C:\Program Files\Stata16\ado\base/"
   [3]  (SITE)      "C:\Program Files\Stata16\ado\site/"
   [4]              "."
@@ -39,16 +41,22 @@ Machine type:  PC (64-bit x86-64)
 
 . mata: mata mlib index
 .mlib libraries to be searched are now
-    lmatabase;lmataado;lmataerm;lmatafc;lmatagsem;lmatalasso;lmatamcmc;lmatameta;lmatami;lmatamixlog;lmatanumlib;lmataopt;lmatapath;lmatapostest;lmatapss;lmatasem;lmatasp;lmatasvy;lmatatab;lftools;lreghdfe
+    lmatabase;lmataado;lmataerm;lmatafc;lmatagsem;lmatalasso;lmatamcmc;lmatame
+> ta;lmatami;lmatamixlog;lmatanumlib;lmataopt;lmatapath;lmatapostest;lmatapss;
+> lmatasem;lmatasp;lmatasvy;lmatatab;lftools;lreghdfe
 
 . 
-. * R packages can be installed manually (see README) or installed automatically by uncommenting the following line
-. * if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/_install_R_packages.R"
+. * R packages can be installed manually (see README) or installed automatical
+> ly by uncommenting the following line
+. * if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/_install_R_
+> packages.R"
 . 
 . * Stata programs and R scripts are stored in /programs
 . adopath ++ "$MyProject/scripts/programs"
-  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs"
-  [2]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
+  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/script
+> s/programs"
+  [2]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/script
+> s/libraries/stata"
   [3]  (BASE)      "C:\Program Files\Stata16\ado\base/"
   [4]  (SITE)      "C:\Program Files\Stata16\ado\site/"
   [5]              "."
@@ -60,17 +68,21 @@ Machine type:  PC (64-bit x86-64)
 . * Stata and R version control
 . version 15
 
-. if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/_confirm_version.R"
-Running R script: C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs/_confirm_version.R
+. if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/_confirm_vers
+> ion.R"
+Running R script: C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/
+> programs/_confirm_version.R
 
 
 Begin R output:
-________________________________________________________________________________
+______________________________________________________________________________
+> __
 stdout:
 
 
 stderr:
-________________________________________________________________________________
+______________________________________________________________________________
+> __
 ...end R output
 
 
@@ -99,10 +111,13 @@ ________________________________________________________________________________
 . * PURPOSE: imports the raw data and saves it in Stata readable format
 . ************
 . 
-. * Preamble: these two lines of code are included so scripts can be run individually (rather than called by 0_run_all.do)
+. * Preamble: these two lines of code are included so scripts can be run indiv
+> idually (rather than called by 0_run_all.do)
 . adopath ++ "$MyProject/scripts/libraries/stata"
-  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
-  [2]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs"
+  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/script
+> s/libraries/stata"
+  [2]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/script
+> s/programs"
   [3]  (BASE)      "C:\Program Files\Stata16\ado\base/"
   [4]  (SITE)      "C:\Program Files\Stata16\ado\site/"
   [5]              "."
@@ -111,8 +126,10 @@ ________________________________________________________________________________
   [8]  (OLDPLACE)  "c:\ado/"
 
 . adopath ++ "$MyProject/scripts/programs"
-  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs"
-  [2]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
+  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/script
+> s/programs"
+  [2]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/script
+> s/libraries/stata"
   [3]  (BASE)      "C:\Program Files\Stata16\ado\base/"
   [4]  (SITE)      "C:\Program Files\Stata16\ado\site/"
   [5]              "."
@@ -133,7 +150,8 @@ ________________________________________________________________________________
   (0 bytes saved)
 
 . save "$MyProject/processed/intermediate/auto_uncleaned.dta", replace
-file C:/Users/jreif/Documents/GitHub/my-project/analysis/processed/intermediate/auto_uncleaned.dta saved
+file C:/Users/jreif/Documents/GitHub/my-project/analysis/processed/intermediat
+> e/auto_uncleaned.dta saved
 
 . 
 . ** EOF
@@ -147,10 +165,13 @@ end of do-file
 . * PURPOSE: processes the main dataset in preparation for analysis
 . ************
 . 
-. * Preamble: these two lines of code are included so scripts can be run individually (rather than called by 0_run_all.do)
+. * Preamble: these two lines of code are included so scripts can be run indiv
+> idually (rather than called by 0_run_all.do)
 . adopath ++ "$MyProject/scripts/libraries/stata"
-  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
-  [2]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs"
+  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/script
+> s/libraries/stata"
+  [2]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/script
+> s/programs"
   [3]  (BASE)      "C:\Program Files\Stata16\ado\base/"
   [4]  (SITE)      "C:\Program Files\Stata16\ado\site/"
   [5]              "."
@@ -159,8 +180,10 @@ end of do-file
   [8]  (OLDPLACE)  "c:\ado/"
 
 . adopath ++ "$MyProject/scripts/programs"
-  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs"
-  [2]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
+  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/script
+> s/programs"
+  [2]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/script
+> s/libraries/stata"
   [3]  (BASE)      "C:\Program Files\Stata16\ado\base/"
   [4]  (SITE)      "C:\Program Files\Stata16\ado\site/"
   [5]              "."
@@ -362,7 +385,8 @@ end of do-file
   (2,220 bytes saved)
 
 . save "$MyProject/processed/auto.dta", replace
-file C:/Users/jreif/Documents/GitHub/my-project/analysis/processed/auto.dta saved
+file C:/Users/jreif/Documents/GitHub/my-project/analysis/processed/auto.dta sa
+> ved
 
 . 
 . ** EOF
@@ -376,10 +400,13 @@ end of do-file
 . * PURPOSE: estimates regression models and saves the resulting output
 . ************
 . 
-. * Preamble: these two lines of code are included so scripts can be run individually (rather than called by 0_run_all.do)
+. * Preamble: these two lines of code are included so scripts can be run indiv
+> idually (rather than called by 0_run_all.do)
 . adopath ++ "$MyProject/scripts/libraries/stata"
-  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
-  [2]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs"
+  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/script
+> s/libraries/stata"
+  [2]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/script
+> s/programs"
   [3]  (BASE)      "C:\Program Files\Stata16\ado\base/"
   [4]  (SITE)      "C:\Program Files\Stata16\ado\site/"
   [5]              "."
@@ -388,8 +415,10 @@ end of do-file
   [8]  (OLDPLACE)  "c:\ado/"
 
 . adopath ++ "$MyProject/scripts/programs"
-  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs"
-  [2]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
+  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/script
+> s/programs"
+  [2]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/script
+> s/libraries/stata"
   [3]  (BASE)      "C:\Program Files\Stata16\ado\base/"
   [4]  (SITE)      "C:\Program Files\Stata16\ado\site/"
   [5]              "."
@@ -413,14 +442,15 @@ end of do-file
   2.         
 .         * Domestic cars
 .         reg price `rhs' if foreign=="Domestic", robust
-  3.         regsave using "`results'", t p autoid `replace' addlabel(rhs,"`rhs'",origin,Domestic) 
+  3.         regsave using "`results'", t p autoid `replace' addlabel(rhs,"`rh
+> s'",origin,Domestic) 
   4.         local replace append
   5.         
 .         * Foreign cars
 .         reg price `rhs' if foreign=="Foreign", robust
-  6.         regsave using "`results'", t p autoid append addlabel(rhs,"`rhs'",origin,"Foreign") 
-  7.                 
-. }
+  6.         regsave using "`results'", t p autoid append addlabel(rhs,"`rhs'"
+> ,origin,"Foreign") 
+  7. }
 
 Linear regression                               Number of obs     =         52
                                                 F(1, 50)          =      16.44
@@ -435,8 +465,8 @@ Linear regression                               Number of obs     =         52
          mpg |  -329.2551    81.1942    -4.06   0.000    -492.3384   -166.1717
        _cons |   12600.54   1777.731     7.09   0.000     9029.859    16171.22
 ------------------------------------------------------------------------------
-(note: file C:\Users\jreif\AppData\Local\Temp\ST_3058_000001.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_3058_000001.tmp saved
+(note: file C:\Users\jreif\AppData\Local\Temp\ST_1378_000001.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_1378_000001.tmp saved
 
 Linear regression                               Number of obs     =         22
                                                 F(1, 20)          =       8.05
@@ -451,8 +481,9 @@ Linear regression                               Number of obs     =         22
          mpg |  -250.3668   88.22545    -2.84   0.010    -434.4019   -66.33174
        _cons |   12586.95   2352.589     5.35   0.000     7679.535    17494.37
 ------------------------------------------------------------------------------
-(note: variable origin was str7, now str8 to accommodate using data's values)
-file C:\Users\jreif\AppData\Local\Temp\ST_3058_000001.tmp saved
+(note: variable origin was str7, now str8 to accommodate using data's
+       values)
+file C:\Users\jreif\AppData\Local\Temp\ST_1378_000001.tmp saved
 
 Linear regression                               Number of obs     =         52
                                                 F(2, 49)          =      18.88
@@ -468,7 +499,7 @@ Linear regression                               Number of obs     =         52
       weight |   4.415037   1.338438     3.30   0.002     1.725346    7.104728
        _cons |  -13285.44   8279.718    -1.60   0.115    -29924.16    3353.272
 ------------------------------------------------------------------------------
-file C:\Users\jreif\AppData\Local\Temp\ST_3058_000001.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_1378_000001.tmp saved
 
 Linear regression                               Number of obs     =         22
                                                 F(2, 19)          =      49.02
@@ -484,37 +515,48 @@ Linear regression                               Number of obs     =         22
       weight |   5.155842    .769729     6.70   0.000     3.544781    6.766904
        _cons |  -5065.841   2885.351    -1.76   0.095    -11104.95    973.2692
 ------------------------------------------------------------------------------
-(note: variable origin was str7, now str8 to accommodate using data's values)
-file C:\Users\jreif\AppData\Local\Temp\ST_3058_000001.tmp saved
+(note: variable origin was str7, now str8 to accommodate using data's
+       values)
+file C:\Users\jreif\AppData\Local\Temp\ST_1378_000001.tmp saved
 
 . 
 . use "`results'", clear
 
 . save "$MyProject/results/intermediate/my_regressions.dta", replace
-file C:/Users/jreif/Documents/GitHub/my-project/analysis/results/intermediate/my_regressions.dta saved
+file C:/Users/jreif/Documents/GitHub/my-project/analysis/results/intermediate/
+> my_regressions.dta saved
 
 . 
 . * R regressions. First argument: input file. Second argument: output file.
-. if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/regressions.R", args("$MyProject/processed/auto.dta" "$MyProject/results/intermediate/my_lm_regressions.dta")
-Running R script: C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs/regressions.R
-Args: "C:/Users/jreif/Documents/GitHub/my-project/analysis/processed/auto.dta" "C:/Users/jreif/Documents/GitHub/my-project/analysis/results/intermediate/my_lm_regressions.dta"
+. if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/regressions.R
+> ", args("$MyProject/processed/auto.dta" "$MyProject/results/intermediate/my_
+> lm_regressions.dta")
+Running R script: C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/
+> programs/regressions.R
+Args: "C:/Users/jreif/Documents/GitHub/my-project/analysis/processed/auto.dta"
+>  "C:/Users/jreif/Documents/GitHub/my-project/analysis/results/intermediate/m
+> y_lm_regressions.dta"
 
 
 Begin R output:
-________________________________________________________________________________
+______________________________________________________________________________
+> __
 stdout:
 
 
 stderr:
--- Attaching packages --------------------------------------- tidyverse 1.3.0 --
-v ggplot2 3.3.0     v purrr   0.3.3
-v tibble  2.1.3     v dplyr   0.8.5
-v tidyr   1.0.2     v stringr 1.4.0
+-- Attaching packages --------------------------------------- tidyverse 1.3.0 
+> --
+v ggplot2 3.3.1     v purrr   0.3.4
+v tibble  3.0.1     v dplyr   1.0.0
+v tidyr   1.1.0     v stringr 1.4.0
 v readr   1.3.1     v forcats 0.5.0
--- Conflicts ------------------------------------------ tidyverse_conflicts() --
+-- Conflicts ------------------------------------------ tidyverse_conflicts() 
+> --
 x dplyr::filter() masks stats::filter()
 x dplyr::lag()    masks stats::lag()
-________________________________________________________________________________
+______________________________________________________________________________
+> __
 ...end R output
 
 
@@ -530,10 +572,13 @@ end of do-file
 . * PURPOSE: creates the LaTeX tables and PDF figures for the paper
 . ************
 . 
-. * Preamble: these two lines of code are included so scripts can be run individually (rather than called by 0_run_all.do)
+. * Preamble: these two lines of code are included so scripts can be run indiv
+> idually (rather than called by 0_run_all.do)
 . adopath ++ "$MyProject/scripts/libraries/stata"
-  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
-  [2]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs"
+  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/script
+> s/libraries/stata"
+  [2]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/script
+> s/programs"
   [3]  (BASE)      "C:\Program Files\Stata16\ado\base/"
   [4]  (SITE)      "C:\Program Files\Stata16\ado\site/"
   [5]              "."
@@ -542,8 +587,10 @@ end of do-file
   [8]  (OLDPLACE)  "c:\ado/"
 
 . adopath ++ "$MyProject/scripts/programs"
-  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs"
-  [2]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
+  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/script
+> s/programs"
+  [2]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/script
+> s/libraries/stata"
   [3]  (BASE)      "C:\Program Files\Stata16\ado\base/"
   [4]  (SITE)      "C:\Program Files\Stata16\ado\site/"
   [5]              "."
@@ -564,11 +611,14 @@ end of do-file
 
 . format price %12.0fc
 
-. histogram price, frequency xtitle("Price (1978 dollars)") graphregion(fcolor(white))
+. histogram price, frequency xtitle("Price (1978 dollars)") graphregion(fcolor
+> (white))
 (bin=8, start=3291, width=1576.875)
 
-. graph export "$MyProject/results/figures/price_histogram.pdf", as(pdf) replace
-(file C:/Users/jreif/Documents/GitHub/my-project/analysis/results/figures/price_histogram.pdf written in PDF format)
+. graph export "$MyProject/results/figures/price_histogram.pdf", as(pdf) repla
+> ce
+(file C:/Users/jreif/Documents/GitHub/my-project/analysis/results/figures/pric
+> e_histogram.pdf written in PDF format)
 
 . 
 . ********************************
@@ -585,7 +635,8 @@ end of do-file
 .         assert inlist(imp_`v',0,1)
   3.         gen non_missing = 1 - imp_`v'
   4. 
-.         collapse (mean) mean=`v' (sd) sd=`v' (min) min=`v' (max) max=`v' (sum) count=non_missing, fast
+.         collapse (mean) mean=`v' (sd) sd=`v' (min) min=`v' (max) max=`v' (su
+> m) count=non_missing, fast
   5. 
 .         gen var = "`v'"
   6.         if `run_no'>0 append using "`tmp'"
@@ -593,13 +644,13 @@ end of do-file
   8.         local run_no = `run_no'+1
   9.         restore, preserve
  10. }
-(note: file C:\Users\jreif\AppData\Local\Temp\ST_3058_000001.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_3058_000001.tmp saved
+(note: file C:\Users\jreif\AppData\Local\Temp\ST_1378_000001.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_1378_000001.tmp saved
 (note: variable min was byte, now int to accommodate using data's values)
 (note: variable max was byte, now int to accommodate using data's values)
 (note: variable var was str3, now str5 to accommodate using data's values)
-file C:\Users\jreif\AppData\Local\Temp\ST_3058_000001.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_3058_000001.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_1378_000001.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_1378_000001.tmp saved
 
 . restore, not
 
@@ -646,12 +697,14 @@ variable var was str16 now str20
 (1 real change made)
 
 . 
-. local fn "Notes: Count reports the number of non-missing values for the variable."
+. local fn "Notes: Count reports the number of non-missing values for the vari
+> able."
 
 . local title "Summary statistics"
 
 . 
-. texsave using "$MyProject/results/tables/my_summary_stats.tex", replace varlabels marker(tab:my_summary_stats) title("`title'") footnote("`fn'")
+. texsave using "$MyProject/results/tables/my_summary_stats.tex", replace varl
+> abels marker(tab:my_summary_stats) title("`title'") footnote("`fn'")
 
 . 
 . 
@@ -671,26 +724,32 @@ variable var was str16 now str20
 . foreach orig in "Domestic" "Foreign" {
   2.         foreach rhs in "mpg" "mpg weight" {
   3.                 
-.                 regsave_tbl using "`my_table'" if origin=="`orig'" & rhs=="`rhs'", name(col`run_no') asterisk(10 5 1) parentheses(stderr) sigfig(3) `replace'
+.                 regsave_tbl using "`my_table'" if origin=="`orig'" & rhs=="`
+> rhs'", name(col`run_no') asterisk(10 5 1) parentheses(stderr) sigfig(3) `rep
+> lace'
   4.                 
 .                 local run_no = `run_no'+1
   5.                 local replace append
   6.         }
   7. }
-(note: file C:\Users\jreif\AppData\Local\Temp\ST_3058_000003.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_3058_000003.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_3058_000003.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_3058_000003.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_3058_000003.tmp saved
+(note: file C:\Users\jreif\AppData\Local\Temp\ST_1378_000003.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_1378_000003.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_1378_000003.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_1378_000003.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_1378_000003.tmp saved
 
 . 
+. ***
 . * Format the table
+. ***
 . use "`my_table'", clear
 
-. drop if inlist(var,"_id","rhs","origin") | strpos(var,"_cons") | strpos(var,"tstat") | strpos(var,"pval")
+. drop if inlist(var,"_id","rhs","origin") | strpos(var,"_cons") | strpos(var,
+> "tstat") | strpos(var,"pval")
 (11 observations deleted)
 
 . 
+. * texsave will output these labels as column headers
 . label var col1 "Spec 1"
 
 . label var col2 "Spec 2"
@@ -700,17 +759,18 @@ file C:\Users\jreif\AppData\Local\Temp\ST_3058_000003.tmp saved
 . label var col4 "Spec 2"
 
 . 
+. * Display R^2 in LaTeX math mode
 . replace var = "\(R^2\)" if var=="r2"
 (1 real change made)
 
+. 
+. * Clean variable names
 . replace var = subinstr(var,"_coef","",1)
 (2 real changes made)
 
 . replace var = "" if strpos(var,"_stderr")
 (2 real changes made)
 
-. 
-. * Run program (stored in /programs) to clean variable names
 . clean_vars var
 variable var was str13 now str16
 (1 real change made)
@@ -720,12 +780,18 @@ variable var was str13 now str16
 . 
 . local title "Association between automobile price and fuel efficiency"
 
-. local headerlines "& \multicolumn{2}{c}{Domestic cars} & \multicolumn{2}{c}{Foreign cars} " "\cmidrule(lr){2-3} \cmidrule(lr){4-5}"
+. local headerlines "& \multicolumn{2}{c}{Domestic cars} & \multicolumn{2}{c}{
+> Foreign cars} " "\cmidrule(lr){2-3} \cmidrule(lr){4-5}"
 
-. local fn "Notes: Outcome variable is price (1978 dollars). Columns (1) and (2) report estimates of \(\beta\) from equation (\ref{eqn:model}) for domestic automobiles. Columns (3) and (4) report estimates for foreign automobiles. Robust standard error
-> s are reported in parentheses. A */**/*** indicates significance at the 10/5/1\% levels."
+. local fn "Notes: Outcome variable is price (1978 dollars). Columns (1) and (
+> 2) report estimates of \(\beta\) from equation (\ref{eqn:model}) for domesti
+> c automobiles. Columns (3) and (4) report estimates for foreign automobiles.
+>  Robust standard errors are reported in parentheses. A */**/*** indicates si
+> gnificance at the 10/5/1\% levels."
 
-. texsave using "$MyProject/results/tables/my_regressions.tex", autonumber varlabels hlines(-2) nofix replace marker(tab:my_regressions) title("`title'") headerlines("`headerlines'") footnote("`fn'")
+. texsave using "$MyProject/results/tables/my_regressions.tex", autonumber var
+> labels hlines(-2) nofix replace marker(tab:my_regressions) title("`title'") 
+> headerlines("`headerlines'") footnote("`fn'")
 
 . preserve
 
@@ -750,21 +816,24 @@ variable var was str13 now str16
 . foreach orig in "Domestic" "Foreign" {
   2.         foreach rhs in "mpg" "mpg weight" {
   3.                 
-.                 regsave_tbl using "`my_table_r'" if origin=="`orig'" & rhs=="`rhs'", name(col`run_no') asterisk(10 5 1) parentheses(stderr) sigfig(3) `replace'
+.                 regsave_tbl using "`my_table_r'" if origin=="`orig'" & rhs==
+> "`rhs'", name(col`run_no') asterisk(10 5 1) parentheses(stderr) sigfig(3) `r
+> eplace'
   4.                 
 .                 local run_no = `run_no'+1
   5.                 local replace append
   6.         }
   7. }
-(note: file C:\Users\jreif\AppData\Local\Temp\ST_3058_000005.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_3058_000005.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_3058_000005.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_3058_000005.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_3058_000005.tmp saved
+(note: file C:\Users\jreif\AppData\Local\Temp\ST_1378_000005.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_1378_000005.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_1378_000005.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_1378_000005.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_1378_000005.tmp saved
 .         
 . * Format the table
 . use "`my_table_r'", clear
-. drop if inlist(var,"_id","rhs","origin") | strpos(var,"(Intercept)") | strpos(var,"tstat") | strpos(var,"pval")
+. drop if inlist(var,"_id","rhs","origin") | strpos(var,"(Intercept)") | strpo
+> s(var,"tstat") | strpos(var,"pval")
 (7 observations deleted)
 . 
 . label var col1 "Spec 1"
@@ -781,7 +850,7 @@ file C:\Users\jreif\AppData\Local\Temp\ST_3058_000005.tmp saved
 . 
 . * Append to prior table, reformat, and output
 . save "`my_table_r'", replace
-file C:\Users\jreif\AppData\Local\Temp\ST_3058_000005.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_1378_000005.tmp saved
 . restore
 . append using "`my_table_r'"
 (note: variable var was str16, now str18 to accommodate using data's values)
@@ -801,9 +870,13 @@ variable var was str18 now str25
 (1 real change made)
 (0 real changes made)
 . 
-. * Same output as previous table above, so reuse the same footnote and headerlines
-. local title "Association between automobile price and fuel efficiency, Stata and R"
-. texsave using "$MyProject/results/tables/my_regressions_with_r.tex", autonumber varlabels hlines(1 6) nofix replace marker(tab:my_regressions_with_r) title("`title'") headerlines("`headerlines'") footnote("`fn'") bold("A." "B.")
+. * Same output as previous table above, so reuse the same footnote and header
+> lines
+. local title "Association between automobile price and fuel efficiency, Stata
+>  and R"
+. texsave using "$MyProject/results/tables/my_regressions_with_r.tex", autonum
+> ber varlabels hlines(1 6) nofix replace marker(tab:my_regressions_with_r) ti
+> tle("`title'") headerlines("`headerlines'") footnote("`fn'") bold("A." "B.")
 . }
 
 . 
@@ -815,11 +888,12 @@ end of do-file
 . 
 . * End log
 . di "End date and time: $S_DATE $S_TIME"
-End date and time:  3 Apr 2020 17:09:27
+End date and time:  1 Jul 2020 15:07:57
 
 . log close
       name:  <unnamed>
-       log:  C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/logs/log_2020.04.03_17.09.20.txt
+       log:  C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/logs/
+> log_2020.07.01_15.07.53.txt
   log type:  text
- closed on:   3 Apr 2020, 17:09:27
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ closed on:   1 Jul 2020, 15:07:57
+------------------------------------------------------------------------------

@@ -33,7 +33,7 @@ set more off
 cap mkdir "$MyProject/scripts/logs"
 cap log close
 local datetime : di %tcCCYY.NN.DD!_HH.MM.SS `=clock("$S_DATE $S_TIME", "DMYhms")'
-local logfile "$MyProject/scripts/logs/log_`datetime'.txt"
+local logfile "$MyProject/scripts/logs/`datetime'.log.txt"
 log using "`logfile'", text
 
 di "Begin date and time: $S_DATE $S_TIME"
@@ -56,7 +56,7 @@ adopath ++ "$MyProject/scripts/programs"
 
 * Stata and R version control
 version 15
-if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/_confirm_version.R"
+if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/_confirm_version.R", args(3.6 4.0.1 1 0)
 
 * Create directories for output files
 cap mkdir "$MyProject/processed"

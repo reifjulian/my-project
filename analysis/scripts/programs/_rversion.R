@@ -3,11 +3,15 @@
 # It also checks whether the tidyverse and estimatr libraries have been installed
 ########
 
-# Up to 4 arguments accepted:
-# 1. minimum R version
-# 2. maximum R version
-# 3. enforce minimum with hard break
-# 4. enforce the maximum with hard break
+########
+# Syntax
+# _confirm_version.R rmin [ rmax enforcemin enforcemax ]
+
+# ARGUMENTS:
+# rmin (required): minimum R version
+# rmax (optional): maximum R version
+# enforcemin (optional): enforce rmin with hard break
+# enforcemax (optional): enforce rmax with hard break
 
 
 # Syntax 1 example: require an exact version of R
@@ -15,6 +19,7 @@
 
 # Syntax 2 example: check that R is between 3.4 and 3.6, and issue warning if not
 # _confirm_version 3.4 3.6 0 0
+########
 
 args = commandArgs(trailingOnly = "TRUE")
 if (length(args)) {

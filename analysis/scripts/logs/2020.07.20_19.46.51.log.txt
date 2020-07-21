@@ -1,12 +1,12 @@
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/logs/2020.07.19_13.42.13.log.txt
+       log:  C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/logs/2020.07.20_19.46.51.log.txt
   log type:  text
- opened on:  19 Jul 2020, 13:42:13
+ opened on:  20 Jul 2020, 19:46:51
 
 . 
 . di "Begin date and time: $S_DATE $S_TIME"
-Begin date and time: 19 Jul 2020 13:42:13
+Begin date and time: 20 Jul 2020 19:46:51
 
 . di "Stata version: `c(stata_version)'"
 Stata version: 16.1
@@ -60,8 +60,8 @@ Machine type:  PC (64-bit x86-64)
 . * Stata and R version control
 . version 15
 
-. if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/_confirm_version.R", args(3.6 4.0.1 1 0)
-Running R script: C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs/_confirm_version.R
+. if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/_rversion.R", args(3.6 4.0.1 1 0)
+Running R script: C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs/_rversion.R
 Args: 3.6 4.0.1 1 0
 
 
@@ -435,8 +435,8 @@ Linear regression                               Number of obs     =         52
          mpg |  -329.2551    81.1942    -4.06   0.000    -492.3384   -166.1717
        _cons |   12600.54   1777.731     7.09   0.000     9029.859    16171.22
 ------------------------------------------------------------------------------
-(note: file C:\Users\jreif\AppData\Local\Temp\ST_598c_000001.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_598c_000001.tmp saved
+(note: file C:\Users\jreif\AppData\Local\Temp\ST_703c_000001.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_703c_000001.tmp saved
 
 Linear regression                               Number of obs     =         22
                                                 F(1, 20)          =       8.05
@@ -452,7 +452,7 @@ Linear regression                               Number of obs     =         22
        _cons |   12586.95   2352.589     5.35   0.000     7679.535    17494.37
 ------------------------------------------------------------------------------
 (note: variable origin was str7, now str8 to accommodate using data's values)
-file C:\Users\jreif\AppData\Local\Temp\ST_598c_000001.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_703c_000001.tmp saved
 
 Linear regression                               Number of obs     =         52
                                                 F(2, 49)          =      18.88
@@ -468,7 +468,7 @@ Linear regression                               Number of obs     =         52
       weight |   4.415037   1.338438     3.30   0.002     1.725346    7.104728
        _cons |  -13285.44   8279.718    -1.60   0.115    -29924.16    3353.272
 ------------------------------------------------------------------------------
-file C:\Users\jreif\AppData\Local\Temp\ST_598c_000001.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_703c_000001.tmp saved
 
 Linear regression                               Number of obs     =         22
                                                 F(2, 19)          =      49.02
@@ -485,7 +485,7 @@ Linear regression                               Number of obs     =         22
        _cons |  -5065.841   2885.351    -1.76   0.095    -11104.95    973.2692
 ------------------------------------------------------------------------------
 (note: variable origin was str7, now str8 to accommodate using data's values)
-file C:\Users\jreif\AppData\Local\Temp\ST_598c_000001.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_703c_000001.tmp saved
 
 . 
 . use "`results'", clear
@@ -607,13 +607,13 @@ end of do-file
   8.         local run_no = `run_no'+1
   9.         restore, preserve
  10. }
-(note: file C:\Users\jreif\AppData\Local\Temp\ST_598c_000001.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_598c_000001.tmp saved
+(note: file C:\Users\jreif\AppData\Local\Temp\ST_703c_000001.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_703c_000001.tmp saved
 (note: variable min was byte, now int to accommodate using data's values)
 (note: variable max was byte, now int to accommodate using data's values)
 (note: variable var was str3, now str5 to accommodate using data's values)
-file C:\Users\jreif\AppData\Local\Temp\ST_598c_000001.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_598c_000001.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_703c_000001.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_703c_000001.tmp saved
 
 . restore, not
 
@@ -691,11 +691,11 @@ variable var was str16 now str20
   5.                 local replace append
   6.         }
   7. }
-(note: file C:\Users\jreif\AppData\Local\Temp\ST_598c_000003.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_598c_000003.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_598c_000003.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_598c_000003.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_598c_000003.tmp saved
+(note: file C:\Users\jreif\AppData\Local\Temp\ST_703c_000003.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_703c_000003.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_703c_000003.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_703c_000003.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_703c_000003.tmp saved
 
 . 
 . ***
@@ -774,11 +774,11 @@ variable var was str13 now str16
   5.                 local replace append
   6.         }
   7. }
-(note: file C:\Users\jreif\AppData\Local\Temp\ST_598c_000005.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_598c_000005.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_598c_000005.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_598c_000005.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_598c_000005.tmp saved
+(note: file C:\Users\jreif\AppData\Local\Temp\ST_703c_000005.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_703c_000005.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_703c_000005.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_703c_000005.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_703c_000005.tmp saved
 .         
 . * Format the table
 . use "`my_table_r'", clear
@@ -799,7 +799,7 @@ file C:\Users\jreif\AppData\Local\Temp\ST_598c_000005.tmp saved
 . 
 . * Append to prior table, reformat, and output
 . save "`my_table_r'", replace
-file C:\Users\jreif\AppData\Local\Temp\ST_598c_000005.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_703c_000005.tmp saved
 . restore
 . append using "`my_table_r'"
 (note: variable var was str16, now str18 to accommodate using data's values)
@@ -833,11 +833,11 @@ end of do-file
 . 
 . * End log
 . di "End date and time: $S_DATE $S_TIME"
-End date and time: 19 Jul 2020 13:42:18
+End date and time: 20 Jul 2020 19:46:56
 
 . log close
       name:  <unnamed>
-       log:  C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/logs/2020.07.19_13.42.13.log.txt
+       log:  C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/logs/2020.07.20_19.46.51.log.txt
   log type:  text
- closed on:  19 Jul 2020, 13:42:18
+ closed on:  20 Jul 2020, 19:46:56
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

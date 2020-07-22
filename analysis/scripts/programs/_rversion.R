@@ -42,10 +42,11 @@ if(is.na(enforcemax)) enforcemax <- 1
 ###
 
 rcurrent <- packageVersion("base")
+print(paste("Running R version", rcurrent))
 
 # Minimum version requirements
 if (rcurrent < rmin) {
-  vers_ex_msg = paste0("This is version ", rcurrent, " of R; it may not be able to correctly run code written for version ", rmin ,
+  vers_ex_msg = paste0("This version of R may not be able to correctly run code written for version ", rmin ,
                        ".\nYou can download a newer version of R by visiting: https://www.r-project.org"
                     )
   if(enforcemin) stop(vers_ex_msg)
@@ -54,7 +55,7 @@ if (rcurrent < rmin) {
 
 # Maximum version requirements
 if (rcurrent > rmax) {
-  vers_ex_msg = paste0("This is version ", rcurrent, " of R; it may not be able to correctly run code written for version ", rmax ,
+  vers_ex_msg = paste0("This version of R may not be able to correctly run code written for version ", rmax ,
                        ".\nYou can download an older version of R by visiting: https://www.r-project.org"
   )
  

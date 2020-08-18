@@ -1,5 +1,5 @@
 ******
-* This script contains code that allows scripts to be run individually on a standalone basis
+* This script contains code that allows scripts to be run individually on a standalone basis, if the user has defined the project global in their Stata profile
 * It is unnecessary when executing run.do
 ******
 

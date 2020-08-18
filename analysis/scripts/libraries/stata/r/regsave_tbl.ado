@@ -1,4 +1,5 @@
-*! regsave_tbl 1.1.7 24mar2020 by Julian Reif
+*! regsave_tbl 1.1.8 30mar2020 by Julian Reif
+* 1.1.8: fixed autoid bug
 * 1.1.7: fixed minor sigfig() bug
 * 1.1.6: fixed bug with sigfig() formatting
 * 1.1.5: fixed bug with sigfig() option and brackets
@@ -432,7 +433,9 @@ program define regsave_tbl, rclass
 					if `max_id' < `tmp_id' local max_id = `tmp_id'
 				}
 			}
-			qui replace `table' = `max_id'+1 if var=="_id"
+			capture confirm string variable `table'
+			if _rc qui replace `table' = `max_id'+1      if var=="_id"
+			else   qui replace `table' = "`=`max_id'+1'" if var=="_id"
 		}
 
 		

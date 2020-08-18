@@ -429,6 +429,7 @@ program define regsave, rclass
 	if "`autoid'"!="" {
 		if "`append'" == "" qui gen _id = 1
 		else qui gen _id = `autoid_default'
+		cap label var _id "Regression ID number"
 	}
 	
 	

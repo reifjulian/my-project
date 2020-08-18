@@ -5,7 +5,7 @@
 *   All raw data are stored in /data
 *   All tables are outputted to /results/tables
 *   All figures are outputted to /results/figures
-* 
+*
 * SOFTWARE REQUIREMENTS
 *   Analyses run on Windows using Stata version 15 and R-3.6.0
 *
@@ -28,7 +28,7 @@ assert !missing("$MyProject")
 if "$DisableR"!="1" assert !missing("$RSCRIPT_PATH")
 
 * Initialize log and record system parameters
-clear 
+clear
 set more off
 cap mkdir "$MyProject/scripts/logs"
 cap log close
@@ -56,7 +56,7 @@ adopath ++ "$MyProject/scripts/programs"
 
 * Stata and R version control
 version 15
-if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/_confirm_version.R"
+if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/_rversion.R", args(3.6 4.0.1 1 0)
 
 * Create directories for output files
 cap mkdir "$MyProject/processed"

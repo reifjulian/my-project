@@ -1,32 +1,18 @@
-----------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
-<<<<<<< HEAD:analysis/scripts/logs/2020.08.18-15.24.24.log.txt
-       log:  C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/logs/2020.08.18-15.24.24.log.txt
+       log:  C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/logs/2020.08.18-15.30.55.log.txt
   log type:  text
- opened on:  18 Aug 2020, 15:24:24
+ opened on:  18 Aug 2020, 15:30:55
 
 . 
 . di "Begin date and time: $S_DATE $S_TIME"
-Begin date and time: 18 Aug 2020 15:24:24
-=======
-       log:  C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/logs/2020.07.22_07.32.51.log.txt
-  log type:  text
- opened on:  22 Jul 2020, 07:32:51
-
-. 
-. di "Begin date and time: $S_DATE $S_TIME"
-Begin date and time: 22 Jul 2020 07:32:51
->>>>>>> 3d7d455aaf7c319a8d7badca9441f206b8d299be:analysis/scripts/logs/2020.07.22_07.32.51.log.txt
+Begin date and time: 18 Aug 2020 15:30:55
 
 . di "Stata version: `c(stata_version)'"
 Stata version: 16.1
 
 . di "Updated as of: `c(born_date)'"
-<<<<<<< HEAD:analysis/scripts/logs/2020.08.18-15.24.24.log.txt
 Updated as of: 12 Aug 2020
-=======
-Updated as of: 30 Jun 2020
->>>>>>> 3d7d455aaf7c319a8d7badca9441f206b8d299be:analysis/scripts/logs/2020.07.22_07.32.51.log.txt
 
 . di "Variant:       `=cond( c(MP),"MP",cond(c(SE),"SE",c(flavor)) )'"
 Variant:       MP
@@ -53,13 +39,8 @@ Machine type:  PC (64-bit x86-64)
 
 . mata: mata mlib index
 .mlib libraries to be searched are now
-<<<<<<< HEAD:analysis/scripts/logs/2020.08.18-15.24.24.log.txt
     lmatabase;lmataado;lmataerm;lmatafc;lmatagsem;lmatalasso;lmatamcmc;lmatameta;lmatami;lmatamixlog;lmatanumlib;lmataopt;lmatapath;lmatapostest;lmatapss;lmatasem;lmatasp;lmatasvy;lmatatab;lftools;libjson;lintegrate;livreg2;lmhtexp;lparallel;lreghdfe;l
 > xtabond2
-=======
-    lmatabase;lmataado;lmataerm;lmatafc;lmatagsem;lmatalasso;lmatamcmc;lmatameta;lmatami;lmatamixlog;lmatanumlib;lmataopt;lmatapath;lmat
-> apostest;lmatapss;lmatasem;lmatasp;lmatasvy;lmatatab;lftools;livreg2;lreghdfe
->>>>>>> 3d7d455aaf7c319a8d7badca9441f206b8d299be:analysis/scripts/logs/2020.07.22_07.32.51.log.txt
 
 . 
 . * R packages can be installed manually (see README) or installed automatically by uncommenting the following line
@@ -88,7 +69,9 @@ Args: 3.6 4.0.1 1 0
 Begin R output:
 ________________________________________________________________________________
 stdout:
-[1] "Running R version 4.0.1"
+[1] "Running R version 4.0.2"
+Warning:  This version of R may not be able to correctly run code written for version 4.0.1.
+You can download an older version of R by visiting: https://www.r-project.org
 
 
 stderr:
@@ -521,13 +504,8 @@ Linear regression                               Number of obs     =         52
          mpg |  -329.2551    81.1942    -4.06   0.000    -492.3384   -166.1717
        _cons |   12600.54   1777.731     7.09   0.000     9029.859    16171.22
 ------------------------------------------------------------------------------
-<<<<<<< HEAD:analysis/scripts/logs/2020.08.18-15.24.24.log.txt
-(note: file C:\Users\jreif\AppData\Local\Temp\ST_330_000001.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_330_000001.tmp saved
-=======
-(note: file C:\Users\jreif\AppData\Local\Temp\ST_1d00_000001.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_1d00_000001.tmp saved
->>>>>>> 3d7d455aaf7c319a8d7badca9441f206b8d299be:analysis/scripts/logs/2020.07.22_07.32.51.log.txt
+(note: file C:\Users\jreif\AppData\Local\Temp\ST_3864_000001.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_3864_000001.tmp saved
 
 Linear regression                               Number of obs     =         22
                                                 F(1, 20)          =       8.05
@@ -543,11 +521,7 @@ Linear regression                               Number of obs     =         22
        _cons |   12586.95   2352.589     5.35   0.000     7679.535    17494.37
 ------------------------------------------------------------------------------
 (note: variable origin was str7, now str8 to accommodate using data's values)
-<<<<<<< HEAD:analysis/scripts/logs/2020.08.18-15.24.24.log.txt
-file C:\Users\jreif\AppData\Local\Temp\ST_330_000001.tmp saved
-=======
-file C:\Users\jreif\AppData\Local\Temp\ST_1d00_000001.tmp saved
->>>>>>> 3d7d455aaf7c319a8d7badca9441f206b8d299be:analysis/scripts/logs/2020.07.22_07.32.51.log.txt
+file C:\Users\jreif\AppData\Local\Temp\ST_3864_000001.tmp saved
 
 Linear regression                               Number of obs     =         52
                                                 F(2, 49)          =      18.88
@@ -563,11 +537,7 @@ Linear regression                               Number of obs     =         52
       weight |   4.415037   1.338438     3.30   0.002     1.725346    7.104728
        _cons |  -13285.44   8279.718    -1.60   0.115    -29924.16    3353.272
 ------------------------------------------------------------------------------
-<<<<<<< HEAD:analysis/scripts/logs/2020.08.18-15.24.24.log.txt
-file C:\Users\jreif\AppData\Local\Temp\ST_330_000001.tmp saved
-=======
-file C:\Users\jreif\AppData\Local\Temp\ST_1d00_000001.tmp saved
->>>>>>> 3d7d455aaf7c319a8d7badca9441f206b8d299be:analysis/scripts/logs/2020.07.22_07.32.51.log.txt
+file C:\Users\jreif\AppData\Local\Temp\ST_3864_000001.tmp saved
 
 Linear regression                               Number of obs     =         22
                                                 F(2, 19)          =      49.02
@@ -584,11 +554,7 @@ Linear regression                               Number of obs     =         22
        _cons |  -5065.841   2885.351    -1.76   0.095    -11104.95    973.2692
 ------------------------------------------------------------------------------
 (note: variable origin was str7, now str8 to accommodate using data's values)
-<<<<<<< HEAD:analysis/scripts/logs/2020.08.18-15.24.24.log.txt
-file C:\Users\jreif\AppData\Local\Temp\ST_330_000001.tmp saved
-=======
-file C:\Users\jreif\AppData\Local\Temp\ST_1d00_000001.tmp saved
->>>>>>> 3d7d455aaf7c319a8d7badca9441f206b8d299be:analysis/scripts/logs/2020.07.22_07.32.51.log.txt
+file C:\Users\jreif\AppData\Local\Temp\ST_3864_000001.tmp saved
 
 . 
 . use "`results'", clear
@@ -602,11 +568,9 @@ file C:/Users/jreif/Documents/GitHub/my-project/analysis/results/intermediate/my
 
 . 
 . * R regressions. First argument: input file. Second argument: output file.
-. if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/regressions.R", args("$MyProject/processed/auto.dta" "$MyProject/result
-> s/intermediate/my_lm_regressions.dta")
+. if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/regressions.R", args("$MyProject/processed/auto.dta" "$MyProject/results/intermediate/my_lm_regressions.dta")
 Running R script: C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs/regressions.R
-Args: "C:/Users/jreif/Documents/GitHub/my-project/analysis/processed/auto.dta" "C:/Users/jreif/Documents/GitHub/my-project/analysis/resu
-> lts/intermediate/my_lm_regressions.dta"
+Args: "C:/Users/jreif/Documents/GitHub/my-project/analysis/processed/auto.dta" "C:/Users/jreif/Documents/GitHub/my-project/analysis/results/intermediate/my_lm_regressions.dta"
 
 
 Begin R output:
@@ -617,31 +581,12 @@ stdout:
 stderr:
 -- Attaching packages --------------------------------------- tidyverse 1.3.0 --
 v ggplot2 3.3.2     v purrr   0.3.4
-<<<<<<< HEAD:analysis/scripts/logs/2020.08.18-15.24.24.log.txt
 v tibble  3.0.3     v dplyr   1.0.1
 v tidyr   1.1.1     v stringr 1.4.0
-=======
-v tibble  3.0.2     v dplyr   1.0.0
-v tidyr   1.1.0     v stringr 1.4.0
->>>>>>> 3d7d455aaf7c319a8d7badca9441f206b8d299be:analysis/scripts/logs/2020.07.22_07.32.51.log.txt
 v readr   1.3.1     v forcats 0.5.0
 -- Conflicts ------------------------------------------ tidyverse_conflicts() --
 x dplyr::filter() masks stats::filter()
 x dplyr::lag()    masks stats::lag()
-Warning messages:
-1: package 'tidyverse' was built under R version 4.0.2 
-2: package 'ggplot2' was built under R version 4.0.2 
-3: package 'tibble' was built under R version 4.0.2 
-4: package 'tidyr' was built under R version 4.0.2 
-5: package 'readr' was built under R version 4.0.2 
-6: package 'purrr' was built under R version 4.0.2 
-7: package 'dplyr' was built under R version 4.0.2 
-8: package 'stringr' was built under R version 4.0.2 
-9: package 'forcats' was built under R version 4.0.2 
-Warning message:
-package 'haven' was built under R version 4.0.2 
-Warning message:
-package 'estimatr' was built under R version 4.0.2 
 ________________________________________________________________________________
 ...end R output
 
@@ -740,23 +685,13 @@ end of do-file
   8.         local run_no = `run_no'+1
   9.         restore, preserve
  10. }
-<<<<<<< HEAD:analysis/scripts/logs/2020.08.18-15.24.24.log.txt
-(note: file C:\Users\jreif\AppData\Local\Temp\ST_330_000001.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_330_000001.tmp saved
+(note: file C:\Users\jreif\AppData\Local\Temp\ST_3864_000001.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_3864_000001.tmp saved
 (note: variable min was byte, now int to accommodate using data's values)
 (note: variable max was byte, now int to accommodate using data's values)
 (note: variable var was str3, now str5 to accommodate using data's values)
-file C:\Users\jreif\AppData\Local\Temp\ST_330_000001.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_330_000001.tmp saved
-=======
-(note: file C:\Users\jreif\AppData\Local\Temp\ST_1d00_000001.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_1d00_000001.tmp saved
-(note: variable min was byte, now int to accommodate using data's values)
-(note: variable max was byte, now int to accommodate using data's values)
-(note: variable var was str3, now str5 to accommodate using data's values)
-file C:\Users\jreif\AppData\Local\Temp\ST_1d00_000001.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_1d00_000001.tmp saved
->>>>>>> 3d7d455aaf7c319a8d7badca9441f206b8d299be:analysis/scripts/logs/2020.07.22_07.32.51.log.txt
+file C:\Users\jreif\AppData\Local\Temp\ST_3864_000001.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_3864_000001.tmp saved
 
 . restore, not
 
@@ -808,8 +743,7 @@ variable var was str16 now str20
 . local title "Summary statistics"
 
 . 
-. texsave using "$MyProject/results/tables/my_summary_stats.tex", replace varlabels marker(tab:my_summary_stats) title("`title'") footno
-> te("`fn'")
+. texsave using "$MyProject/results/tables/my_summary_stats.tex", replace varlabels marker(tab:my_summary_stats) title("`title'") footnote("`fn'")
 
 . 
 . 
@@ -829,26 +763,17 @@ variable var was str16 now str20
 . foreach orig in "Domestic" "Foreign" {
   2.         foreach rhs in "mpg" "mpg weight" {
   3.                 
-.                 regsave_tbl using "`my_table'" if origin=="`orig'" & rhs=="`rhs'", name(col`run_no') asterisk(10 5 1) parentheses(stde
-> rr) sigfig(3) `replace'
+.                 regsave_tbl using "`my_table'" if origin=="`orig'" & rhs=="`rhs'", name(col`run_no') asterisk(10 5 1) parentheses(stderr) sigfig(3) `replace'
   4.                 
 .                 local run_no = `run_no'+1
   5.                 local replace append
   6.         }
   7. }
-<<<<<<< HEAD:analysis/scripts/logs/2020.08.18-15.24.24.log.txt
-(note: file C:\Users\jreif\AppData\Local\Temp\ST_330_000003.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_330_000003.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_330_000003.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_330_000003.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_330_000003.tmp saved
-=======
-(note: file C:\Users\jreif\AppData\Local\Temp\ST_1d00_000003.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_1d00_000003.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_1d00_000003.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_1d00_000003.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_1d00_000003.tmp saved
->>>>>>> 3d7d455aaf7c319a8d7badca9441f206b8d299be:analysis/scripts/logs/2020.07.22_07.32.51.log.txt
+(note: file C:\Users\jreif\AppData\Local\Temp\ST_3864_000003.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_3864_000003.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_3864_000003.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_3864_000003.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_3864_000003.tmp saved
 
 . 
 . ***
@@ -893,12 +818,10 @@ variable var was str13 now str16
 
 . local headerlines "& \multicolumn{2}{c}{Domestic cars} & \multicolumn{2}{c}{Foreign cars} " "\cmidrule(lr){2-3} \cmidrule(lr){4-5}"
 
-. local fn "Notes: Outcome variable is price (1978 dollars). Columns (1) and (2) report estimates of \(\beta\) from equation (\ref{eqn:m
-> odel}) for domestic automobiles. Columns (3) and (4) report estimates for foreign automobiles. Robust standard errors are reported in 
-> parentheses. A */**/*** indicates significance at the 10/5/1\% levels."
+. local fn "Notes: Outcome variable is price (1978 dollars). Columns (1) and (2) report estimates of \(\beta\) from equation (\ref{eqn:model}) for domestic automobiles. Columns (3) and (4) report estimates for foreign automobiles. Robust standard error
+> s are reported in parentheses. A */**/*** indicates significance at the 10/5/1\% levels."
 
-. texsave using "$MyProject/results/tables/my_regressions.tex", autonumber varlabels hlines(-2) nofix replace marker(tab:my_regressions)
->  title("`title'") headerlines("`headerlines'") footnote("`fn'")
+. texsave using "$MyProject/results/tables/my_regressions.tex", autonumber varlabels hlines(-2) nofix replace marker(tab:my_regressions) title("`title'") headerlines("`headerlines'") footnote("`fn'")
 
 . preserve
 
@@ -923,26 +846,17 @@ variable var was str13 now str16
 . foreach orig in "Domestic" "Foreign" {
   2.         foreach rhs in "mpg" "mpg weight" {
   3.                 
-.                 regsave_tbl using "`my_table_r'" if origin=="`orig'" & rhs=="`rhs'", name(col`run_no') asterisk(10 5 1) parentheses(st
-> derr) sigfig(3) `replace'
+.                 regsave_tbl using "`my_table_r'" if origin=="`orig'" & rhs=="`rhs'", name(col`run_no') asterisk(10 5 1) parentheses(stderr) sigfig(3) `replace'
   4.                 
 .                 local run_no = `run_no'+1
   5.                 local replace append
   6.         }
   7. }
-<<<<<<< HEAD:analysis/scripts/logs/2020.08.18-15.24.24.log.txt
-(note: file C:\Users\jreif\AppData\Local\Temp\ST_330_000005.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_330_000005.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_330_000005.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_330_000005.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_330_000005.tmp saved
-=======
-(note: file C:\Users\jreif\AppData\Local\Temp\ST_1d00_000005.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_1d00_000005.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_1d00_000005.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_1d00_000005.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_1d00_000005.tmp saved
->>>>>>> 3d7d455aaf7c319a8d7badca9441f206b8d299be:analysis/scripts/logs/2020.07.22_07.32.51.log.txt
+(note: file C:\Users\jreif\AppData\Local\Temp\ST_3864_000005.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_3864_000005.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_3864_000005.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_3864_000005.tmp saved
+file C:\Users\jreif\AppData\Local\Temp\ST_3864_000005.tmp saved
 .         
 . * Format the table
 . use "`my_table_r'", clear
@@ -963,11 +877,7 @@ file C:\Users\jreif\AppData\Local\Temp\ST_1d00_000005.tmp saved
 . 
 . * Append to prior table, reformat, and output
 . save "`my_table_r'", replace
-<<<<<<< HEAD:analysis/scripts/logs/2020.08.18-15.24.24.log.txt
-file C:\Users\jreif\AppData\Local\Temp\ST_330_000005.tmp saved
-=======
-file C:\Users\jreif\AppData\Local\Temp\ST_1d00_000005.tmp saved
->>>>>>> 3d7d455aaf7c319a8d7badca9441f206b8d299be:analysis/scripts/logs/2020.07.22_07.32.51.log.txt
+file C:\Users\jreif\AppData\Local\Temp\ST_3864_000005.tmp saved
 . restore
 . append using "`my_table_r'"
 (note: variable var was str16, now str18 to accommodate using data's values)
@@ -989,8 +899,7 @@ variable var was str18 now str25
 . 
 . * Same output as previous table above, so reuse the same footnote and headerlines
 . local title "Association between automobile price and fuel efficiency, Stata and R"
-. texsave using "$MyProject/results/tables/my_regressions_with_r.tex", autonumber varlabels hlines(1 6) nofix replace marker(tab:my_regr
-> essions_with_r) title("`title'") headerlines("`headerlines'") footnote("`fn'") bold("A." "B.")
+. texsave using "$MyProject/results/tables/my_regressions_with_r.tex", autonumber varlabels hlines(1 6) nofix replace marker(tab:my_regressions_with_r) title("`title'") headerlines("`headerlines'") footnote("`fn'") bold("A." "B.")
 . }
 
 . 
@@ -1002,22 +911,11 @@ end of do-file
 . 
 . * End log
 . di "End date and time: $S_DATE $S_TIME"
-<<<<<<< HEAD:analysis/scripts/logs/2020.08.18-15.24.24.log.txt
-End date and time: 18 Aug 2020 15:24:29
+End date and time: 18 Aug 2020 15:31:00
 
 . log close
       name:  <unnamed>
-       log:  C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/logs/2020.08.18-15.24.24.log.txt
+       log:  C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/logs/2020.08.18-15.30.55.log.txt
   log type:  text
- closed on:  18 Aug 2020, 15:24:29
+ closed on:  18 Aug 2020, 15:31:00
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-=======
-End date and time: 22 Jul 2020 07:32:55
-
-. log close
-      name:  <unnamed>
-       log:  C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/logs/2020.07.22_07.32.51.log.txt
-  log type:  text
- closed on:  22 Jul 2020, 07:32:55
-----------------------------------------------------------------------------------------------------------------------------------------
->>>>>>> 3d7d455aaf7c319a8d7badca9441f206b8d299be:analysis/scripts/logs/2020.07.22_07.32.51.log.txt

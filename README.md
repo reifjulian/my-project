@@ -4,11 +4,11 @@ This repository includes a short paper and its accompanying replication code. Do
 
 The main analysis is written in Stata, but it also uses [rscript](https://github.com/reifjulian/rscript) to call a subroutine written in *R*. If you don't want to install *R*, set `global DisableR = 1` in **run.do**. More information is available in the [README](analysis/README.pdf).
 
-This sample replication package serves several purposes:
-1. Provide supporting materials for an accompanying [Stata coding guide](https://reifjulian.github.io/guide).
-1. Provide [example Stata code](analysis/scripts/4_make_tables_figures.do) that automates the creation of tables and figures for a manuscript
-1. Provide an example of a cross-platform, standalone replication package that is compliant with the AEA's [data and code availability policy](https://www.aeaweb.org/journals/policies/data-code)
-1. Provide a template LaTeX manuscript
+This sample replication package provides:
+1. Supporting materials for an accompanying [Stata coding guide](https://reifjulian.github.io/guide)
+1. [Example Stata code](analysis/scripts/4_make_tables_figures.do) that automates the creation of tables and figures for a manuscript
+1. An example of a cross-platform, standalone replication package that is compliant with the AEA's [data and code availability policy](https://www.aeaweb.org/journals/policies/data-code)
+1. A template LaTeX manuscript
 
 ## Notes
 

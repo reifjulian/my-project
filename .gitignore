@@ -1,5 +1,6 @@
 .DS_Store
 .Rapp.history
+.Rhistory
 *.aux
 *.synctex.gz
 *.log

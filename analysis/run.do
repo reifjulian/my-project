@@ -32,8 +32,8 @@ clear
 set more off
 cap mkdir "$MyProject/scripts/logs"
 cap log close
-local datetime : di %tcCCYY.NN.DD!_HH.MM.SS `=clock("$S_DATE $S_TIME", "DMYhms")'
-local logfile "$MyProject/scripts/logs/log_`datetime'.txt"
+local datetime : di %tcCCYY.NN.DD!-HH.MM.SS `=clock("$S_DATE $S_TIME", "DMYhms")'
+local logfile "$MyProject/scripts/logs/`datetime'.log.txt"
 log using "`logfile'", text
 
 di "Begin date and time: $S_DATE $S_TIME"

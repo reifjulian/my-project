@@ -3,9 +3,8 @@
 * PURPOSE: creates the LaTeX tables and PDF figures for the paper
 ************
 
-* Preamble: these two lines of code are included so scripts can be run individually (rather than called by 0_run_all.do)
-adopath ++ "$MyProject/scripts/libraries/stata"
-adopath ++ "$MyProject/scripts/programs"
+* Preamble (unnecessary when executing run.do)
+do "$MyProject/scripts/programs/_config.do"
 
 ************
 * Code begins

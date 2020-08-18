@@ -3,9 +3,8 @@
 * PURPOSE: estimates regression models and saves the resulting output
 ************
 
-* Preamble: these two lines of code are included so scripts can be run individually (rather than called by 0_run_all.do)
-adopath ++ "$MyProject/scripts/libraries/stata"
-adopath ++ "$MyProject/scripts/programs"
+* Preamble (unnecessary when executing run.do)
+do "$MyProject/scripts/programs/_config.do"
 
 ************
 * Code begins
@@ -28,6 +27,7 @@ foreach rhs in "mpg" "mpg weight" {
 }
 
 use "`results'", clear
+compress
 save "$MyProject/results/intermediate/my_regressions.dta", replace
 
 * R regressions. First argument: input file. Second argument: output file.

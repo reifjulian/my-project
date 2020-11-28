@@ -62,7 +62,6 @@ if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/_rversion.R", arg
 cap mkdir "$MyProject/processed"
 cap mkdir "$MyProject/processed/intermediate"
 cap mkdir "$MyProject/results"
-cap mkdir "$MyProject/results"
 cap mkdir "$MyProject/results/figures"
 cap mkdir "$MyProject/results/intermediate"
 cap mkdir "$MyProject/results/tables"

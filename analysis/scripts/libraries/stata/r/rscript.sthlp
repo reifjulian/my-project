@@ -17,7 +17,8 @@
 {p 8 14 2}{it: stringlist} is a list of quoted strings.
 
 
-{p 4 4 2}By default, {cmd:rscript} calls the R executable specified by the global macro RSCRIPT_PATH.
+{p 4 4 2}The R executable can be specified by {cmd:rpath()} or by defining the global macro RSCRIPT_PATH.
+If neither are defined, then {cmd:rscript} will search for the R executable on its own. 
 
 
 {title:Description}
@@ -28,7 +29,9 @@
 {title:Options}
 
 {p 4 8 2}
-{cmd:rpath(}{it:pathname}{cmd:)} specifies the location of the R executable. The default is to call the executable specified by the global macro RSCRIPT_PATH.
+{cmd:rpath(}{it:pathname}{cmd:)} specifies the location of the R executable. 
+If not specified, {cmd:rscript} will use the location specified by the global macro RSCRIPT_PATH.
+If {cmd:rpath()} is not specified and RSCRIPT_PATH is undefined, then {cmd:rscript} will search for the R executable on its own.
 
 {p 4 8 2}
 {cmd:args(}{it:stringlist}{cmd:)} specifies arguments to pass along to R.

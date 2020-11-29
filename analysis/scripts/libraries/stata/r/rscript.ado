@@ -1,9 +1,10 @@
-*! rscript 1.0.3 23mar2020 by David Molitor and Julian Reif
+*! rscript 1.0.4 25nov2020 by David Molitor and Julian Reif
+* 1.0.4: added default pathname
 * 1.0.3: added support for "~" pathnames
 * 1.0.2: stderr is now parsed by Mata instead of Stata
-* 1.0.1: Updated error handling
+* 1.0.1: updated error handling
 
-program define rscript, nclass
+program define rscript, rclass
 
 	version 13.0
 
@@ -18,14 +19,52 @@ program define rscript, nclass
 	confirm file "`using'"
 	
 	* If user does not specify the location of the R executable, set the default to what is stored in RSCRIPT_PATH
-	if mi(`"`rpath'"') local rpath "$RSCRIPT_PATH"
-	
+	* If both are blank, then try using an os-specific default
 	if mi(`"`rpath'"') {
-		di as error "Location of R executable must be specified using option rpath() or using the global RSCRIPT_PATH"
-		exit 198
+		local rpath `"$RSCRIPT_PATH"'
+		local no_default_rpath = mi(`"`rpath'"')
+		
+		if `no_default_rpath' {
+			
+			local os = lower("`c(os)'")
+			
+			* Unix/mac default paths: (1) /usr/local/bin/Rscript (2) /usr/bin/Rscript
+			if inlist("`os'","macosx","unix") {
+				local rpath "/usr/local/bin/Rscript"
+				cap confirm file "`rpath'"
+				if _rc local rpath "/usr/bin/Rscript"
+				cap confirm file "`rpath'"
+				if _rc local rpath 
+			}
+			
+			* Windows default path: "C:/Program Files/R/R-X.Y.Z/bin/Rscript.exe" (newest version)
+			else if "`os'" == "windows" {
+				local subdirs : dir "C:/Program Files/R/" dirs "R-?.?.?", respectcase
+				local subdirs : list clean subdirs
+				local subdirs : list sort subdirs
+				local ndirs   : list sizeof subdirs
+				if `ndirs' > 0 {
+					local newest  : word `ndirs' of `subdirs'
+					local rpath "C:/Program Files/R/`newest'/bin/Rscript.exe"
+				}
+			}
+			
+			local no_default_rpath = mi(`"`rpath'"')
+		}
+		
+		if `no_default_rpath' {
+			di as error "No default R executable found. Specify R executable using option rpath() or using the global RSCRIPT_PATH"
+			exit 198	
+		}
+		
+		di as result `"Using default path: `rpath'"'
 	}
 	
-	confirm file "`rpath'"
+	cap confirm file "`rpath'"
+	if _rc {
+		di as error "R executable not found. Specify R executable using option rpath() or using the global RSCRIPT_PATH"
+		exit 601		
+	}
 	
 	* Calling a script using "~" notation causes a fatal error with shell (Unix/Mac). Avoid by converting to absolute path.
 	qui if strpos("`using'","~") {
@@ -72,7 +111,9 @@ program define rscript, nclass
 	else {
 		shell "`rpath'" "`using'" `args' > `out' 2>`err'
 	}
-
+	
+	return local rpath `rpath'
+	
 	****************
 	* Display stdout and stderr output
 	****************
@@ -87,6 +128,7 @@ program define rscript, nclass
 	
 	di as result "`="_"*80'"
 	di as result "...end R output"_n
+	
 	
 	****************
 	* If there was an "error" in the execution of the R script, notify the user (and break, unless -force- option is specified)

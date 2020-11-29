@@ -1,4 +1,6 @@
-*! texsave 1.4.5 1jul2020 by Julian Reif 
+*! texsave 1.5 2nov2020 by Julian Reif 
+* 1.5: added decimalalign option
+* 1.4.6: added label option (replaces marker function, which is now deprecated)
 * 1.4.5: added new endash option (enabled by default)
 * 1.4.4: added headersep() option
 * 1.4.3: width default changed from \textwidth to \linewidth, to improve landscape tables. Added addlinespace() as footnote suboption. Changed default to \addlinespace[\belowrulesep]
@@ -21,7 +23,7 @@
 program define texsave, nclass
 	version 10
 
-	syntax [varlist] using/ [if] [in] [, noNAMES SW noFIX noENDASH title(string) DELIMITer(string) footnote(string asis) headerlines(string asis) headlines(string asis) preamble(string asis) footlines(string asis) frag align(string) LOCation(string) size(string) width(string) marker(string) bold(string) italics(string) underline(string) slanted(string) smallcaps(string) sansserif(string) monospace(string) emphasis(string) VARLABels hlines(numlist) autonumber rowsep(string) headersep(string) LANDscape GEOmetry(string) replace]
+	syntax [varlist] using/ [if] [in] [, noNAMES SW noFIX noENDASH title(string) DELIMITer(string) footnote(string asis) headerlines(string asis) headlines(string asis) preamble(string asis) footlines(string asis) frag align(string) LOCation(string) size(string) width(string) marker(string) label(string) bold(string) italics(string) underline(string) slanted(string) smallcaps(string) sansserif(string) monospace(string) emphasis(string) VARLABels hlines(numlist) autonumber rowsep(string) headersep(string) LANDscape GEOmetry(string) DECIMALalign replace]
 
 	* Check if appendfile is installed
 	cap appendfile
@@ -77,6 +79,15 @@ program define texsave, nclass
 
 	* Get number of vars/columns
 	local num_vars : word count `varlist'
+	
+	* Label option overloads the marker option
+	if !mi(`"`label'"') {
+		if !mi(`"`marker'"') {
+			di as error "Cannot specify both the label and marker options"
+			exit 198	
+		}
+		local marker `"`label'"'
+	}
 
 	* Error check the location option.  Set default to "tbp"
 	if `"`location'"'!="" {
@@ -175,7 +186,8 @@ program define texsave, nclass
 	if `"`align'"'=="" {
 		local align "l"
 		forval x = 2/`num_vars' {
-			local align "`align'C"
+			if "`decimalalign'"!="" local align "`align'S"
+			else local align "`align'C"
 		}
 	}
 
@@ -248,9 +260,9 @@ program define texsave, nclass
 	}
 	
 	* Dataset corrections
-	if "`fix'"=="" | "`endash'"=="" | `"`bold'`italics'`underline'`slanted'`smallcaps'`sansserif'`monospace'`emphasis'"'!="" {
+	if "`fix'"=="" | "`endash'"=="" | `"`bold'`italics'`underline'`slanted'`smallcaps'`sansserif'`monospace'`emphasis'"'!="" | "`decimalalign'"!="" {
 		
-		tempvar index_neg
+		tempvar index_neg isreal
 		local renamed = "yes"
 		
 		* Variables - create new temporary ones that have bad chars stripped out of them and are formatted as specified by user
@@ -272,9 +284,9 @@ program define texsave, nclass
 					qui replace `v' = subinstr(`v',"^","\^{}",.)
 				}
 				
-				* Reformat negative signs from "-" to "--" (en-dash)
+				* Reformat negative signs from "-" to "--" (en-dash), unless decimalalign option is specified
 				* Only reformat negative signs if they are followed by a number and not preceded by an alphabetic character or negative sign
-				if "`endash'"=="" {
+				if "`endash'"=="" & "`decimalalign'"=="" {
 				    qui gen `index_neg' = strpos(`v',"-")
 					qui replace `v' = subinstr(`v',"-","--",1) if real(substr(`v',`index_neg'+1,1))!=. & regexm(substr(`v',`index_neg'-1,1),"[A-Za-z\-]")!=1
 					drop `index_neg'
@@ -295,6 +307,13 @@ program define texsave, nclass
 					
 					local run_no = `run_no'+1
 				}
+				
+				* For decimalalign option, when variable is a formatted string, surround text data with "{...}" but not numeric data
+				if "`decimalalign'"!="" {
+					qui gen `isreal' = real(`v')
+					replace `v' = "{" + `v' + "}" if mi(`isreal')
+					drop `isreal'
+				}
 			}			
 		}
 	}
@@ -314,7 +333,8 @@ program define texsave, nclass
 		file write `fh' "\usepackage{booktabs}" _n
 		file write `fh' "\usepackage{tabularx}" _n
 		file write `fh' "\usepackage[margin=1in]{geometry}" _n
-		if "`landscape'"!="" file write `fh' "\usepackage{pdflscape}" _n
+		if "`landscape'"!=""    file write `fh' "\usepackage{pdflscape}" _n
+		if "`decimalalign'"!="" file write `fh' "\usepackage{siunitx}" _n
 	}
 	* Preamble option. This is always outputted, whether or not frag option is specified
 	if `"`preamble'"' != "" {

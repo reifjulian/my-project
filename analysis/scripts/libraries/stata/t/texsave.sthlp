@@ -10,11 +10,11 @@
 
 {p 8 14 2}{cmd:texsave} [{it:varlist}] {cmd:using} {it:filename} [if] [in] [, {cmd:title(}{it:string}{cmd:)} {cmd:size(}{it:string}{cmd:)}
 {cmd:width(}{it:string}{cmd:)} {cmd:align(}{it:string}{cmd:)} {cmdab:loc:ation(}{it:string}{cmd:)}
-{cmd:marker(}{it:string}{cmd:)} {cmd:autonumber} {cmd:hlines(}{it:numlist}{cmd:)} {cmd:footnote(}{it:footnote_options}{cmd:)}
+{cmd:label(}{it:string}{cmd:)} {cmd:autonumber} {cmd:hlines(}{it:numlist}{cmd:)} {cmd:footnote(}{it:footnote_options}{cmd:)}
 {cmdab:varlab:els} {cmdab:land:scape}  {cmdab:geo:metry(}{it:string}{cmd:)}
-{cmd:rowsep(}{it:string}{cmd:)} {cmd:frag} {cmd:nonames} {cmd:sw} {cmd:nofix} {cmd:noendash}
+{cmd:rowsep(}{it:string}{cmd:)} {cmdab:decimal:align} {cmd:nonames} {cmd:nofix} {cmd:noendash}
 {cmd:preamble(}{it:stringlist}{cmd:)} {cmd:headlines(}{it:stringlist}{cmd:)} {cmd:headerlines(}{it:stringlist}{cmd:)}  
-{cmd:footlines(}{it:stringlist}{cmd:)} {cmd:replace} {it:format_options}]
+{cmd:footlines(}{it:stringlist}{cmd:)} {cmd:sw} {cmd:frag} {cmd:replace} {it:format_options}]
 
 {p 4 4 2}where
 
@@ -64,6 +64,8 @@ Alternatively, the user may specify a numeric value between 1 and 10, where 1 co
 
 {p 8 8 2}r - a column of right-aligned items
 
+{p 8 8 2}S - a column of numbers aligned at the decimal point; requires {cmd:decimalalign} option
+
 {p 8 8 2}| - a vertical line the full height and depth of the environment 
 
 {p 8 8 2}The character '|' (the vertical bar, NOT the alphabetic character 'l') adds vertical lines to the table.  For example, 
@@ -87,7 +89,7 @@ The default is to left-justify the first column and center and distribute space 
 
 
 {p 4 8 2}
-{cmd:marker(}{it:string}{cmd:)} uses LaTeX's \label option to mark your table with the key {it:string}.
+{cmd:label(}{it:string}{cmd:)} uses LaTeX's {it:\label} option to mark your table with the key {it:string}.
 
 
 {p 4 8 2}
@@ -135,17 +137,11 @@ The default is "\addlinespace[\belowrulesep]".
 
 
 {p 4 8 2}
-{cmd:frag} omits from the output LaTeX code like {it:\begin{c -(}document{c )-}} that is needed to create a standalone document. This makes {it:filename} a fragment, which
-is useful if you want to use LaTeX's {it:\input{c -(}table{c )-}} command to include your table as a subfile.
-An alternative is to use the LaTeX package {browse "http://ctan.org/pkg/standalone":standalone}, which instructs LaTeX to skip extra premables when including subfiles. 
+{cmd:decimalalign} aligns numeric values at the decimal point using the {it:siunitx} package. 
 
 
 {p 4 8 2}
 {cmd:nonames} specifies that variable names not be added to the table header.
-
-
-{p 4 8 2}
-{cmd:sw} instructs {cmd:texsave} to include macro code that can be read by Scientific Word (SW) so that full SW functionality is retained.
 
 
 {p 4 8 2}
@@ -155,7 +151,7 @@ By default, {cmd:texsave} adds a backslash (\) in front of these characters in o
 
 
 {p 4 8 2}
-{cmd:noendash} instructs {cmd:texsave} not to convert negative signs in the dataset ("-") to en dashes ("--").
+{cmd:noendash} specifies that negative signs ("-") not be converted to en dashes ("--") in the dataset.
 
 
 {p 4 8 2}
@@ -172,6 +168,16 @@ By default, {cmd:texsave} adds a backslash (\) in front of these characters in o
 
 {p 4 8 2}
 {cmd:footlines(}{it:stringlist}{cmd:)} specifies a list of lines of LaTeX code to appear after the "\end{table}" code in the output.  Each line of code should be surrounded by quotation marks (see example 4 below).
+
+
+{p 4 8 2}
+{cmd:sw} instructs {cmd:texsave} to include macro code that can be read by Scientific Word (SW) so that full SW functionality is retained.
+
+
+{p 4 8 2}
+{cmd:frag} omits from the output LaTeX code like {it:\begin{c -(}document{c )-}} that is needed to create a standalone document. This makes {it:filename} a fragment, which
+is useful if you want to use LaTeX's {it:\input{c -(}table{c )-}} command to include your table as a subfile.
+An alternative is to use the LaTeX package {browse "http://ctan.org/pkg/standalone":standalone}, which instructs LaTeX to skip extra premables when including subfiles. 
 
 
 {p 4 8 2}

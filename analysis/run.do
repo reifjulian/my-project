@@ -14,18 +14,14 @@
 *   /results
 **********************
 
-* User must define two global macros in order to run the analysis:
-* (1) "MyProject" points to the project folder
-* (2) "RSCRIPT_PATH" points to the folder containing the executables for R-3.6.0 (or newer)
+* User must set the global macro MyProject to the path of the folder that includes run.do
 * global MyProject "C:/Users/jdoe/MyProject"
-* global RSCRIPT_PATH "C:/Program Files/R/R-3.6.0/bin/x64"
 
 * To disable the R portion of the analysis, set the following flag to 1
 global DisableR = 0
 
-* Confirm that the globals for the project root directory and the R executable have been defined
+* Confirm that the global for the project root directory has been defined
 assert !missing("$MyProject")
-if "$DisableR"!="1" assert !missing("$RSCRIPT_PATH")
 
 * Initialize log and record system parameters
 clear
@@ -45,6 +41,11 @@ di "OS:            `c(os)' `c(osdtl)'"
 di "Machine type:  `c(machine_type)'"
 
 * All required Stata packages are available in the /libraries/stata folder
+tokenize `"$S_ADO"', parse(";")
+while `"`1'"' != "" {
+  if `"`1'"'!="BASE" cap adopath - `"`1'"'
+  macro shift
+}
 adopath ++ "$MyProject/scripts/libraries/stata"
 mata: mata mlib index
 

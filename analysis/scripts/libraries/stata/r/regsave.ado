@@ -1,4 +1,4 @@
-*! regsave 1.4.9 30aug2020 by Julian Reif
+*! regsave 1.4.9 4mar2021 by Julian Reif
 * 1.4.9: fixed minor bug when N was stored as non-integer
 * 1.4.8: added rtable option.
 * 1.4.7: fixed bug that caused large scalars outside the normal integer range to be stored as missing, when using the detail() option.
@@ -398,8 +398,8 @@ program define regsave, rclass
 
 	* N, R^2, and regression command. Always store N as a double, to avoid rounding issues with big data.
 	* Note: sometimes commands like ivregress incorrectly report N as a non-integer, and it get stored as such when in double format.
-	if e(N)!=. {
-		qui gen double N = e(N)
+	qui if e(N)!=. {
+		gen double N = e(N)
 		if abs(round(N)-N)<c(epsfloat) replace N = round(N)
 	}
 	if e(r2)!=. qui gen `double' r2 = e(r2)

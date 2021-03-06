@@ -1,4 +1,4 @@
-* 00000010
+* 00000011
 *! version 1.0.0
 * Do not erase or edit this file
 * It is used by Stata to track the ado and help
@@ -144,4 +144,14 @@ f t\texsave.ado
 f t\texsave.sthlp
 f a\appendfile.ado
 f a\appendfile.hlp
+e
+S https://raw.githubusercontent.com/reifjulian/rscript/master
+N rscript.pkg
+D 29 Nov 2020
+U 11
+d rscript. Call an R script from Stata.
+d David Molitor and Julian Reif, University of Illinois
+d dmolitor@illinois.edu, jreif@illinois.edu
+f r\rscript.ado
+f r\rscript.sthlp
 e

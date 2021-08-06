@@ -1,30 +1,30 @@
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/logs/2021.03.06-07.29.09.log.txt
+       log:  /Users/jreif/Documents/GitHub/my-project/analysis/scripts/logs/2021.08.03-15.55.08.log.txt
   log type:  text
- opened on:   6 Mar 2021, 07:29:09
+ opened on:   3 Aug 2021, 15:55:08
 
 . 
 . di "Begin date and time: $S_DATE $S_TIME"
-Begin date and time:  6 Mar 2021 07:29:09
+Begin date and time:  3 Aug 2021 15:55:08
 
 . di "Stata version: `c(stata_version)'"
-Stata version: 16.1
+Stata version: 17
 
 . di "Updated as of: `c(born_date)'"
-Updated as of: 21 Jan 2021
+Updated as of: 13 Jul 2021
 
 . di "Variant:       `=cond( c(MP),"MP",cond(c(SE),"SE",c(flavor)) )'"
 Variant:       MP
 
 . di "Processors:    `c(processors)'"
-Processors:    6
+Processors:    4
 
 . di "OS:            `c(os)' `c(osdtl)'"
-OS:            Windows 64-bit
+OS:            MacOSX 11.5.1
 
 . di "Machine type:  `c(machine_type)'"
-Machine type:  PC (64-bit x86-64)
+Machine type:  Macintosh (Intel 64-bit)
 
 . 
 . * All required Stata packages are available in the /libraries/stata folder
@@ -36,12 +36,13 @@ Machine type:  PC (64-bit x86-64)
   4. }
 
 . adopath ++ "$MyProject/scripts/libraries/stata"
-  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
-  [2]  (BASE)      "C:\Program Files\Stata16\ado\base/"
+  [1]              "/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
+  [2]  (BASE)      "/Applications/Stata/ado/base/"
 
 . mata: mata mlib index
 .mlib libraries to be searched are now
-    lmatabase;lmataado;lmataerm;lmatafc;lmatagsem;lmatalasso;lmatamcmc;lmatameta;lmatami;lmatamixlog;lmatanumlib;lmataopt;lmatapath;lmatapostest;lmatapss;lmatasem;lmatasp;lmatasvy;lmatatab
+    lmatabase;lmatamcmc;lmatabma;lmatacollect;lmatatab;lmatamixlog;lmatami;lmatasem;lmatagsem;lmatasp;lmatapss;lmatalasso;lmatapostest;lmatapath;lmatameta;
+> lmataopt;lmatasvy;lmatanumlib;lmataado;lmataerm;lmatafc
 
 . 
 . * R packages can be installed manually (see README) or installed automatically by uncommenting the following line
@@ -49,32 +50,17 @@ Machine type:  PC (64-bit x86-64)
 . 
 . * Stata programs and R scripts are stored in /programs
 . adopath ++ "$MyProject/scripts/programs"
-  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs"
-  [2]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
-  [3]  (BASE)      "C:\Program Files\Stata16\ado\base/"
+  [1]              "/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs"
+  [2]              "/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
+  [3]  (BASE)      "/Applications/Stata/ado/base/"
 
 . 
 . * Stata and R version control
 . version 15
 
-. if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/_rversion.R", args(3.6 4.0.1 1 0)
-Using default path: C:/Program Files/R/R-4.0.2/bin/Rscript.exe
-Running R script: C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs/_rversion.R
-Args: 3.6 4.0.1 1 0
-
-
-Begin R output:
-________________________________________________________________________________
-stdout:
-[1] "Running R version 4.0.2"
-Warning:  This version of R may not be able to correctly run code written for version 4.0.1.
-You can download an older version of R by visiting: https://www.r-project.org
-
-
-stderr:
-________________________________________________________________________________
-...end R output
-
+. if "$DisableR"!="1" rscript, rversion(3.6) require(tidyverse estimatr)
+Version information:
+[1] "R installation is version 4.0.2"
 
 . 
 . * Create directories for output files
@@ -103,20 +89,21 @@ ________________________________________________________________________________
 . do "$MyProject/scripts/programs/_config.do"
 
 . ******
-. * This script contains code that allows scripts to be run individually on a standalone basis, if the user has defined the project global in their Stata profile
+. * This script contains code that allows scripts to be run individually on a standalone basis, if the user has defined the project global in their Stata p
+> rofile
 . * It is unnecessary when executing run.do
 . ******
 . 
 . * Ensure the script uses only local libraries and programs
 . adopath ++ "$MyProject/scripts/libraries/stata"
-  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
-  [2]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs"
-  [3]  (BASE)      "C:\Program Files\Stata16\ado\base/"
+  [1]              "/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
+  [2]              "/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs"
+  [3]  (BASE)      "/Applications/Stata/ado/base/"
 
 . adopath ++ "$MyProject/scripts/programs"
-  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs"
-  [2]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
-  [3]  (BASE)      "C:\Program Files\Stata16\ado\base/"
+  [1]              "/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs"
+  [2]              "/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
+  [3]  (BASE)      "/Applications/Stata/ado/base/"
 
 . 
 . cap adopath - PERSONAL
@@ -150,7 +137,7 @@ end of do-file
   (0 bytes saved)
 
 . save "$MyProject/processed/intermediate/auto_uncleaned.dta", replace
-file C:/Users/jreif/Documents/GitHub/my-project/analysis/processed/intermediate/auto_uncleaned.dta saved
+file /Users/jreif/Documents/GitHub/my-project/analysis/processed/intermediate/auto_uncleaned.dta saved
 
 . 
 . ** EOF
@@ -168,20 +155,21 @@ end of do-file
 . do "$MyProject/scripts/programs/_config.do"
 
 . ******
-. * This script contains code that allows scripts to be run individually on a standalone basis, if the user has defined the project global in their Stata profile
+. * This script contains code that allows scripts to be run individually on a standalone basis, if the user has defined the project global in their Stata p
+> rofile
 . * It is unnecessary when executing run.do
 . ******
 . 
 . * Ensure the script uses only local libraries and programs
 . adopath ++ "$MyProject/scripts/libraries/stata"
-  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
-  [2]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs"
-  [3]  (BASE)      "C:\Program Files\Stata16\ado\base/"
+  [1]              "/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
+  [2]              "/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs"
+  [3]  (BASE)      "/Applications/Stata/ado/base/"
 
 . adopath ++ "$MyProject/scripts/programs"
-  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs"
-  [2]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
-  [3]  (BASE)      "C:\Program Files\Stata16\ado\base/"
+  [1]              "/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs"
+  [2]              "/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
+  [3]  (BASE)      "/Applications/Stata/ado/base/"
 
 . 
 . cap adopath - PERSONAL
@@ -227,10 +215,10 @@ end of do-file
  1%         3291           3291
  5%         3748           3299
 10%         3895           3667       Obs                  74
-25%         4195           3748       Sum of Wgt.          74
+25%         4195           3748       Sum of wgt.          74
 
 50%       5006.5                      Mean           6165.257
-                        Largest       Std. Dev.      2949.496
+                        Largest       Std. dev.      2949.496
 75%         6342          13466
 90%        11385          13594       Variance        8699526
 95%        13466          14500       Skewness       1.653434
@@ -243,10 +231,10 @@ end of do-file
  1%           12             12
  5%           14             12
 10%           14             14       Obs                  74
-25%           18             14       Sum of Wgt.          74
+25%           18             14       Sum of wgt.          74
 
 50%           20                      Mean            21.2973
-                        Largest       Std. Dev.      5.785503
+                        Largest       Std. dev.      5.785503
 75%           25             34
 90%           29             35       Variance       33.47205
 95%           34             35       Skewness       .9487176
@@ -259,10 +247,10 @@ end of do-file
  1%            1              1
  5%            2              1
 10%            2              2       Obs                  69
-25%            3              2       Sum of Wgt.          69
+25%            3              2       Sum of wgt.          69
 
 50%            3                      Mean           3.405797
-                        Largest       Std. Dev.      .9899323
+                        Largest       Std. dev.      .9899323
 75%            4              5
 90%            5              5       Variance       .9799659
 95%            5              5       Skewness      -.0570331
@@ -275,10 +263,10 @@ end of do-file
  1%          1.5            1.5
  5%          1.5            1.5
 10%            2            1.5       Obs                  74
-25%          2.5            1.5       Sum of Wgt.          74
+25%          2.5            1.5       Sum of wgt.          74
 
 50%            3                      Mean           2.993243
-                        Largest       Std. Dev.      .8459948
+                        Largest       Std. dev.      .8459948
 75%          3.5            4.5
 90%            4            4.5       Variance       .7157071
 95%          4.5            4.5       Skewness       .1408651
@@ -291,10 +279,10 @@ end of do-file
  1%            5              5
  5%            7              6
 10%            8              7       Obs                  74
-25%           10              7       Sum of Wgt.          74
+25%           10              7       Sum of wgt.          74
 
 50%           14                      Mean           13.75676
-                        Largest       Std. Dev.      4.277404
+                        Largest       Std. dev.      4.277404
 75%           17             21
 90%           20             21       Variance       18.29619
 95%           21             22       Skewness       .0292034
@@ -307,10 +295,10 @@ end of do-file
  1%         1760           1760
  5%         1830           1800
 10%         2020           1800       Obs                  74
-25%         2240           1830       Sum of Wgt.          74
+25%         2240           1830       Sum of wgt.          74
 
 50%         3190                      Mean           3019.459
-                        Largest       Std. Dev.      777.1936
+                        Largest       Std. dev.      777.1936
 75%         3600           4290
 90%         4060           4330       Variance       604029.8
 95%         4290           4720       Skewness       .1481164
@@ -323,10 +311,10 @@ end of do-file
  1%          142            142
  5%          154            147
 10%          157            149       Obs                  74
-25%          170            154       Sum of Wgt.          74
+25%          170            154       Sum of wgt.          74
 
 50%        192.5                      Mean           187.9324
-                        Largest       Std. Dev.      22.26634
+                        Largest       Std. dev.      22.26634
 75%          204            221
 90%          218            222       Variance       495.7899
 95%          221            230       Skewness      -.0409746
@@ -339,10 +327,10 @@ end of do-file
  1%           31             31
  5%           33             32
 10%           34             33       Obs                  74
-25%           36             33       Sum of Wgt.          74
+25%           36             33       Sum of wgt.          74
 
 50%           40                      Mean           39.64865
-                        Largest       Std. Dev.      4.399354
+                        Largest       Std. dev.      4.399354
 75%           43             46
 90%           45             48       Variance       19.35431
 95%           46             48       Skewness       .1238259
@@ -355,10 +343,10 @@ end of do-file
  1%           79             79
  5%           86             85
 10%           97             86       Obs                  74
-25%          119             86       Sum of Wgt.          74
+25%          119             86       Sum of wgt.          74
 
 50%          196                      Mean           197.2973
-                        Largest       Std. Dev.      91.83722
+                        Largest       Std. dev.      91.83722
 75%          250            350
 90%          350            400       Variance       8434.075
 95%          350            400       Skewness       .5916565
@@ -371,10 +359,10 @@ end of do-file
  1%         2.19           2.19
  5%         2.28           2.24
 10%         2.43           2.26       Obs                  74
-25%         2.73           2.28       Sum of Wgt.          74
+25%         2.73           2.28       Sum of wgt.          74
 
 50%        2.955                      Mean           3.014865
-                        Largest       Std. Dev.      .4562871
+                        Largest       Std. dev.      .4562871
 75%         3.37           3.78
 90%         3.72           3.78       Variance       .2081979
 95%         3.78           3.81       Skewness       .2191658
@@ -396,7 +384,7 @@ end of do-file
   (2,220 bytes saved)
 
 . save "$MyProject/processed/auto.dta", replace
-file C:/Users/jreif/Documents/GitHub/my-project/analysis/processed/auto.dta saved
+file /Users/jreif/Documents/GitHub/my-project/analysis/processed/auto.dta saved
 
 . 
 . ** EOF
@@ -414,20 +402,21 @@ end of do-file
 . do "$MyProject/scripts/programs/_config.do"
 
 . ******
-. * This script contains code that allows scripts to be run individually on a standalone basis, if the user has defined the project global in their Stata profile
+. * This script contains code that allows scripts to be run individually on a standalone basis, if the user has defined the project global in their Stata p
+> rofile
 . * It is unnecessary when executing run.do
 . ******
 . 
 . * Ensure the script uses only local libraries and programs
 . adopath ++ "$MyProject/scripts/libraries/stata"
-  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
-  [2]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs"
-  [3]  (BASE)      "C:\Program Files\Stata16\ado\base/"
+  [1]              "/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
+  [2]              "/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs"
+  [3]  (BASE)      "/Applications/Stata/ado/base/"
 
 . adopath ++ "$MyProject/scripts/programs"
-  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs"
-  [2]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
-  [3]  (BASE)      "C:\Program Files\Stata16\ado\base/"
+  [1]              "/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs"
+  [2]              "/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
+  [3]  (BASE)      "/Applications/Stata/ado/base/"
 
 . 
 . cap adopath - PERSONAL
@@ -480,13 +469,13 @@ Linear regression                               Number of obs     =         52
 
 ------------------------------------------------------------------------------
              |               Robust
-       price |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+       price | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
 -------------+----------------------------------------------------------------
          mpg |  -329.2551    81.1942    -4.06   0.000    -492.3384   -166.1717
        _cons |   12600.54   1777.731     7.09   0.000     9029.859    16171.22
 ------------------------------------------------------------------------------
-(note: file C:\Users\jreif\AppData\Local\Temp\ST_4d20_000001.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_4d20_000001.tmp saved
+(file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_67029.000001 not found)
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_67029.000001 saved as .dta format
 
 Linear regression                               Number of obs     =         22
                                                 F(1, 20)          =       8.05
@@ -496,13 +485,13 @@ Linear regression                               Number of obs     =         22
 
 ------------------------------------------------------------------------------
              |               Robust
-       price |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+       price | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
 -------------+----------------------------------------------------------------
          mpg |  -250.3668   88.22545    -2.84   0.010    -434.4019   -66.33174
        _cons |   12586.95   2352.589     5.35   0.000     7679.535    17494.37
 ------------------------------------------------------------------------------
-(note: variable origin was str7, now str8 to accommodate using data's values)
-file C:\Users\jreif\AppData\Local\Temp\ST_4d20_000001.tmp saved
+(variable origin was str7, now str8 to accommodate using data's values)
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_67029.000001 saved as .dta format
 
 Linear regression                               Number of obs     =         52
                                                 F(2, 49)          =      18.88
@@ -512,13 +501,13 @@ Linear regression                               Number of obs     =         52
 
 ------------------------------------------------------------------------------
              |               Robust
-       price |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+       price | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
 -------------+----------------------------------------------------------------
          mpg |    237.691   202.6121     1.17   0.246    -169.4733    644.8552
       weight |   4.415037   1.338438     3.30   0.002     1.725346    7.104728
        _cons |  -13285.44   8279.718    -1.60   0.115    -29924.16    3353.272
 ------------------------------------------------------------------------------
-file C:\Users\jreif\AppData\Local\Temp\ST_4d20_000001.tmp saved
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_67029.000001 saved as .dta format
 
 Linear regression                               Number of obs     =         22
                                                 F(2, 19)          =      49.02
@@ -528,14 +517,14 @@ Linear regression                               Number of obs     =         22
 
 ------------------------------------------------------------------------------
              |               Robust
-       price |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+       price | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
 -------------+----------------------------------------------------------------
          mpg |  -19.77737   51.73445    -0.38   0.706    -128.0588    88.50408
       weight |   5.155842    .769729     6.70   0.000     3.544781    6.766904
        _cons |  -5065.841   2885.351    -1.76   0.095    -11104.95    973.2692
 ------------------------------------------------------------------------------
-(note: variable origin was str7, now str8 to accommodate using data's values)
-file C:\Users\jreif\AppData\Local\Temp\ST_4d20_000001.tmp saved
+(variable origin was str7, now str8 to accommodate using data's values)
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_67029.000001 saved as .dta format
 
 . 
 . use "`results'", clear
@@ -545,15 +534,15 @@ file C:\Users\jreif\AppData\Local\Temp\ST_4d20_000001.tmp saved
   (30 bytes saved)
 
 . save "$MyProject/results/intermediate/my_regressions.dta", replace
-file C:/Users/jreif/Documents/GitHub/my-project/analysis/results/intermediate/my_regressions.dta saved
+file /Users/jreif/Documents/GitHub/my-project/analysis/results/intermediate/my_regressions.dta saved
 
 . 
 . * R regressions. First argument: input file. Second argument: output file.
-. if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/regressions.R", args("$MyProject/processed/auto.dta" "$MyProject/results/intermediate/my_lm_regressions.dta")
-Using default path: C:/Program Files/R/R-4.0.2/bin/Rscript.exe
-Running R script: C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs/regressions.R
-Args: "C:/Users/jreif/Documents/GitHub/my-project/analysis/processed/auto.dta" "C:/Users/jreif/Documents/GitHub/my-project/analysis/results/intermediate/my_lm_regressions.dta"
-
+. if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/regressions.R", args("$MyProject/processed/auto.dta" "$MyProject/results/intermediate/my_l
+> m_regressions.dta")
+Running R script: /Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs/regressions.R
+Args: "/Users/jreif/Documents/GitHub/my-project/analysis/processed/auto.dta" "/Users/jreif/Documents/GitHub/my-project/analysis/results/intermediate/my_lm_
+> regressions.dta"
 
 Begin R output:
 ________________________________________________________________________________
@@ -561,17 +550,16 @@ stdout:
 
 
 stderr:
--- Attaching packages --------------------------------------- tidyverse 1.3.0 --
-v ggplot2 3.3.2     v purrr   0.3.4
-v tibble  3.0.2     v dplyr   1.0.0
-v tidyr   1.1.0     v stringr 1.4.0
-v readr   1.3.1     v forcats 0.5.0
--- Conflicts ------------------------------------------ tidyverse_conflicts() --
-x dplyr::filter() masks stats::filter()
-x dplyr::lag()    masks stats::lag()
+── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
+✔ ggplot2 3.3.5     ✔ purrr   0.3.4
+✔ tibble  3.1.2     ✔ dplyr   1.0.7
+✔ tidyr   1.1.3     ✔ stringr 1.4.0
+✔ readr   1.4.0     ✔ forcats 0.5.1
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
 ________________________________________________________________________________
 ...end R output
-
 
 . 
 . ** EOF
@@ -589,20 +577,21 @@ end of do-file
 . do "$MyProject/scripts/programs/_config.do"
 
 . ******
-. * This script contains code that allows scripts to be run individually on a standalone basis, if the user has defined the project global in their Stata profile
+. * This script contains code that allows scripts to be run individually on a standalone basis, if the user has defined the project global in their Stata p
+> rofile
 . * It is unnecessary when executing run.do
 . ******
 . 
 . * Ensure the script uses only local libraries and programs
 . adopath ++ "$MyProject/scripts/libraries/stata"
-  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
-  [2]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs"
-  [3]  (BASE)      "C:\Program Files\Stata16\ado\base/"
+  [1]              "/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
+  [2]              "/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs"
+  [3]  (BASE)      "/Applications/Stata/ado/base/"
 
 . adopath ++ "$MyProject/scripts/programs"
-  [1]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs"
-  [2]              "C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
-  [3]  (BASE)      "C:\Program Files\Stata16\ado\base/"
+  [1]              "/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs"
+  [2]              "/Users/jreif/Documents/GitHub/my-project/analysis/scripts/libraries/stata"
+  [3]  (BASE)      "/Applications/Stata/ado/base/"
 
 . 
 . cap adopath - PERSONAL
@@ -640,7 +629,7 @@ end of do-file
 (bin=8, start=3291, width=1576.875)
 
 . graph export "$MyProject/results/figures/price_histogram.pdf", as(pdf) replace
-(file C:/Users/jreif/Documents/GitHub/my-project/analysis/results/figures/price_histogram.pdf written in PDF format)
+file /Users/jreif/Documents/GitHub/my-project/analysis/results/figures/price_histogram.pdf saved as PDF format
 
 . 
 . ********************************
@@ -665,13 +654,13 @@ end of do-file
   8.         local run_no = `run_no'+1
   9.         restore, preserve
  10. }
-(note: file C:\Users\jreif\AppData\Local\Temp\ST_4d20_000001.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_4d20_000001.tmp saved
-(note: variable min was byte, now int to accommodate using data's values)
-(note: variable max was byte, now int to accommodate using data's values)
-(note: variable var was str3, now str5 to accommodate using data's values)
-file C:\Users\jreif\AppData\Local\Temp\ST_4d20_000001.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_4d20_000001.tmp saved
+(file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_67029.000001 not found)
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_67029.000001 saved as .dta format
+(variable min was byte, now int to accommodate using data's values)
+(variable max was byte, now int to accommodate using data's values)
+(variable var was str3, now str5 to accommodate using data's values)
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_67029.000001 saved as .dta format
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_67029.000001 saved as .dta format
 
 . restore, not
 
@@ -743,17 +732,18 @@ variable var was str16 now str20
 . foreach orig in "Domestic" "Foreign" {
   2.         foreach rhs in "mpg" "mpg weight" {
   3.                 
-.                 regsave_tbl using "`my_table'" if origin=="`orig'" & rhs=="`rhs'", name(col`run_no') asterisk(10 5 1) parentheses(stderr) sigfig(3) `replace'
+.                 regsave_tbl using "`my_table'" if origin=="`orig'" & rhs=="`rhs'", name(col`run_no') asterisk(10 5 1) parentheses(stderr) sigfig(3) `repl
+> ace'
   4.                 
 .                 local run_no = `run_no'+1
   5.                 local replace append
   6.         }
   7. }
-(note: file C:\Users\jreif\AppData\Local\Temp\ST_4d20_000003.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_4d20_000003.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_4d20_000003.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_4d20_000003.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_4d20_000003.tmp saved
+(file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_67029.000003 not found)
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_67029.000003 saved as .dta format
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_67029.000003 saved as .dta format
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_67029.000003 saved as .dta format
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_67029.000003 saved as .dta format
 
 . 
 . ***
@@ -798,10 +788,12 @@ variable var was str13 now str16
 
 . local headerlines "& \multicolumn{2}{c}{Domestic cars} & \multicolumn{2}{c}{Foreign cars} " "\cmidrule(lr){2-3} \cmidrule(lr){4-5}"
 
-. local fn "Notes: Outcome variable is price (1978 dollars). Columns (1) and (2) report estimates of \(\beta\) from equation (\ref{eqn:model}) for domestic automobiles. Columns (3) and (4) report estimates for foreign automobiles. Robust standard error
-> s are reported in parentheses. A */**/*** indicates significance at the 10/5/1\% levels."
+. local fn "Notes: Outcome variable is price (1978 dollars). Columns (1) and (2) report estimates of \(\beta\) from equation (\ref{eqn:model}) for domestic
+>  automobiles. Columns (3) and (4) report estimates for foreign automobiles. Robust standard errors are reported in parentheses. A */**/*** indicates sign
+> ificance at the 10/5/1\% levels."
 
-. texsave using "$MyProject/results/tables/my_regressions.tex", autonumber varlabels hlines(-2) nofix replace marker(tab:my_regressions) title("`title'") headerlines("`headerlines'") footnote("`fn'")
+. texsave using "$MyProject/results/tables/my_regressions.tex", autonumber varlabels hlines(-2) nofix replace marker(tab:my_regressions) title("`title'") h
+> eaderlines("`headerlines'") footnote("`fn'")
 
 . preserve
 
@@ -826,17 +818,18 @@ variable var was str13 now str16
 . foreach orig in "Domestic" "Foreign" {
   2.         foreach rhs in "mpg" "mpg weight" {
   3.                 
-.                 regsave_tbl using "`my_table_r'" if origin=="`orig'" & rhs=="`rhs'", name(col`run_no') asterisk(10 5 1) parentheses(stderr) sigfig(3) `replace'
+.                 regsave_tbl using "`my_table_r'" if origin=="`orig'" & rhs=="`rhs'", name(col`run_no') asterisk(10 5 1) parentheses(stderr) sigfig(3) `re
+> place'
   4.                 
 .                 local run_no = `run_no'+1
   5.                 local replace append
   6.         }
   7. }
-(note: file C:\Users\jreif\AppData\Local\Temp\ST_4d20_000005.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_4d20_000005.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_4d20_000005.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_4d20_000005.tmp saved
-file C:\Users\jreif\AppData\Local\Temp\ST_4d20_000005.tmp saved
+(file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_67029.000005 not found)
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_67029.000005 saved as .dta format
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_67029.000005 saved as .dta format
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_67029.000005 saved as .dta format
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_67029.000005 saved as .dta format
 .         
 . * Format the table
 . use "`my_table_r'", clear
@@ -857,10 +850,10 @@ file C:\Users\jreif\AppData\Local\Temp\ST_4d20_000005.tmp saved
 . 
 . * Append to prior table, reformat, and output
 . save "`my_table_r'", replace
-file C:\Users\jreif\AppData\Local\Temp\ST_4d20_000005.tmp saved
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_67029.000005 saved as .dta format
 . restore
 . append using "`my_table_r'"
-(note: variable var was str16, now str18 to accommodate using data's values)
+(variable var was str16, now str18 to accommodate using data's values)
 . drop if var=="N" | strpos(var,"R^2")
 (2 observations deleted)
 . ingap 1 5
@@ -879,7 +872,8 @@ variable var was str18 now str25
 . 
 . * Same output as previous table above, so reuse the same footnote and headerlines
 . local title "Association between automobile price and fuel efficiency, Stata and R"
-. texsave using "$MyProject/results/tables/my_regressions_with_r.tex", autonumber varlabels hlines(1 6) nofix replace marker(tab:my_regressions_with_r) title("`title'") headerlines("`headerlines'") footnote("`fn'") bold("A." "B.")
+. texsave using "$MyProject/results/tables/my_regressions_with_r.tex", autonumber varlabels hlines(1 6) nofix replace marker(tab:my_regressions_with_r) tit
+> le("`title'") headerlines("`headerlines'") footnote("`fn'") bold("A." "B.")
 . }
 
 . 
@@ -891,11 +885,11 @@ end of do-file
 . 
 . * End log
 . di "End date and time: $S_DATE $S_TIME"
-End date and time:  6 Mar 2021 07:29:34
+End date and time:  3 Aug 2021 15:55:16
 
 . log close
       name:  <unnamed>
-       log:  C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/logs/2021.03.06-07.29.09.log.txt
+       log:  /Users/jreif/Documents/GitHub/my-project/analysis/scripts/logs/2021.08.03-15.55.08.log.txt
   log type:  text
- closed on:   6 Mar 2021, 07:29:34
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ closed on:   3 Aug 2021, 15:55:16
+-----------------------------------------------------------------------------------------------------------------------------------------------------------

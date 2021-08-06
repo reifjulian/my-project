@@ -1,4 +1,4 @@
-* 00000011
+* 00000012
 *! version 1.0.0
 * Do not erase or edit this file
 * It is used by Stata to track the ado and help
@@ -154,4 +154,15 @@ d David Molitor and Julian Reif, University of Illinois
 d dmolitor@illinois.edu, jreif@illinois.edu
 f r\rscript.ado
 f r\rscript.sthlp
+e
+S https://raw.githubusercontent.com/reifjulian/regsave/master
+N regsave.pkg
+D  5 Mar 2021
+U 12
+d regsave. Extract and store regression results.
+d Julian Reif, University of Illinois (jreif@illinois.edu)
+f r\regsave.ado
+f r\regsave.hlp
+f r\regsave_tbl.ado
+f r\regsave_tbl.hlp
 e

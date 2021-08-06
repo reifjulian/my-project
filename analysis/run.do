@@ -57,7 +57,7 @@ adopath ++ "$MyProject/scripts/programs"
 
 * Stata and R version control
 version 15
-if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/_rversion.R", args(3.6 4.0.1 1 0)
+if "$DisableR"!="1" rscript, rversion(3.6) require(tidyverse estimatr)
 
 * Create directories for output files
 cap mkdir "$MyProject/processed"

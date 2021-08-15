@@ -4,15 +4,16 @@
 ******
 
 * Ensure the script uses only local libraries and programs
+tokenize `"$S_ADO"', parse(";")
+while `"`1'"' != "" {
+  if `"`1'"'!="BASE" cap adopath - `"`1'"'
+  macro shift
+}
 adopath ++ "$MyProject/scripts/libraries/stata"
 adopath ++ "$MyProject/scripts/programs"
-
-cap adopath - PERSONAL
-cap adopath - PLUS
-cap adopath - SITE
-cap adopath - OLDPLACE
 
 * Additional code you want automatically executed
 assert !mi("$MyProject")
 set varabbrev off
 
+** EOF

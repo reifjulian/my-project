@@ -14,13 +14,13 @@
 *   /results
 **********************
 
-* User must set the global macro MyProject to the path of the folder that includes run.do
+* User must define this global macro to point to the folder path that includes this run.do script
 * global MyProject "C:/Users/jdoe/MyProject"
 
 * To disable the R portion of the analysis, set the following flag to 1
 global DisableR = 0
 
-* Confirm that the global for the project root directory has been defined
+* Confirm that the global for the project root directory was defined
 assert !missing("$MyProject")
 
 * Initialize log and record system parameters

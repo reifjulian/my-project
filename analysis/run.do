@@ -39,6 +39,8 @@ di "Variant:       `=cond( c(MP),"MP",cond(c(SE),"SE",c(flavor)) )'"
 di "Processors:    `c(processors)'"
 di "OS:            `c(os)' `c(osdtl)'"
 di "Machine type:  `c(machine_type)'"
+local hostname : env HOSTNAME
+if !mi("`hostname'") di "Hostname: `hostname'"
 
 * All required Stata packages are available in the /libraries/stata folder
 tokenize `"$S_ADO"', parse(";")

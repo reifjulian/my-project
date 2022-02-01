@@ -4,7 +4,7 @@
 ************
 
 * Preamble (unnecessary when executing run.do)
-do "$MyProject/scripts/programs/_config.do"
+run "$MyProject/scripts/programs/_config.do"
 
 ************
 * Code begins

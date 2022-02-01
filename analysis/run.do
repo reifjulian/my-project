@@ -23,7 +23,7 @@ global DisableR = 0
 * Confirm that the global for the project root directory was defined
 assert !missing("$MyProject")
 
-* Initialize log and record system parameters
+* Initialize log
 clear
 set more off
 cap mkdir "$MyProject/scripts/logs"
@@ -32,30 +32,11 @@ local datetime : di %tcCCYY.NN.DD!-HH.MM.SS `=clock("$S_DATE $S_TIME", "DMYhms")
 local logfile "$MyProject/scripts/logs/`datetime'.log.txt"
 log using "`logfile'", text
 
-di "Begin date and time: $S_DATE $S_TIME"
-di "Stata version: `c(stata_version)'"
-di "Updated as of: `c(born_date)'"
-di "Variant:       `=cond( c(MP),"MP",cond(c(SE),"SE",c(flavor)) )'"
-di "Processors:    `c(processors)'"
-di "OS:            `c(os)' `c(osdtl)'"
-di "Machine type:  `c(machine_type)'"
-local hostname : env HOSTNAME
-if !mi("`hostname'") di "Hostname: `hostname'"
-
-* All required Stata packages are available in the /libraries/stata folder
-tokenize `"$S_ADO"', parse(";")
-while `"`1'"' != "" {
-  if `"`1'"'!="BASE" cap adopath - `"`1'"'
-  macro shift
-}
-adopath ++ "$MyProject/scripts/libraries/stata"
-mata: mata mlib index
+* Configure Stata's library environment and record system parameters
+run "$MyProject/scripts/programs/_config.do"
 
 * R packages can be installed manually (see README) or installed automatically by uncommenting the following line
 * if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/_install_R_packages.R"
-
-* Stata programs and R scripts are stored in /programs
-adopath ++ "$MyProject/scripts/programs"
 
 * Stata and R version control
 version 15

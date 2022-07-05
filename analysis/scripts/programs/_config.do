@@ -2,19 +2,23 @@
 * This script configures the Stata library environment and displays the value of system parameters
 ******
 
+* The local macro ProjectDir must point to the folder path that includes the /scripts folder
+local ProjectDir "$MyProject"
+
+cap assert !mi("`ProjectDir'")
+if _rc {
+	noi di as error "Error: need to define project directory in scripts/programs/_config.do"
+	error 9
+}
+
 * Ensure Stata uses only local libraries and programs
 tokenize `"$S_ADO"', parse(";")
 while `"`1'"' != "" {
   if `"`1'"'!="BASE" cap adopath - `"`1'"'
   macro shift
 }
-adopath ++ "$MyProject/scripts/libraries/stata"
-adopath ++ "$MyProject/scripts/programs"
-cap assert !mi("$MyProject")
-if _rc {
-	noi di as error "Error: need to define global macro for the project"
-	error 9
-}
+adopath ++ "`ProjectDir'/scripts/libraries/stata"
+adopath ++ "`ProjectDir'/scripts/programs"
 
 * Display system parameters and record the date and time
 cap program drop _print_timestamp 

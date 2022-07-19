@@ -1,19 +1,19 @@
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  /Users/jreif/Documents/GitHub/my-project/analysis/scripts/logs/2022.02.01-13.46.07.log.txt
+       log:  /Users/jreif/Documents/GitHub/my-project/analysis/scripts/logs/2022.07.19-09.22.59.log.txt
   log type:  text
- opened on:   1 Feb 2022, 13:46:07
+ opened on:  19 Jul 2022, 09:22:59
 
 . 
 . * Configure Stata's library environment and record system parameters
-. run "$MyProject/scripts/programs/_config.do"
+. run "`ProjectDir'/scripts/programs/_config.do"
 -------------------------------------------------------------------------------
-Date and time:  1 Feb 2022 13:46:07
+Date and time: 19 Jul 2022 09:22:59
 Stata version: 17
-Updated as of: 13 Dec 2021
+Updated as of: 01 Jun 2022
 Variant:       MP
 Processors:    4
-OS:            MacOSX 11.6.2
+OS:            MacOSX 11.6.7
 Machine type:  Macintosh (Intel 64-bit)
 -------------------------------------------------------------------------------
 
@@ -26,25 +26,27 @@ Machine type:  Macintosh (Intel 64-bit)
 
 . if "$DisableR"!="1" rscript, rversion(3.6) require(tidyverse estimatr)
 Version information:
+Running .Rprofile...
+
 [1] "R installation is version 4.1.2"
 
 . 
 . * Create directories for output files
-. cap mkdir "$MyProject/processed"
+. cap mkdir "`ProjectDir'/processed"
 
-. cap mkdir "$MyProject/processed/intermediate"
+. cap mkdir "`ProjectDir'/processed/intermediate"
 
-. cap mkdir "$MyProject/results"
+. cap mkdir "`ProjectDir'/results"
 
-. cap mkdir "$MyProject/results/figures"
+. cap mkdir "`ProjectDir'/results/figures"
 
-. cap mkdir "$MyProject/results/intermediate"
+. cap mkdir "`ProjectDir'/results/intermediate"
 
-. cap mkdir "$MyProject/results/tables"
+. cap mkdir "`ProjectDir'/results/tables"
 
 . 
 . * Run project analysis
-. do "$MyProject/scripts/1_process_raw_data.do"
+. do "`ProjectDir'/scripts/1_process_raw_data.do"
 
 . ************
 . * SCRIPT: 1_process_raw_data.do
@@ -54,12 +56,12 @@ Version information:
 . * Preamble (unnecessary when executing run.do)
 . run "$MyProject/scripts/programs/_config.do"
 -------------------------------------------------------------------------------
-Date and time:  1 Feb 2022 13:46:08
+Date and time: 19 Jul 2022 09:23:02
 Stata version: 17
-Updated as of: 13 Dec 2021
+Updated as of: 01 Jun 2022
 Variant:       MP
 Processors:    4
-OS:            MacOSX 11.6.2
+OS:            MacOSX 11.6.7
 Machine type:  Macintosh (Intel 64-bit)
 -------------------------------------------------------------------------------
 
@@ -83,7 +85,7 @@ file /Users/jreif/Documents/GitHub/my-project/analysis/processed/intermediate/au
 . 
 end of do-file
 
-. do "$MyProject/scripts/2_clean_data.do"
+. do "`ProjectDir'/scripts/2_clean_data.do"
 
 . ************
 . * SCRIPT: 2_clean_data.do
@@ -93,12 +95,12 @@ end of do-file
 . * Preamble (unnecessary when executing run.do)
 . run "$MyProject/scripts/programs/_config.do"
 -------------------------------------------------------------------------------
-Date and time:  1 Feb 2022 13:46:08
+Date and time: 19 Jul 2022 09:23:02
 Stata version: 17
-Updated as of: 13 Dec 2021
+Updated as of: 01 Jun 2022
 Variant:       MP
 Processors:    4
-OS:            MacOSX 11.6.2
+OS:            MacOSX 11.6.7
 Machine type:  Macintosh (Intel 64-bit)
 -------------------------------------------------------------------------------
 
@@ -303,7 +305,7 @@ file /Users/jreif/Documents/GitHub/my-project/analysis/processed/auto.dta saved
 . 
 end of do-file
 
-. do "$MyProject/scripts/3_regressions.do"
+. do "`ProjectDir'/scripts/3_regressions.do"
 
 . ************
 . * SCRIPT: 3_regressions.do
@@ -313,12 +315,12 @@ end of do-file
 . * Preamble (unnecessary when executing run.do)
 . run "$MyProject/scripts/programs/_config.do"
 -------------------------------------------------------------------------------
-Date and time:  1 Feb 2022 13:46:08
+Date and time: 19 Jul 2022 09:23:02
 Stata version: 17
-Updated as of: 13 Dec 2021
+Updated as of: 01 Jun 2022
 Variant:       MP
 Processors:    4
-OS:            MacOSX 11.6.2
+OS:            MacOSX 11.6.7
 Machine type:  Macintosh (Intel 64-bit)
 -------------------------------------------------------------------------------
 
@@ -359,8 +361,8 @@ Linear regression                               Number of obs     =         52
          mpg |  -329.2551    81.1942    -4.06   0.000    -492.3384   -166.1717
        _cons |   12600.54   1777.731     7.09   0.000     9029.859    16171.22
 ------------------------------------------------------------------------------
-(file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_04499.000001 not found)
-file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_04499.000001 saved as .dta format
+(file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_24017.000001 not found)
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_24017.000001 saved as .dta format
 
 Linear regression                               Number of obs     =         22
                                                 F(1, 20)          =       8.05
@@ -376,7 +378,7 @@ Linear regression                               Number of obs     =         22
        _cons |   12586.95   2352.589     5.35   0.000     7679.535    17494.37
 ------------------------------------------------------------------------------
 (variable origin was str7, now str8 to accommodate using data's values)
-file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_04499.000001 saved as .dta format
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_24017.000001 saved as .dta format
 
 Linear regression                               Number of obs     =         52
                                                 F(2, 49)          =      18.88
@@ -392,7 +394,7 @@ Linear regression                               Number of obs     =         52
       weight |   4.415037   1.338438     3.30   0.002     1.725346    7.104728
        _cons |  -13285.44   8279.718    -1.60   0.115    -29924.16    3353.272
 ------------------------------------------------------------------------------
-file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_04499.000001 saved as .dta format
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_24017.000001 saved as .dta format
 
 Linear regression                               Number of obs     =         22
                                                 F(2, 19)          =      49.02
@@ -409,7 +411,7 @@ Linear regression                               Number of obs     =         22
        _cons |  -5065.841   2885.351    -1.76   0.095    -11104.95    973.2692
 ------------------------------------------------------------------------------
 (variable origin was str7, now str8 to accommodate using data's values)
-file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_04499.000001 saved as .dta format
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_24017.000001 saved as .dta format
 
 . 
 . use "`results'", clear
@@ -423,15 +425,14 @@ file /Users/jreif/Documents/GitHub/my-project/analysis/results/intermediate/my_r
 
 . 
 . * R regressions. First argument: input file. Second argument: output file.
-. if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/regressions.R", args("$MyProject/processed/auto.dta" "$MyProject/results/intermediate/my_lm_regressions.
-> dta")
+. if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/regressions.R", args("$MyProject/processed/auto.dta" "$MyProject/results/intermediate/my_lm_regressions.dta")
 Running R script: /Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs/regressions.R
-Args: "/Users/jreif/Documents/GitHub/my-project/analysis/processed/auto.dta" "/Users/jreif/Documents/GitHub/my-project/analysis/results/intermediate/my_lm_regressions.dt
-> a"
+Args: "/Users/jreif/Documents/GitHub/my-project/analysis/processed/auto.dta" "/Users/jreif/Documents/GitHub/my-project/analysis/results/intermediate/my_lm_regressions.dta"
 
 Begin R output:
 ________________________________________________________________________________
 stdout:
+Running .Rprofile...
 
 
 stderr:
@@ -451,7 +452,7 @@ ________________________________________________________________________________
 . 
 end of do-file
 
-. do "$MyProject/scripts/4_make_tables_figures.do"
+. do "`ProjectDir'/scripts/4_make_tables_figures.do"
 
 . ************
 . * SCRIPT: 4_make_tables_figures.do
@@ -461,12 +462,12 @@ end of do-file
 . * Preamble (unnecessary when executing run.do)
 . run "$MyProject/scripts/programs/_config.do"
 -------------------------------------------------------------------------------
-Date and time:  1 Feb 2022 13:46:11
+Date and time: 19 Jul 2022 09:23:07
 Stata version: 17
-Updated as of: 13 Dec 2021
+Updated as of: 01 Jun 2022
 Variant:       MP
 Processors:    4
-OS:            MacOSX 11.6.2
+OS:            MacOSX 11.6.7
 Machine type:  Macintosh (Intel 64-bit)
 -------------------------------------------------------------------------------
 
@@ -512,13 +513,13 @@ file /Users/jreif/Documents/GitHub/my-project/analysis/results/figures/price_his
   8.         local run_no = `run_no'+1
   9.         restore, preserve
  10. }
-(file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_04499.000001 not found)
-file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_04499.000001 saved as .dta format
+(file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_24017.000001 not found)
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_24017.000001 saved as .dta format
 (variable min was byte, now int to accommodate using data's values)
 (variable max was byte, now int to accommodate using data's values)
 (variable var was str3, now str5 to accommodate using data's values)
-file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_04499.000001 saved as .dta format
-file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_04499.000001 saved as .dta format
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_24017.000001 saved as .dta format
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_24017.000001 saved as .dta format
 
 . restore, not
 
@@ -596,11 +597,11 @@ variable var was str16 now str20
   5.                 local replace append
   6.         }
   7. }
-(file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_04499.000003 not found)
-file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_04499.000003 saved as .dta format
-file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_04499.000003 saved as .dta format
-file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_04499.000003 saved as .dta format
-file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_04499.000003 saved as .dta format
+(file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_24017.000003 not found)
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_24017.000003 saved as .dta format
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_24017.000003 saved as .dta format
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_24017.000003 saved as .dta format
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_24017.000003 saved as .dta format
 
 . 
 . ***
@@ -645,12 +646,11 @@ variable var was str13 now str16
 
 . local headerlines "& \multicolumn{2}{c}{Domestic cars} & \multicolumn{2}{c}{Foreign cars} " "\cmidrule(lr){2-3} \cmidrule(lr){4-5}"
 
-. local fn "Notes: Outcome variable is price (1978 dollars). Columns (1) and (2) report estimates of \(\beta\) from equation (\ref{eqn:model}) for domestic automobiles. 
-> Columns (3) and (4) report estimates for foreign automobiles. Robust standard errors are reported in parentheses. A */**/*** indicates significance at the 10/5/1\% lev
-> els."
+. local fn "Notes: Outcome variable is price (1978 dollars). Columns (1) and (2) report estimates of \(\beta\) from equation (\ref{eqn:model}) for domestic automobiles. Columns (3
+> ) and (4) report estimates for foreign automobiles. Robust standard errors are reported in parentheses. A */**/*** indicates significance at the 10/5/1\% levels."
 
-. texsave using "$MyProject/results/tables/my_regressions.tex", autonumber varlabels hlines(-2) nofix replace marker(tab:my_regressions) title("`title'") headerlines("`h
-> eaderlines'") footnote("`fn'")
+. texsave using "$MyProject/results/tables/my_regressions.tex", autonumber varlabels hlines(-2) nofix replace marker(tab:my_regressions) title("`title'") headerlines("`headerlines
+> '") footnote("`fn'")
 
 . preserve
 
@@ -681,11 +681,11 @@ variable var was str13 now str16
   5.                 local replace append
   6.         }
   7. }
-(file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_04499.000005 not found)
-file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_04499.000005 saved as .dta format
-file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_04499.000005 saved as .dta format
-file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_04499.000005 saved as .dta format
-file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_04499.000005 saved as .dta format
+(file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_24017.000005 not found)
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_24017.000005 saved as .dta format
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_24017.000005 saved as .dta format
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_24017.000005 saved as .dta format
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_24017.000005 saved as .dta format
 .         
 . * Format the table
 . use "`my_table_r'", clear
@@ -706,7 +706,7 @@ file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_04499.000005 saved as .
 . 
 . * Append to prior table, reformat, and output
 . save "`my_table_r'", replace
-file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_04499.000005 saved as .dta format
+file /var/folders/rr/4qwqdlyn7n1_fc89nkkxl22930kzkx/T//S_24017.000005 saved as .dta format
 . restore
 . append using "`my_table_r'"
 (variable var was str16, now str18 to accommodate using data's values)
@@ -728,8 +728,8 @@ variable var was str18 now str25
 . 
 . * Same output as previous table above, so reuse the same footnote and headerlines
 . local title "Association between automobile price and fuel efficiency, Stata and R"
-. texsave using "$MyProject/results/tables/my_regressions_with_r.tex", autonumber varlabels hlines(1 6) nofix replace marker(tab:my_regressions_with_r) title("`title'") 
-> headerlines("`headerlines'") footnote("`fn'") bold("A." "B.")
+. texsave using "$MyProject/results/tables/my_regressions_with_r.tex", autonumber varlabels hlines(1 6) nofix replace marker(tab:my_regressions_with_r) title("`title'") headerline
+> s("`headerlines'") footnote("`fn'") bold("A." "B.")
 . }
 
 . 
@@ -741,11 +741,11 @@ end of do-file
 . 
 . * End log
 . di "End date and time: $S_DATE $S_TIME"
-End date and time:  1 Feb 2022 13:46:14
+End date and time: 19 Jul 2022 09:23:11
 
 . log close
       name:  <unnamed>
-       log:  /Users/jreif/Documents/GitHub/my-project/analysis/scripts/logs/2022.02.01-13.46.07.log.txt
+       log:  /Users/jreif/Documents/GitHub/my-project/analysis/scripts/logs/2022.07.19-09.22.59.log.txt
   log type:  text
- closed on:   1 Feb 2022, 13:46:14
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ closed on:  19 Jul 2022, 09:23:11
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

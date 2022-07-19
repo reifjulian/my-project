@@ -2,7 +2,7 @@
 * This script configures the Stata library environment and displays the value of system parameters
 ******
 
-* The local macro ProjectDir must point to the folder path that includes the /scripts folder
+* The local macro ProjectDir must point to the folder path that contains the /scripts folder
 local ProjectDir "$MyProject"
 
 cap assert !mi("`ProjectDir'")

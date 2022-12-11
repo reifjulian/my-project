@@ -1,5 +1,6 @@
-*! texsave 1.5 2nov2020 by Julian Reif 
-* 1.5: added decimalalign option
+*! texsave 1.6.0 30nov2022 by Julian Reif 
+* 1.6.0: added "@{}" to header alignment. Changed footnote to use \parbox.
+* 1.5.1: added dataonly and valuelabels options. endash option, when there is more than one negative number in the cell, now changes all negatives (up to 10) rather than just the first one
 * 1.4.6: added label option (replaces marker function, which is now deprecated)
 * 1.4.5: added new endash option (enabled by default)
 * 1.4.4: added headersep() option
@@ -23,8 +24,13 @@
 program define texsave, nclass
 	version 10
 
-	syntax [varlist] using/ [if] [in] [, noNAMES SW noFIX noENDASH title(string) DELIMITer(string) footnote(string asis) headerlines(string asis) headlines(string asis) preamble(string asis) footlines(string asis) frag align(string) LOCation(string) size(string) width(string) marker(string) label(string) bold(string) italics(string) underline(string) slanted(string) smallcaps(string) sansserif(string) monospace(string) emphasis(string) VARLABels hlines(numlist) autonumber rowsep(string) headersep(string) LANDscape GEOmetry(string) DECIMALalign replace]
+	syntax [varlist] using/ [if] [in] [, noNAMES SW noFIX noENDASH title(string) DELIMITer(string) footnote(string asis) headerlines(string asis) headlines(string asis) preamble(string asis) footlines(string asis) frag align(string) LOCation(string) size(string) width(string) marker(string) label(string) bold(string) italics(string) underline(string) slanted(string) smallcaps(string) sansserif(string) monospace(string) emphasis(string) VARLABels VALUELABels hlines(numlist) autonumber rowsep(string) headersep(string) LANDscape GEOmetry(string) DECIMALalign dataonly replace]
 
+
+	********************************************************************************************
+	*****  Parsing and QC'ing of command options
+	********************************************************************************************
+	
 	* Check if appendfile is installed
 	cap appendfile
 	if _rc==199 {
@@ -38,6 +44,8 @@ program define texsave, nclass
 		exit 198
 	}
 
+	* By default, value labels are not written out
+	if "`valuelabels'"=="" local nolabel nolabel
 	
 	* Error check hlines
 	if "`hlines'"!="" {
@@ -140,9 +148,13 @@ program define texsave, nclass
 	* http://mirror.utexas.edu/ctan/macros/latex/contrib/booktabs/booktabs.pdf
 	if `"`footnote'"'!=""                          local footnotespace  "\addlinespace[\belowrulesep]"
 	if `"`footnote'"'!="" & `"`addlinespace'"'!="" local footnotespace `"\addlinespace[`addlinespace']"'
+	
+	* Footnote width option. Default is \linewidth (consistent with table -width- option)
+	if `"`footnotewidth'"'=="" & `"`width'"'!="" local footnotewidth `"`width'"'
+	else if `"`footnotewidth'"'==""              local footnotewidth "\linewidth"
 		
 	* Error check the size and footnotesize options. Set default for footnotesize.
-	if "`footnotesize'"=="" local footnotesize "footnotesize"
+	if `"`footnotesize'"'=="" local footnotesize "footnotesize"
 
 	foreach opt in "size" "footnotesize" {
 		if "``opt''"!="" {
@@ -184,11 +196,12 @@ program define texsave, nclass
 
 	* Default is to have first column left-justified and the rest centered.
 	if `"`align'"'=="" {
-		local align "l"
+		local align "@{}l"
 		forval x = 2/`num_vars' {
 			if "`decimalalign'"!="" local align "`align'S"
 			else local align "`align'C"
 		}
+		local align "`align'@{}"
 	}
 
 
@@ -235,9 +248,9 @@ program define texsave, nclass
 		local header_colnames `"`header_colnames' \tabularnewline"'
 	}
 
-	*****
-	* Correct chars that cause problems in LaTeX; add bold, italics, underline etc. tags as necessary
-	*****
+	***
+	* -fix- option: correct chars in header, footnote, and title that cause problems in LaTeX; add bold, italics, underline etc. tags as necessary
+	***
 	
 	* Header, title, and footer corrections
 	if "`fix'"=="" {		
@@ -259,21 +272,30 @@ program define texsave, nclass
 		}
 	}
 	
-	* Dataset corrections
+	* User-specified options that alter the dataset
+	*  - Temporarily rename original variables
+	*  - Create new tempvar that has the modified contents (eg, braces removed)
+	*  - At the end of the texsave program, drop the tempvars and rename the original vars back to their original names
 	if "`fix'"=="" | "`endash'"=="" | `"`bold'`italics'`underline'`slanted'`smallcaps'`sansserif'`monospace'`emphasis'"'!="" | "`decimalalign'"!="" {
 		
-		tempvar index_neg isreal
+		tempvar match str1 str2 isreal
 		local renamed = "yes"
 		
 		* Variables - create new temporary ones that have bad chars stripped out of them and are formatted as specified by user
-		foreach v of local varlist {
+		qui foreach v of local varlist {
 			tempname `v'temp
-			qui ren `v' ``v'temp'
-			qui gen `v' = ``v'temp'
+			ren `v' ``v'temp'
+			gen `v' = ``v'temp'
 			
+			* Retain display formatting and value labels
+			local varformat : format ``v'temp'
+			format `v' `varformat'			
+			local vallabel : value label ``v'temp'
+			cap label values `v' `vallabel'
+
 			capture confirm string var `v'
 			if _rc==0 {
-								
+
 				* Fix problematic symbols 
 				if "`fix'"=="" {
 					foreach symbol in _ % # $ & ~ {
@@ -285,13 +307,28 @@ program define texsave, nclass
 				}
 				
 				* Reformat negative signs from "-" to "--" (en-dash), unless decimalalign option is specified
-				* Only reformat negative signs if they are followed by a number and not preceded by an alphabetic character or negative sign
-				if "`endash'"=="" & "`decimalalign'"=="" {
-				    qui gen `index_neg' = strpos(`v',"-")
-					qui replace `v' = subinstr(`v',"-","--",1) if real(substr(`v',`index_neg'+1,1))!=. & regexm(substr(`v',`index_neg'-1,1),"[A-Za-z\-]")!=1
-					drop `index_neg'
+				* Only reformat negative signs if they are followed by a number and not preceded by an alphabetic character or negative sign. Do this up to 10 times.
+				qui if "`endash'"=="" & "`decimalalign'"=="" {
+
+					gen `match' = regexm(`v', "(^|[^A-Za-z\-])-[0-9]")
+					summ `match', meanonly
+					local ismatch = r(max)
+					local counter = 1
+					
+					while `ismatch'==1 & `counter'<10 {
+						gen `str1' = regexs(0) if regexm(`v', "(^|[^A-Za-z\-])-[0-9]")
+						gen `str2' = subinstr(`str1',"-","--",1)
+						replace `v' = subinstr(`v',`str1',`str2',1)
+	
+						drop `match' `str1' `str2'
+						gen `match' = regexm(`v', "(^|[^A-Za-z\-])-[0-9]")
+						summ `match', meanonly
+						local ismatch = r(max)						
+						local `counter' = `counter'+1
+					}
+					cap drop `match'
 				}
-				
+			
 				* Formatting options
 				local tex_code "\textbf{ \textit{ \underline{ \textsl{ \textsc{ \textsf{ \texttt{ \emph{"
 				local run_no = 1
@@ -314,13 +351,16 @@ program define texsave, nclass
 					replace `v' = "{" + `v' + "}" if mi(`isreal')
 					drop `isreal'
 				}
-			}			
+			}
 		}
 	}
-
-	******
-	** Open the file
-	******
+	
+	
+	********************************************************************************************
+	*****  Write out table header to the -using- file
+	********************************************************************************************
+	
+	* Open the file
 	tempfile data1 data2 end_file
 	tempname fh
 	qui file open `fh' using "`using'", write `replace'
@@ -384,10 +424,12 @@ program define texsave, nclass
 	if `"`header_headerlines'`autonumber'`header_colnames'"'!="" qui file write `fh' "`horiz_line'`headersep'" _n
 	file close `fh'
 	
-	*********
-	** Data
-	*********
-	* If hlines() option is specified, need to split up dataset and insert hlines
+	
+	********************************************************************************************
+	*****  Write out dataset (body of table) to "data1", then convert to "data2"
+	********************************************************************************************	
+
+	* If hlines() option is specified, need to split up dataset and insert hlines. Write out using -file write- commands.
 	if "`hlines'"!="" {
 		tempvar dummy rownum touse
 		tempfile tmp
@@ -405,7 +447,7 @@ program define texsave, nclass
 			
 			* First group
 			if `grp'==1 {
-				qui outsheet `varlist' if `touse'==1 & inrange(`rownum',1,``grp'') using "`data1'", replace delimiter(`delimiter') nonames noquote
+				qui outsheet `varlist' if `touse'==1 & inrange(`rownum',1,``grp'') using "`data1'", replace delimiter(`delimiter') nonames noquote `nolabel'
 			}
 			
 			* Rest of groups
@@ -425,36 +467,31 @@ program define texsave, nclass
 				}
 				
 				* Append next group
-				qui outsheet `varlist' if `touse'==1 & inrange(`rownum',`g1',`g2') using "`tmp'", replace delimiter(`delimiter') nonames noquote
+				qui outsheet `varlist' if `touse'==1 & inrange(`rownum',`g1',`g2') using "`tmp'", replace delimiter(`delimiter') nonames noquote `nolabel'
 				appendfile "`tmp'" "`data1'"
 			}
 		}		
 	}
 	
-	else qui outsheet `varlist' `if' `in' using "`data1'", replace delimiter(`delimiter') nonames noquote
+	* Else just outsheet the dataset
+	else qui outsheet `varlist' `if' `in' using "`data1'", replace delimiter(`delimiter') nonames noquote `nolabel'
+	
+	
 	filefilter "`data1'" "`data2'", from("`eol_char'") to(" \BStabularnewline`rowsep'`eol_char'") replace
 
-	*********
-	** Table end
-	*********
+	********************************************************************************************
+	*****  Write out table bottom to "end_file"
+	********************************************************************************************	
+	
+	* Close out tabularx (with footnote spacer, if footnote present)
 	qui file open `fh' using "`end_file'", write `replace'	
-	
-	* SW has a bug with \bottomrule that requires you to output an extra \\
 	file write `fh' `"\bottomrule `footnotespace'"' _n(2)	
-
-	* Footnote style #1 only done if user specifies width option: this aligns with columns and needs to go before \end{tabularx}
-	if `"`footnote'"'!="" & `"`footnotewidth'"'!="" file write `fh' `"\multicolumn{`num_vars'}{`footnotewidth'}{\begin{`footnotesize'} `footnote'\end{`footnotesize'}}"' _n	
+	file write `fh'  "\end{tabularx}" _n
 	
-	file write `fh' "\end{tabularx}" _n
-
-	* Footnote style #2: just a simple flush left after the end of the table
-	if `"`footnote'"'!="" & `"`footnotewidth'"'=="" {
-		file write `fh' `"\begin{flushleft}"' _n
-		file write `fh' `"\\`footnotesize' `footnote'"' _n
-		file write `fh' `"\end{flushleft}"' _n
-	}
+	* Table footnote, if specified
+	if `"`footnote'"'!="" file write `fh' `"\\ \parbox{`footnotewidth'}{\\`footnotesize' `footnote'}"' _n
 	
-	
+	* Close out table
 	if `"`size'"'!="" file write `fh' "}" _n
 		if "`sw'"!="" file write `fh' "%TCIMACRO{\TeXButton{E}{\end{table}}}%" _n
 		if "`sw'"!="" file write `fh' "%BeginExpansion" _n
@@ -475,14 +512,18 @@ program define texsave, nclass
 	* End the tex document
 	if "`frag'"=="" file write `fh' "\end{document}" _n
 	
-	* Close the file
+	* Close the bottom file
 	file close `fh'
 	
-	********
-	** Append table start ("using"), data, and table end together
-	********
-	appendfile "`data2'" "`using'"
-	appendfile "`end_file'" "`using'"
+	********************************************************************************************
+	*****  Append table start ("using"), data2, and end_file together
+	********************************************************************************************	
+	
+	if "`dataonly'"!="" copy "`data2'" "`using'", public replace
+	else {
+		appendfile "`data2'" "`using'"
+		appendfile "`end_file'" "`using'"
+	}
 	
 	* Return vars to original state
 	if "`renamed'"=="yes" {

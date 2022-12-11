@@ -9,7 +9,7 @@
 
 \caption{Summary statistics}
 \label{tab:my_summary_stats}
-\begin{tabularx}{\linewidth}{lCCCCC}
+\begin{tabularx}{\linewidth}{@{}lCCCCC@{}}
 
 \toprule
 {}&{Mean}&{Stdev.}&{Min}&{Max}&{Count} \tabularnewline
@@ -20,8 +20,6 @@ Price (1978 dollars)&6,165&2,949&3,291&15,906&74 \tabularnewline
 \bottomrule \addlinespace[\belowrulesep]
 
 \end{tabularx}
-\begin{flushleft}
-\footnotesize Notes: Count reports the number of non-missing values for the variable.
-\end{flushleft}
+\\ \parbox{\linewidth}{\footnotesize Notes: Count reports the number of non-missing values for the variable.}
 \end{table}
 \end{document}

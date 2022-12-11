@@ -9,7 +9,7 @@
 
 \caption{Association between automobile price and fuel efficiency}
 \label{tab:my_regressions}
-\begin{tabularx}{\linewidth}{lCCCC}
+\begin{tabularx}{\linewidth}{@{}lCCCC@{}}
 
 \toprule
 &{(1)}&{(2)}&{(3)}&{(4)} \tabularnewline \midrule
@@ -25,8 +25,6 @@ Weight (pounds)&&4.42***&&5.16*** \tabularnewline
 \bottomrule \addlinespace[\belowrulesep]
 
 \end{tabularx}
-\begin{flushleft}
-\footnotesize Notes: Outcome variable is price (1978 dollars). Columns (1) and (2) report estimates of \(\beta\) from equation (\ref{eqn:model}) for domestic automobiles. Columns (3) and (4) report estimates for foreign automobiles. Robust standard errors are reported in parentheses. A */**/*** indicates significance at the 10/5/1\% levels.
-\end{flushleft}
+\\ \parbox{\linewidth}{\footnotesize Notes: Outcome variable is price (1978 dollars). Columns (1) and (2) report estimates of \(\beta\) from equation (\ref{eqn:model}) for domestic automobiles. Columns (3) and (4) report estimates for foreign automobiles. Robust standard errors are reported in parentheses. A */**/*** indicates significance at the 10/5/1\% levels.}
 \end{table}
 \end{document}

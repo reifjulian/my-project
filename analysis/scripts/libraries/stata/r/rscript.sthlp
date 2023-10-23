@@ -9,7 +9,7 @@
 {title:Syntax}
 
 {p 8 14 2}{cmd:rscript} {cmd:using} {it:filename.R}, [{cmd:rpath(}{it:pathname}{cmd:)} {cmd:args(}{it:stringlist}{cmd:)}
-{cmd:rversion(}{it:# [#]}{cmd:)} {cmd:require(}{it:stringlist}{cmd:)} {cmd:force}]
+{cmd:rversion(}{it:# [#]}{cmd:)} {cmd:require(}{it:stringlist}{cmd:)} {cmd:async} {cmd:force}]
 
 {p 4 4 2}where
 
@@ -43,6 +43,10 @@ If {cmd:rpath()} is not specified and RSCRIPT_PATH is undefined, then {cmd:rscri
 {cmd:require(}{it:stringlist}{cmd:)} specifies a list of required R packages and generates a break if any are missing from the user's default library.
 
 {p 4 8 2}
+{cmd:async} instructs {cmd:rscript} to run {it:filename.R} in the background. {cmd:rscript} will immediately exit after beginning the script. 
+It will not wait for the script to finish and will not display any R output or errors in the Stata console.
+
+{p 4 8 2}
 {cmd:force} instructs {cmd:rscript} not to break when {it:filename.R} generates an error during execution.
 
 
@@ -50,6 +54,9 @@ If {cmd:rpath()} is not specified and RSCRIPT_PATH is undefined, then {cmd:rscri
 
 {p 4 8 2}
 {cmd:rscript} has been tested on Windows, Mac OS X, and Unix (tcsh shell).
+
+{p 4 8 2}
+The {cmd:async} option can be used to launch a large number of jobs at the same time, all running in parallel.
 
 {p 4 8 2}
 The options {cmd:rversion()} and {cmd:require()} can be used without specifying {cmd:using} {it:filename.R}. 

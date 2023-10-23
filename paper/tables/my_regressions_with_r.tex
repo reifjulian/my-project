@@ -5,6 +5,8 @@
 \begin{document}
 
 \begin{table}[tbp] \centering
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
 \newcolumntype{C}{>{\centering\arraybackslash}X}
 
 \caption{Association between automobile price and fuel efficiency, Stata and R}
@@ -13,7 +15,7 @@
 
 \toprule
 &{(1)}&{(2)}&{(3)}&{(4)} \tabularnewline \midrule
-& \multicolumn{2}{c}{Domestic cars} & \multicolumn{2}{c}{Foreign cars}  \tabularnewline \cmidrule(lr){2-3} \cmidrule(lr){4-5} \tabularnewline
+& \multicolumn{2}{c}{Domestic cars} & \multicolumn{2}{c}{Foreign cars}  \tabularnewline \cmidrule(lr){2-3} \cmidrule(lr){4-5} \tabularnewline 
 {}&{Spec 1}&{Spec 2}&{Spec 1}&{Spec 2} \tabularnewline
 \midrule \addlinespace[\belowrulesep]
 \textbf{A. Stata output (regress)}&&&& \tabularnewline

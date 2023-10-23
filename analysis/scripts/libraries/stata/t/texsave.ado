@@ -1,4 +1,5 @@
-*! texsave 1.6.0 30nov2022 by Julian Reif 
+*! texsave 1.6.1 22may2023 by Julian Reif 
+* 1.6.1: added rowstretch, rowheight, colwidth, and tablelines options. added headerlines2() option. added align options 'R' and 'L'
 * 1.6.0: added "@{}" to header alignment. Changed footnote to use \parbox.
 * 1.5.1: added dataonly and valuelabels options. endash option, when there is more than one negative number in the cell, now changes all negatives (up to 10) rather than just the first one
 * 1.4.6: added label option (replaces marker function, which is now deprecated)
@@ -24,7 +25,7 @@
 program define texsave, nclass
 	version 10
 
-	syntax [varlist] using/ [if] [in] [, noNAMES SW noFIX noENDASH title(string) DELIMITer(string) footnote(string asis) headerlines(string asis) headlines(string asis) preamble(string asis) footlines(string asis) frag align(string) LOCation(string) size(string) width(string) marker(string) label(string) bold(string) italics(string) underline(string) slanted(string) smallcaps(string) sansserif(string) monospace(string) emphasis(string) VARLABels VALUELABels hlines(numlist) autonumber rowsep(string) headersep(string) LANDscape GEOmetry(string) DECIMALalign dataonly replace]
+	syntax [varlist] using/ [if] [in] [, noNAMES SW noFIX noENDASH title(string) DELIMITer(string) footnote(string asis) preamble(string asis) headlines(string asis) tablelines(string asis) headerlines(string asis) headerlines2(string asis) footlines(string asis) frag align(string) LOCation(string) size(string) width(string) marker(string) label(string) bold(string) italics(string) underline(string) slanted(string) smallcaps(string) sansserif(string) monospace(string) emphasis(string) VARLABels VALUELABels hlines(numlist) autonumber rowstretch(numlist max=1 missingok) rowheight(string) rowsep(string) colwidth(string) headersep(string) LANDscape GEOmetry(string) DECIMALalign dataonly replace]
 
 
 	********************************************************************************************
@@ -43,6 +44,11 @@ program define texsave, nclass
 		di as error "option varlabels not allowed with option nonames"
 		exit 198
 	}
+	
+	* headerlines and headerlines2 generally not specified together
+	if `"`headerlines'"'!="" & `"`headerlines2'"'!="" {
+		di as error "Note: headerlines() and headerlines2() both specified"
+	}	
 
 	* By default, value labels are not written out
 	if "`valuelabels'"=="" local nolabel nolabel
@@ -78,6 +84,8 @@ program define texsave, nclass
 	
 	* Define row and header separation spacing if applicable. (rowsep uses "\BS" since it is implemented via filefilter)
 	if `"`rowsep'"'!="" local rowsep `" \BSaddlinespace[`rowsep']"'
+	
+	if "`rowstretch'" == "" local rowstretch = .
 	
 	if `"`headersep'"'!="" local headersep `" \addlinespace[`headersep']"'
 	else local headersep `" \addlinespace[\belowrulesep]"'
@@ -209,17 +217,23 @@ program define texsave, nclass
 	** 		  HEADER   **
 	*****************************
 
-	* Headerlines (user-specified code)
+	* Headerlines (user-specified code): by default, includes "\tabularnewline" after each string
 	if `"`headerlines'"' != "" {
 		tokenize `"`headerlines'"'
 		while `"`1'"' != "" {
-			local header_headerlines `"`header_headerlines' \tabularnewline `1'"'
+			local header_headerlines `"`header_headerlines'`1' \tabularnewline "'
 			macro shift
-		}		
-		* Strip out the first \tabularnewline
-		local header_headerlines : subinstr local header_headerlines `" \tabularnewline "' ""
-		local header_headerlines `"`header_headerlines' \tabularnewline"'
+		}
 	}
+	
+	* alternative: headerlines2: does not include "\tabularnewline"
+	if `"`headerlines2'"' != "" {
+		tokenize `"`headerlines2'"'
+		while `"`1'"' != "" {
+			local header_headerlines `"`header_headerlines'`1' "'
+			macro shift
+		}
+	}	
 
 	* Autonumber - no number in the first column
 	if "`autonumber'"!="" {
@@ -366,7 +380,7 @@ program define texsave, nclass
 	qui file open `fh' using "`using'", write `replace'
 
 	******
-	** Table start
+	** Preamble
 	******
 	if "`frag'" == "" {
 		file write `fh' "\documentclass{article}" _n
@@ -383,7 +397,11 @@ program define texsave, nclass
 			file write `fh' `"`1'"' _n
 			macro shift
 		}
-	}	
+	}
+	
+	******
+	** \begin{document}
+	******	
 	if "`frag'" == "" file write `fh' "\begin{document}" _n(2)
 	
 	if "`landscape'"!="" file write `fh' "\begin{landscape}" _n
@@ -400,12 +418,34 @@ program define texsave, nclass
 	
 		if "`sw'"!="" file write `fh' "%TCIMACRO{\TeXButton{B}{\begin{table}[`location'] \centering}}" _n
 		if "`sw'"!="" file write `fh' "%BeginExpansion" _n
+
+	******
+	** \begin{table}
+	******			
 	file write `fh' "\begin{table}[`location'] \centering" _n
+	
+	* tablelines option
+	if `"`tablelines'"' != "" {
+		tokenize `"`tablelines'"'
+		while `"`1'"' != "" {
+			file write `fh' `"`1'"' _n
+			macro shift
+		}
+	}	
+	if `rowstretch'!=. file write `fh' "\renewcommand{\arraystretch}{`rowstretch'}" _n
+	if `"`rowheight'"'!="" file write `fh' "\setlength\extrarowheight{`rowheight'}" _n
+	if `"`colwidth'"'!="" file write `fh' "\setlength{\tabcolsep}{`colwidth'}" _n
+	file write `fh' "\newcolumntype{R}{>{\raggedleft\arraybackslash}X}" _n
+	file write `fh' "\newcolumntype{L}{>{\raggedright\arraybackslash}X}" _n
 	file write `fh' "\newcolumntype{C}{>{\centering\arraybackslash}X}" _n(2)
 		if "`sw'"!="" file write `fh' "%EndExpansion" _n
 	if `"`title'"'!="" file write `fh' `"\caption{`title'}"' _n
 	if `"`marker'"'!="" file write `fh' `"\label{`marker'}"' _n
 	if `"`size'"'!="" file write `fh' `"{\\`size'"' _n
+	
+	******
+	** \begin{tabularx}
+	******		
 	file write `fh' "\begin{tabularx}{`width'}{`align'}" _n(2)
 
 	* Create double-line or thick line, depending on booktabs

@@ -11,13 +11,13 @@ net set ado "$MyProject/scripts/libraries/stata"
 
 
 * Install latest developer's version of the package from GitHub
-foreach p in regsave texsave rscript {
+foreach p in rscript {
 	net install `p', from("https://raw.githubusercontent.com/reifjulian/`p'/master") replace
 }
 
 
 * Install packages from SSC
-foreach p in ingap {
+foreach p in ingap regsave texsave {
 	local ltr = substr(`"`p'"',1,1)
 	qui net from "http://fmwww.bc.edu/repec/bocode/`ltr'"
 	net install `p', replace

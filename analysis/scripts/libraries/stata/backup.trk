@@ -1,4 +1,4 @@
-* 00000015
+* 00000018
 *! version 1.0.0
 * Do not erase or edit this file
 * It is used by Stata to track the ado and help
@@ -197,4 +197,58 @@ f t\texsave.ado
 f t\texsave.sthlp
 f a\appendfile.ado
 f a\appendfile.hlp
+e
+S https://raw.githubusercontent.com/reifjulian/texsave/footer
+N texsave.pkg
+D 11 Dec 2022
+U 16
+d texsave. Save dataset in LaTeX format.
+d Julian Reif, University of Illinois (jreif@illinois.edu)
+f t\texsave.ado
+f t\texsave.sthlp
+f a\appendfile.ado
+f a\appendfile.hlp
+e
+S https://raw.githubusercontent.com/reifjulian/rscript/master
+N rscript.pkg
+D 23 Oct 2023
+U 17
+d rscript. Call an R script from Stata.
+d David Molitor and Julian Reif, University of Illinois
+d dmolitor@illinois.edu, jreif@illinois.edu
+f r\rscript.ado
+f r\rscript.sthlp
+e
+S http://fmwww.bc.edu/repec/bocode/r
+N regsave.pkg
+D 23 Oct 2023
+U 18
+d 'REGSAVE': module to save regression results to a Stata-formatted dataset
+d 
+d  regsave fetches output from Stata's e() macros, scalars, and
+d matrices and stores them in  a Stata-formatted dataset. This
+d command provides a user-friendly way to manipulate a large number
+d  of regression results by allowing the user to apply Stata's data
+d manipulation commands to those  results. When combined with the
+d table option and the outsheet command, it also provides an easy
+d way to create tables that can be opened by, or copy and pasted
+d into, other programs such as MS Excel.
+d 
+d KW: regression
+d KW: output
+d KW: tables
+d KW: formatting
+d KW: outsheet
+d 
+d Requires: Stata version 8
+d 
+d Distribution-Date: 20230822
+d 
+d Author: Julian Reif , University of Illinois
+d Support: email jreif@@illinois.edu
+d 
+f r\regsave.ado
+f r\regsave_tbl.ado
+f r\regsave.hlp
+f r\regsave_tbl.hlp
 e

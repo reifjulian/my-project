@@ -8,97 +8,58 @@
 
 {title:Syntax}
 
-{p 8 14 2}{cmd:texsave} [{it:varlist}] {cmd:using} {it:filename} [if] [in] [, {cmd:title(}{it:string}{cmd:)} {cmd:size(}{it:string}{cmd:)}
-{cmd:width(}{it:string}{cmd:)} {cmd:align(}{it:string}{cmd:)} {cmdab:loc:ation(}{it:string}{cmd:)}
-{cmd:label(}{it:string}{cmd:)} {cmd:autonumber} {cmd:hlines(}{help numlist:numlist}{cmd:)} {cmd:footnote(}{it:footnote_options}{cmd:)}
-{cmdab:varlab:els} {cmdab:valuelab:els} {cmdab:land:scape}  {cmdab:geo:metry(}{it:string}{cmd:)}
-{cmd:rowsep(}{it:string}{cmd:)} {cmd:headersep(}{it:string}{cmd:)} {cmdab:decimal:align} {cmd:nonames}
-{cmd:preamble(}{it:stringlist}{cmd:)} {cmd:headlines(}{it:stringlist}{cmd:)} {cmd:headerlines(}{it:stringlist}{cmd:)}  
-{cmd:footlines(}{it:stringlist}{cmd:)} {cmd:frag} {cmd:dataonly} {cmd:replace} {it:format_options}]
+{p 8 14 2}{cmd:texsave} [{it:varlist}] {cmd:using} {it:filename} [if] [in] [, {cmd:title(}{it:string}{cmd:)} {cmd:footnote(}{it:footnote_suboptions}{cmd:)} 
+ {cmd:autonumber} {cmdab:varlab:els} {cmd:hlines(}{help numlist:numlist}{cmd:)} 
+ {cmd:label(}{it:string}{cmd:)} {cmd:size(}{it:string}{cmd:)} {cmdab:land:scape}   {cmd:replace} 
+{it:spacing_options} {it:code_options} {it:format_options} {it:other_options}]
 
 {p 4 4 2}where
 
-{p 8 14 2}{it: stringlist} is a list of quoted strings,
-
-{p 8 14 2}{it:footnote_options} are
+{p 8 14 2}{it:footnote_suboptions} are
 
 {p 12 14 2}{cmd:footnote(}{it:string} [, {cmd:size(}{it:string}{cmd:)} {cmd:addlinespace(}{it:string}{cmd:)} {cmd:width(}{it:string}{cmd:)}]{cmd:)}
 
-{p 8 14 2}and {it:format_options} are
+{p 8 14 2}{it:spacing_options} are
 
-{p 12 14 2} {cmd:nofix} {cmd:noendash} {cmd:bold(}{it:stringlist}{cmd:)} {cmd:italics(}{it:stringlist}{cmd:)} 
+{p 12 14 2} {cmdab:geo:metry(}{it:string}{cmd:)} 
+{cmd:width(}{it:string}{cmd:)} {cmd:headersep(}{it:string}{cmd:)} 
+{cmd:rowsep(}{it:string}{cmd:)}  {cmd:rowstretch(}{it:#}{cmd:)} {cmd:rowheight(}{it:string}{cmd:)} 
+{cmd:colwidth(}{it:string}{cmd:)}
+
+{p 8 14 2}{it:code_options} are
+
+{p 12 14 2} {cmd:preamble(}{it:stringlist}{cmd:)} {cmd:headlines(}{it:stringlist}{cmd:)} 
+{cmd:tablelines(}{it:stringlist}{cmd:)} {cmd:headerlines(}{it:stringlist}{cmd:)} 
+{cmd:footlines(}{it:stringlist}{cmd:)}
+
+{p 8 14 2}{it:format_options} are
+
+{p 12 14 2} {cmd:nofix} {cmd:noendash} {cmdab:decimal:align} 
+{cmd:bold(}{it:stringlist}{cmd:)} {cmd:italics(}{it:stringlist}{cmd:)} 
 {cmd:underline(}{it:stringlist}{cmd:)} {cmd:slanted(}{it:stringlist}{cmd:)} {cmd:smallcaps(}{it:stringlist}{cmd:)}
 {cmd:sansserif(}{it:stringlist}{cmd:)} {cmd:monospace(}{it:stringlist}{cmd:)} {cmd:emphasis(}{it:stringlist}{cmd:)}
+
+{p 8 14 2}and {it:other_options} are
+
+{p 12 14 2} {cmdab:valuelab:els} {cmd:nonames} {cmd:frag} {cmd:dataonly} {cmdab:loc:ation(}{it:string}{cmd:)}
+{cmd:align(}{it:string}{cmd:)} 
 
 
 {title:Description}
 
 {p 4 4 2}{cmd:texsave} outputs the dataset currently in memory to {it:filename} in LaTeX format. It uses the {it:booktabs}, {it:tabularx}, and {it:geometry} packages
-to produce publication-quality tables.
+to produce publication-quality tables. To link the table to an existing LaTeX document, follow these two steps:
 
+{p 8 10 2}
+1. Add the line {it:\usepackage{standalone}} to the document's preamble.
+
+{p 8 10 2}
+2. Add the line {it:\input{filename}} to the place where you want the table to appear in the document.
 
 {title:Options}
 
 {p 4 8 2}
 {cmd:title(}{it:string}{cmd:)} writes out {it:string} as a caption above the table.
-
-
-{p 4 8 2}
-{cmd:size(}{it:string}{cmd:)} specifies the size of your table.  Valid size options are tiny, scriptsize, footnotesize, small, normalsize, large, Large, LARGE, huge, and Huge.  
-Alternatively, the user may specify a numeric value between 1 and 10, where 1 corresponds to tiny and 10 corresponds to Huge.
-
-
-{p 4 8 2}
-{cmd:width(}{it:string}{cmd:)} specifies the width of your table. Lengths can be specified in the same way as for {cmd:rowsep} (see below). The default is {it:\linewidth}.
-
-
-{p 4 8 2}
-{cmd:align(}{it:string}{cmd:)} specifies the column formatting. It generally consists of a sequence of the following specifiers, at least one for each of the columns: 
-
-{p 8 8 2}l - a column of left-aligned items
-
-{p 8 8 2}c - a column of centered items
-
-{p 8 8 2}C - a column of centered items; column spacing for all 'C' columns are always the same.
-
-{p 8 8 2}r - a column of right-aligned items
-
-{p 8 8 2}S - a column of numbers aligned at the decimal point; requires {cmd:decimalalign} option
-
-{p 8 8 2}| - a vertical line the full height and depth of the environment 
-
-{p 8 8 2}The character '|' (the vertical bar, NOT the alphabetic character 'l') adds vertical lines to the table.  For example, 
-if there are three columns, specify {cmd:align(}{it:|l|C|C|}{cmd:)} to surround all columns with vertical lines.
-The default is to left-justify the first column and center and distribute space equally across the rest of the columns, which in the case of three columns corresponds to 
-{cmd:align(}{it:lCC}{cmd:)}
-
-
-{p 4 8 2}
-{cmd:location(}{it:string}{cmd:)} specifies the location of your table in the document.  It consists of one or more of the following specifiers:
-
-{p 8 8 2}h - "Here": at the position in the text where the environment appears
-
-{p 8 8 2}t - "Top": at the top of a text page
-
-{p 8 8 2}b - "Bottom": at the bottom of a text page
-
-{p 8 8 2}p - "Page": on a separate page containing no text, only figures and tables
-
-{p 8 8 2}The default is {cmd:location(}{it:tbp}{cmd:)}.
-
-
-{p 4 8 2}
-{cmd:label(}{it:string}{cmd:)} uses LaTeX's {it:\label} option to mark your table with the key {it:string}.
-
-
-{p 4 8 2}
-{cmd:autonumber} writes out "(1)", "(2)"... in the first row of the table header, beginning with column two.  
-This is useful when outputting regression results stored by a command like {help regsave:regsave} (if installed).
-
-
-{p 4 8 2}
-{cmd:hlines(}{help numlist:numlist}{cmd:)} draws horizontal lines below each row specified in {help numlist:numlist}.  Specify a row's number twice to output a double line. Negative 
-values are interpreted as the distance from the end of the table.
 
 
 {p 4 8 2}
@@ -111,11 +72,26 @@ The default is "\addlinespace[\belowrulesep]".
 
 
 {p 4 8 2}
+{cmd:autonumber} writes out "(1)", "(2)"... in the first row of the table header, beginning with column two.  
+This is useful when outputting regression results stored by a command like {help regsave:regsave} (if installed).
+
+
+{p 4 8 2}
 {cmd:varlabels} specifies that variable labels be written in the table header instead of variable names.
 
 
 {p 4 8 2}
-{cmd:valuelabels} specifies that value labels of labeled variables be outputted instead of numeric values.
+{cmd:hlines(}{help numlist:numlist}{cmd:)} draws horizontal lines below each row specified in {help numlist:numlist}.  Specify a row's number twice to output a double line. Negative 
+values are interpreted as the distance from the end of the table.
+
+
+{p 4 8 2}
+{cmd:label(}{it:string}{cmd:)} uses LaTeX's {it:\label} option to mark your table with the key {it:string}.
+
+
+{p 4 8 2}
+{cmd:size(}{it:string}{cmd:)} specifies the size of your table.  Valid size options are tiny, scriptsize, footnotesize, small, normalsize, large, Large, LARGE, huge, and Huge.  
+Alternatively, the user may specify a numeric value between 1 and 10, where 1 corresponds to tiny and 10 corresponds to Huge.
 
 
 {p 4 8 2}
@@ -123,60 +99,58 @@ The default is "\addlinespace[\belowrulesep]".
 
 
 {p 4 8 2}
-{cmd:geometry(}{it:string}{cmd:)} specifies the page dimensions using the {it:geometry} package. The default is "margin=1in".
+{cmd:replace} overwrites {it:filename}.
 
 
 {p 4 8 2}
+{it:spacing_options}:
+
+{p 12 14 2}
+{cmd:geometry(}{it:string}{cmd:)} specifies the page dimensions using the {it:geometry} package. The default is "margin=1in".
+
+{p 12 14 2}
+{cmd:width(}{it:string}{cmd:)} specifies the width of your table. Lengths can be specified in the same way as for {cmd:rowsep} (see below). The default is {it:\linewidth}.
+
+{p 12 14 2}
+{cmd:headersep(}{it:string}{cmd:)} adds vertical spacing of length {it:string} between the header row and the data rows via the {it:\addlinespace} command.
+It uses the same syntax as {cmd:rowsep(}{it:string}{cmd:)}.
+The default is "\addlinespace[\belowrulesep]".
+
+{p 12 14 2}
 {cmd:rowsep(}{it:string}{cmd:)} adds vertical spacing of length {it:string} to the rows via the {it:\addlinespace} command. 
 The length can be expressed in the following units: {it:cm} (centimetres), {it:em} (the width of the letter M in the current font), {it:ex} 
 (the height of the letter x in the current font), {it:in} (inches), {it:pc} (picas), {it:pt} (points) or {it:mm} (millimetres). 
 For example, {cmd:rowsep(}{it:1cm}{cmd:)} adds one centimeter of vertical space between rows.
 
+{p 12 14 2}
+{cmd:rowstretch(}{it:#}{cmd:)} injects vertical space above and below cell text: "\renewcommand{\arraystretch}{#}". The default value is 1. Values larger than 1 increase spacing, values smaller than 1 decrease spacing.
 
-{p 4 8 2}
-{cmd:headersep(}{it:string}{cmd:)} adds vertical spacing of length {it:string} between the header row and the data rows via the {it:\addlinespace} command.
-It uses the same syntax as {cmd:rowsep(}{it:string}{cmd:)}.
-The default is "\addlinespace[\belowrulesep]".
+{p 12 14 2}
+{cmd:rowheight(}{it:string}{cmd:)} injects vertical space only above cell text: "\setlength\extrarowheight{{it:string}}". Lengths can be specified in the same way as for {cmd:rowsep}.
 
-
-{p 4 8 2}
-{cmd:decimalalign} aligns numeric values at the decimal point using the {it:siunitx} package.
-
-
-{p 4 8 2}
-{cmd:nonames} specifies that variable names not be added to the table header.
+{p 12 14 2}
+{cmd:colwidth(}{it:string}{cmd:)} modifies the column width: "\setlength{\tabcolsep}{{it:string}". Lengths can be specified in the same way as for {cmd:rowsep}. See also {cmd:align()}.
 
 
 {p 4 8 2}
-{cmd:preamble(}{it:stringlist}{cmd:)} specifies a list of lines of LaTeX code to appear before the "\begin{document}" code in the output.  Each line of code should be surrounded by quotation marks (see example 4 below).
+{it:code_options} insert customized LaTeX code into different parts of the table (see {ul:{bf:Notes}} section below for table structure):
 
+{p 12 14 2}
+{cmd:preamble(}{it:stringlist}{cmd:)} specifies lines of LaTeX code to appear before "\begin{document}".  Each line of code should be surrounded by quotation marks (see example 4 below).
 
-{p 4 8 2}
-{cmd:headlines(}{it:stringlist}{cmd:)} specifies a list of lines of LaTeX code to appear before the "\begin{table}" code in the output.  Each line of code should be surrounded by quotation marks (see example 4 below).
+{p 12 14 2}
+{cmd:headlines(}{it:stringlist}{cmd:)} specifies lines of LaTeX code to appear between "\begin{document}" and "\begin{table}".  Each line of code should be surrounded by quotation marks (see example 4 below).
 
+{p 12 14 2}
+{cmd:tablelines(}{it:stringlist}{cmd:)} specifies lines of LaTeX code to appear between "\begin{table}" and "\begin{tabularx}".  Each line of code should be surrounded by quotation marks (see example 4 below).
 
-{p 4 8 2}
-{cmd:headerlines(}{it:stringlist}{cmd:)} specifies a list of lines of LaTeX code to appear before the table header.  Each line of code should be surrounded by quotation marks (see example 5 below).
+{p 12 14 2}
+{cmd:headerlines(}{it:stringlist}{cmd:)} specifies lines of LaTeX code to appear between "\begin{tabularx}" and the table header.  Each line of code should be surrounded by quotation marks (see example 5 below). 
+By default, {cmd:headerlines()} appends "\tabularnewline" to the end of each string.
+Use the alternative option {cmd:headerlines2(}{it:stringlist}{cmd:)} if you don't want to append "\tabularnewline".
 
-
-{p 4 8 2}
-{cmd:footlines(}{it:stringlist}{cmd:)} specifies a list of lines of LaTeX code to appear after the "\end{table}" code in the output.  Each line of code should be surrounded by quotation marks (see example 4 below).
-
-
-{p 4 8 2}
-{cmd:frag} omits from the output LaTeX code like {it:\begin{c -(}document{c )-}} that is needed to create a standalone document. This makes {it:filename} a fragment, which
-is useful if you want to use LaTeX's {it:\input{c -(}table{c )-}} command to include your table as a subfile.
-An alternative is to use the LaTeX package {browse "http://ctan.org/pkg/standalone":standalone}, which instructs LaTeX to skip extra preambles when including subfiles. 
-
-
-{p 4 8 2}
-{cmd:dataonly} is a programmer's option that outputs only the contents of the dataset.
-It omits variable names, footnotes, and all other LaTeX code that surrounds the contents of the table. 
-The resulting output will not compile into a table.
-
-
-{p 4 8 2}
-{cmd:replace} overwrites {it:filename}.
+{p 12 14 2}
+{cmd:footlines(}{it:stringlist}{cmd:)} specifies lines of LaTeX code to appear after "\end{table}".  Each line of code should be surrounded by quotation marks (see example 4 below).
 
 
 {p 4 8 2}
@@ -190,8 +164,67 @@ Adding the backslash is often required in order to avoid LaTeX compilation error
 {cmd:noendash} specifies that negative signs ("-") not be converted to en dashes ("--") in the dataset.
 
 {p 12 14 2}
+{cmd:decimalalign} aligns numeric values at the decimal point using the {it:siunitx} package.
+
+{p 12 14 2}
 {cmd:bold(), italics(), underline(), slanted(), smallcaps(), sansserif(), monospace(),} and {cmd:emphasis()} allow you to format the data values in your table.  
 For example, {cmd:underline(}{it:"word1" "word2"}{cmd:)} underlines all data values containing either {it:"word1"} or {it:"word2"}.
+
+
+{p 4 8 2}
+{it:other_options}:
+
+{p 12 14 2}
+{cmd:valuelabels} specifies that value labels of labeled variables be outputted instead of numeric values.
+
+{p 12 14 2}
+{cmd:nonames} specifies that variable names not be added to the table header.
+
+{p 12 14 2}
+{cmd:frag} omits from the output LaTeX code like {it:\begin{c -(}document{c )-}} that is needed to create a standalone document. This makes {it:filename} a fragment, which
+is useful if you want to use LaTeX's {it:\input{c -(}table{c )-}} command to include your table as a subfile.
+An alternative is to use the LaTeX package {browse "http://ctan.org/pkg/standalone":standalone}, which instructs LaTeX to skip extra preambles when including subfiles. 
+
+{p 12 14 2}
+{cmd:dataonly} is a programmer's option that outputs only the contents of the dataset.
+It omits variable names, footnotes, and all other LaTeX code that surrounds the contents of the table. 
+The resulting output will not compile into a table.
+
+{p 12 14 2}
+{cmd:location(}{it:string}{cmd:)} specifies the location of your table in the document.  It consists of one or more of the following specifiers:
+
+{p 16 18 2}h - "Here": at the position in the text where the environment appears
+
+{p 16 18 2}t - "Top": at the top of a text page
+
+{p 16 18 2}b - "Bottom": at the bottom of a text page
+
+{p 16 18 2}p - "Page": on a separate page containing no text, only figures and tables
+
+{p 16 18 2}The default is {cmd:location(}{it:tbp}{cmd:)}.
+
+{p 12 14 2}
+{cmd:align(}{it:string}{cmd:)} specifies the column formatting. It generally consists of a sequence of the following specifiers, at least one for each of the columns: 
+
+{p 16 18 2}l - a column of left-aligned items
+
+{p 16 18 2}r - a column of right-aligned items
+
+{p 16 18 2}c - a column of centered items
+
+{p 16 18 2}L - a column of ragged-right items; text will wrap around
+
+{p 16 18 2}R - a column of ragged-left items; text will wrap around
+
+{p 16 18 2}C - a column of centered items; text will wrap around
+
+{p 16 18 2}S - a column of numbers aligned at the decimal point; requires {cmd:decimalalign} option
+
+{p 16 18 2}| - a vertical line the full height and depth of the environment. 
+If there are three columns, specify {cmd:align(}{it:|l|C|C|}{cmd:)} to surround all columns with vertical lines.
+
+{p 16 18 2}The default is to left-justify the first column and center and distribute space equally across the rest of the columns, which in the case of three columns corresponds to 
+{cmd:align(}{it:lCC}{cmd:)}.
 
 
 {title:Remarks}
@@ -226,8 +259,10 @@ The {help filefilter:filefilter} command is helpful in these cases. For example,
 {space 9}{cmd:headlines(}{it:stringlist}{cmd:)}
 
 {space 9}{it:\begin{table}[tbp] \centering}
+{space 9}{cmd:tablelines(}{it:stringlist}{cmd:)}
 {space 9}{it:\newcolumntype{C}{>{\centering\arraybackslash}X}}
 {space 9}{cmd:title(}{it:string}{cmd:)}
+
 {space 9}\begin{tabularx}{\linewidth}{@{}lC...C@{}}
 {space 9}{it:\toprule}
 {space 9}{cmd:autonumber}
@@ -239,6 +274,7 @@ The {help filefilter:filefilter} command is helpful in these cases. For example,
 
 {space 9}{it:\bottomrule} \addlinespace[\belowrulesep]
 {space 9}{it:\end{tabularx}}
+
 {space 9}{it:\parbox{\linewidth}}{{it:\footnotesize} {cmd:footnote(}{it:string}{cmd:)}}
 {space 9}{it:\end{table}}
 
@@ -303,6 +339,6 @@ The {help filefilter:filefilter} command is helpful in these cases. For example,
 
 {p 4 4 2}
 {help regsave:regsave} (if installed),
-{help outreg2:outreg2} (if installed),
+{help sortobs:sortobs} (if installed),
 {help filefilter:filefilter}
 

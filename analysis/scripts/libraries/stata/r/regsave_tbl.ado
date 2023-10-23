@@ -1,4 +1,5 @@
-*! regsave_tbl 1.1.8 30mar2020 by Julian Reif
+*! regsave_tbl 1.1.9 20feb2023 by Julian Reif
+* 1.1.9: fixed minor sigfig() bug that formatted blanks as zeros
 * 1.1.8: fixed autoid bug
 * 1.1.7: fixed minor sigfig() bug
 * 1.1.6: fixed bug with sigfig() formatting
@@ -353,7 +354,7 @@ program define regsave_tbl, rclass
 			gen `intvar'=0
 			tokenize `"`int_vars'"'
 			while "`1'"!= "" {
-				replace `intvar'=1 if var=="`1'" | `table'=="."
+				replace `intvar'=1 if var=="`1'" | `table'=="." | `table'==""
 				macro shift
 			}
 			

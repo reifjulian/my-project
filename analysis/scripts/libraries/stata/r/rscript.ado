@@ -1,4 +1,5 @@
-*! rscript 1.1 3aug2021 by David Molitor and Julian Reif
+*! rscript 1.1.1 16may2023 by David Molitor and Julian Reif
+* 1.1.1  added async() option. edited parse_stderr to break only when first word of stderr is "Error:"
 * 1.1:   added rversion() and require() options. fixed text output when using RSCRIPT_PATH
 * 1.0.4: added default pathname
 * 1.0.3: added support for "~" pathnames
@@ -12,7 +13,7 @@ program define rscript, rclass
 	tempfile shell out err tmpfile_require rversion_control_script
 	tempname shellfile tmpname_require
 
-	syntax [using/], [rpath(string) args(string asis) rversion(string) require(string asis) force]
+	syntax [using/], [rpath(string) args(string asis) rversion(string) require(string asis) async force]
 	
 	************************************************
 	* Error checking
@@ -139,6 +140,33 @@ program define rscript, rclass
 		}
 	}
 	
+	* If async option specified, rpath call will be run in the background
+	if !mi("`async'") {
+		
+		if !mi(`"`rversion'"') {
+			di as error "Cannot specify async with rversion()"
+			exit 198
+		}
+			
+		local os = lower("`c(os)'")
+		
+		* Unix/mac: "nohup" keeps command running even after logging out, and '&' makes it run in the background
+		if inlist("`os'","macosx","unix") {
+			local rpath_start "nohup "
+			local rpath_end "&"
+		}
+		
+		* Windows: "cmd.exe /c start /B /min "" " to run in the background (using winexec)
+		else if "`os'" == "windows" {
+			local rpath_start `"cmd.exe /c start /B /MIN "" "'
+		}
+		
+		else {
+			di as error "async option not supported for the `c(os)' operating system"
+			exit 198
+		}
+	}
+	
 	
 	************************************************
 	* Detect shell version
@@ -179,15 +207,17 @@ program define rscript, rclass
 		* Create an R script that will be used to check R version and/or installed packages
 		qui write_r_script `rversion_control_script'
 		
-		* Call that R script. Note: shell call differs for csh/bash/other (windows is "other")
+		* csh shell call
 		if strpos("`shellline'", "csh") {	
 			qui shell ("`rpath'" "`rversion_control_script'" `rversion' `arg_require' > `out') >& `err'
 		}
-
+		
+		* bash shell call
 		else if strpos("`shellline'", "bash") {
 			qui shell "`rpath'" "`rversion_control_script'" `rversion' `arg_require' > `out' 2>`err'
 		}
 
+		* windows and all other unix shell calls
 		else {
 			qui shell "`rpath'" "`rversion_control_script'" `rversion' `arg_require' > `out' 2>`err'
 		}
@@ -228,20 +258,33 @@ program define rscript, rclass
 		di as result `"Running R script: `using'"'
 		if !mi(`"`args'"') di as result `"Args: `args'"'	
 		
-		* shell call differs for csh/bash/other (windows is "other")
+		* csh shell call
 		if strpos("`shellline'", "csh") {	
-			shell ("`rpath'" "`using'" `args' > `out') >& `err'
+			shell (`rpath_start'"`rpath'" "`using'" `args' > `out') >& `err' `rpath_end'
 		}
 		
+		* bash shell call
 		else if strpos("`shellline'", "bash") {
-			shell "`rpath'" "`using'" `args' > `out' 2>`err'
+			shell `rpath_start'"`rpath'" "`using'" `args' > `out' 2>`err' `rpath_end'
 		}
 		
+		* all other unix shell calls
+		else if inlist("`os'","macosx","unix") {
+			shell `rpath_start'"`rpath'" "`using'" `args' > `out' 2>`err' `rpath_end'
+		}
+		
+		* windows shell call
 		else {
-			shell "`rpath'" "`using'" `args' > `out' 2>`err'
+			if !mi("`async'") {
+				winexec `rpath_start'"`rpath'" "`using'" `args' > `out' 2>`err' `rpath_end'
+			}
+			else shell `rpath_start'"`rpath'" "`using'" `args' > `out' 2>`err' `rpath_end'
 		}
 		
 		return local rpath `rpath'
+		
+		* If running aynchronously, exit without looking for stdout and stderr output
+		if !mi("`async'") exit
 		
 		************************************************
 		* Display stdout and stderr output
@@ -292,10 +335,10 @@ end
 ********************************
 
 ***
-* write_script writes out an R script that checks the version of base R and confirms package installations 
+* write_r_script writes out an R script that checks the version of base R and confirms package installations 
 ***
 
-* The program write_script expects one argument: the name of the file being written
+* The program write_r_script expects one argument: the name of the file being written
 
 * The R script that is written accepts three arguments:
 *  (1) rmin (default, '-1', causes script to ignore enforcmement of minimum version)
@@ -388,7 +431,7 @@ void parse_stderr(string scalar filename)
 	input_fh = fopen(filename, "r")
 	
 	while ((line=fget(input_fh)) != J(0,0,"")) {
-		if (strpos(strlower(line), "error")!=0) exit(error(198))
+		if (strpos(line, "Error:")==1) exit(error(198))
 	}
 	
 	fclose(input_fh)

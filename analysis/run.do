@@ -28,13 +28,13 @@ if _rc {
 	error 9
 }
 
-* Initialize log
+* Record start time and initialize log
+local datetime1 = clock("$S_DATE $S_TIME", "DMYhms")
 clear
-set more off
 cap mkdir "`ProjectDir'/scripts/logs"
 cap log close
-local datetime : di %tcCCYY.NN.DD!-HH.MM.SS `=clock("$S_DATE $S_TIME", "DMYhms")'
-local logfile "`ProjectDir'/scripts/logs/`datetime'.log.txt"
+local logdate : di %tcCCYY.NN.DD!_HH.MM.SS `datetime1'
+local logfile "`ProjectDir'/scripts/logs/`logdate'.log.txt"
 log using "`logfile'", text
 
 * Configure Stata's library environment and record system parameters
@@ -43,17 +43,8 @@ run "`ProjectDir'/scripts/programs/_config.do"
 * R packages can be installed manually (see README) or installed automatically by uncommenting the following line
 * if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/_install_R_packages.R"
 
-* Stata and R version control
-version 15
+* R version control
 if "$DisableR"!="1" rscript, rversion(3.6) require(tidyverse estimatr)
-
-* Create directories for output files
-cap mkdir "`ProjectDir'/processed"
-cap mkdir "`ProjectDir'/processed/intermediate"
-cap mkdir "`ProjectDir'/results"
-cap mkdir "`ProjectDir'/results/figures"
-cap mkdir "`ProjectDir'/results/intermediate"
-cap mkdir "`ProjectDir'/results/tables"
 
 * Run project analysis
 do "`ProjectDir'/scripts/1_process_raw_data.do"
@@ -61,8 +52,9 @@ do "`ProjectDir'/scripts/2_clean_data.do"
 do "`ProjectDir'/scripts/3_regressions.do"
 do "`ProjectDir'/scripts/4_make_tables_figures.do"
 
-* End log
-di "End date and time: $S_DATE $S_TIME"
+* Display runtime and end the script
+local datetime2 = clock("$S_DATE $S_TIME", "DMYhms")
+di "Runtime (hours): " %-12.2fc (`datetime2' - `datetime1')/(1000*60*60)
 log close
 
 ** EOF

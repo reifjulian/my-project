@@ -1,18 +1,18 @@
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/logs/2022.12.11-08.38.30.log.txt
+       log:  C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/logs/2024.07.15_14.41.27.log.txt
   log type:  text
- opened on:  11 Dec 2022, 08:38:30
+ opened on:  15 Jul 2024, 14:41:27
 
 . 
 . * Configure Stata's library environment and record system parameters
 . run "`ProjectDir'/scripts/programs/_config.do"
 -------------------------------------------------------------------------------
-Date and time: 11 Dec 2022 08:38:30
-Stata version: 17
-Updated as of: 15 Nov 2022
+Date and time: 15 Jul 2024 14:41:27
+Stata version: 18
+Updated as of: 25 Jun 2024
 Variant:       MP
-Processors:    6
+Processors:    8
 OS:            Windows 64-bit
 Machine type:  PC (64-bit x86-64)
 -------------------------------------------------------------------------------
@@ -21,27 +21,12 @@ Machine type:  PC (64-bit x86-64)
 . * R packages can be installed manually (see README) or installed automatically by uncommenting the following line
 . * if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/_install_R_packages.R"
 . 
-. * Stata and R version control
-. version 15
-
+. * R version control
 . if "$DisableR"!="1" rscript, rversion(3.6) require(tidyverse estimatr)
-Using default path: C:/Program Files/R/R-4.2.1/bin/Rscript.exe
 Version information:
-[1] "R installation is version 4.2.1"
+Running .Rprofile...
 
-. 
-. * Create directories for output files
-. cap mkdir "`ProjectDir'/processed"
-
-. cap mkdir "`ProjectDir'/processed/intermediate"
-
-. cap mkdir "`ProjectDir'/results"
-
-. cap mkdir "`ProjectDir'/results/figures"
-
-. cap mkdir "`ProjectDir'/results/intermediate"
-
-. cap mkdir "`ProjectDir'/results/tables"
+[1] "R installation is version 4.3.1"
 
 . 
 . * Run project analysis
@@ -55,11 +40,11 @@ Version information:
 . * Preamble (unnecessary when executing run.do)
 . run "$MyProject/scripts/programs/_config.do"
 -------------------------------------------------------------------------------
-Date and time: 11 Dec 2022 08:38:31
-Stata version: 17
-Updated as of: 15 Nov 2022
+Date and time: 15 Jul 2024 14:41:28
+Stata version: 18
+Updated as of: 25 Jun 2024
 Variant:       MP
-Processors:    6
+Processors:    8
 OS:            Windows 64-bit
 Machine type:  PC (64-bit x86-64)
 -------------------------------------------------------------------------------
@@ -94,11 +79,11 @@ end of do-file
 . * Preamble (unnecessary when executing run.do)
 . run "$MyProject/scripts/programs/_config.do"
 -------------------------------------------------------------------------------
-Date and time: 11 Dec 2022 08:38:31
-Stata version: 17
-Updated as of: 15 Nov 2022
+Date and time: 15 Jul 2024 14:41:28
+Stata version: 18
+Updated as of: 25 Jun 2024
 Variant:       MP
-Processors:    6
+Processors:    8
 OS:            Windows 64-bit
 Machine type:  PC (64-bit x86-64)
 -------------------------------------------------------------------------------
@@ -314,11 +299,11 @@ end of do-file
 . * Preamble (unnecessary when executing run.do)
 . run "$MyProject/scripts/programs/_config.do"
 -------------------------------------------------------------------------------
-Date and time: 11 Dec 2022 08:38:31
-Stata version: 17
-Updated as of: 15 Nov 2022
+Date and time: 15 Jul 2024 14:41:28
+Stata version: 18
+Updated as of: 25 Jun 2024
 Variant:       MP
-Processors:    6
+Processors:    8
 OS:            Windows 64-bit
 Machine type:  PC (64-bit x86-64)
 -------------------------------------------------------------------------------
@@ -360,8 +345,8 @@ Linear regression                               Number of obs     =         52
          mpg |  -329.2551    81.1942    -4.06   0.000    -492.3384   -166.1717
        _cons |   12600.54   1777.731     7.09   0.000     9029.859    16171.22
 ------------------------------------------------------------------------------
-(file C:\Users\jreif\AppData\Local\Temp\ST_2fd0_000001.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_2fd0_000001.tmp saved as .dta format
+(file C:\Users\jreif\AppData\Local\Temp\ST_2b8_000001.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_2b8_000001.tmp saved as .dta format
 
 Linear regression                               Number of obs     =         22
                                                 F(1, 20)          =       8.05
@@ -377,7 +362,7 @@ Linear regression                               Number of obs     =         22
        _cons |   12586.95   2352.589     5.35   0.000     7679.535    17494.37
 ------------------------------------------------------------------------------
 (variable origin was str7, now str8 to accommodate using data's values)
-file C:\Users\jreif\AppData\Local\Temp\ST_2fd0_000001.tmp saved as .dta format
+file C:\Users\jreif\AppData\Local\Temp\ST_2b8_000001.tmp saved as .dta format
 
 Linear regression                               Number of obs     =         52
                                                 F(2, 49)          =      18.88
@@ -393,7 +378,7 @@ Linear regression                               Number of obs     =         52
       weight |   4.415037   1.338438     3.30   0.002     1.725346    7.104728
        _cons |  -13285.44   8279.718    -1.60   0.115    -29924.16    3353.272
 ------------------------------------------------------------------------------
-file C:\Users\jreif\AppData\Local\Temp\ST_2fd0_000001.tmp saved as .dta format
+file C:\Users\jreif\AppData\Local\Temp\ST_2b8_000001.tmp saved as .dta format
 
 Linear regression                               Number of obs     =         22
                                                 F(2, 19)          =      49.02
@@ -410,7 +395,7 @@ Linear regression                               Number of obs     =         22
        _cons |  -5065.841   2885.351    -1.76   0.095    -11104.95    973.2692
 ------------------------------------------------------------------------------
 (variable origin was str7, now str8 to accommodate using data's values)
-file C:\Users\jreif\AppData\Local\Temp\ST_2fd0_000001.tmp saved as .dta format
+file C:\Users\jreif\AppData\Local\Temp\ST_2b8_000001.tmp saved as .dta format
 
 . 
 . use "`results'", clear
@@ -425,32 +410,29 @@ file C:/Users/jreif/Documents/GitHub/my-project/analysis/results/intermediate/my
 . 
 . * R regressions. First argument: input file. Second argument: output file.
 . if "$DisableR"!="1" rscript using "$MyProject/scripts/programs/regressions.R", args("$MyProject/processed/auto.dta" "$MyProject/results/intermediate/my_lm_regressions.dta")
-Using default path: C:/Program Files/R/R-4.2.1/bin/Rscript.exe
 Running R script: C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/programs/regressions.R
 Args: "C:/Users/jreif/Documents/GitHub/my-project/analysis/processed/auto.dta" "C:/Users/jreif/Documents/GitHub/my-project/analysis/results/intermediate/my_lm_regressions.dta"
 Begin R output:
 ________________________________________________________________________________
 stdout:
+Running .Rprofile...
 
 
 stderr:
-── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
-✔ ggplot2 3.4.0      ✔ purrr   0.3.5 
-✔ tibble  3.1.8      ✔ dplyr   1.0.10
-✔ tidyr   1.2.1      ✔ stringr 1.5.0 
-✔ readr   2.1.3      ✔ forcats 0.5.2 
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.4     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
-Warning messages:
-1: package 'ggplot2' was built under R version 4.2.2 
-2: package 'tidyr' was built under R version 4.2.2 
-3: package 'readr' was built under R version 4.2.2 
-4: package 'purrr' was built under R version 4.2.2 
-5: package 'dplyr' was built under R version 4.2.2 
-6: package 'stringr' was built under R version 4.2.2 
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 Warning message:
-package 'estimatr' was built under R version 4.2.2 
+package 'ggplot2' was built under R version 4.3.2 
+Warning message:
+package 'estimatr' was built under R version 4.3.2 
 ________________________________________________________________________________
 ...end R output
 
@@ -469,11 +451,11 @@ end of do-file
 . * Preamble (unnecessary when executing run.do)
 . run "$MyProject/scripts/programs/_config.do"
 -------------------------------------------------------------------------------
-Date and time: 11 Dec 2022 08:38:34
-Stata version: 17
-Updated as of: 15 Nov 2022
+Date and time: 15 Jul 2024 14:41:32
+Stata version: 18
+Updated as of: 25 Jun 2024
 Variant:       MP
-Processors:    6
+Processors:    8
 OS:            Windows 64-bit
 Machine type:  PC (64-bit x86-64)
 -------------------------------------------------------------------------------
@@ -520,13 +502,13 @@ file C:/Users/jreif/Documents/GitHub/my-project/analysis/results/figures/price_h
   8.         local run_no = `run_no'+1
   9.         restore, preserve
  10. }
-(file C:\Users\jreif\AppData\Local\Temp\ST_2fd0_000001.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_2fd0_000001.tmp saved as .dta format
+(file C:\Users\jreif\AppData\Local\Temp\ST_2b8_000001.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_2b8_000001.tmp saved as .dta format
 (variable min was byte, now int to accommodate using data's values)
 (variable max was byte, now int to accommodate using data's values)
 (variable var was str3, now str5 to accommodate using data's values)
-file C:\Users\jreif\AppData\Local\Temp\ST_2fd0_000001.tmp saved as .dta format
-file C:\Users\jreif\AppData\Local\Temp\ST_2fd0_000001.tmp saved as .dta format
+file C:\Users\jreif\AppData\Local\Temp\ST_2b8_000001.tmp saved as .dta format
+file C:\Users\jreif\AppData\Local\Temp\ST_2b8_000001.tmp saved as .dta format
 
 . restore, not
 
@@ -604,11 +586,11 @@ variable var was str16 now str20
   5.                 local replace append
   6.         }
   7. }
-(file C:\Users\jreif\AppData\Local\Temp\ST_2fd0_000003.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_2fd0_000003.tmp saved as .dta format
-file C:\Users\jreif\AppData\Local\Temp\ST_2fd0_000003.tmp saved as .dta format
-file C:\Users\jreif\AppData\Local\Temp\ST_2fd0_000003.tmp saved as .dta format
-file C:\Users\jreif\AppData\Local\Temp\ST_2fd0_000003.tmp saved as .dta format
+(file C:\Users\jreif\AppData\Local\Temp\ST_2b8_000003.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_2b8_000003.tmp saved as .dta format
+file C:\Users\jreif\AppData\Local\Temp\ST_2b8_000003.tmp saved as .dta format
+file C:\Users\jreif\AppData\Local\Temp\ST_2b8_000003.tmp saved as .dta format
+file C:\Users\jreif\AppData\Local\Temp\ST_2b8_000003.tmp saved as .dta format
 
 . 
 . ***
@@ -653,8 +635,8 @@ variable var was str13 now str16
 
 . local headerlines "& \multicolumn{2}{c}{Domestic cars} & \multicolumn{2}{c}{Foreign cars} " "\cmidrule(lr){2-3} \cmidrule(lr){4-5}"
 
-. local fn "Notes: Outcome variable is price (1978 dollars). Columns (1) and (2) report estimates of \(\beta\) from equation (\ref{eqn:model}) for domestic automobiles. Columns (3) and (4) report estimates for foreign automobiles. Robust standard error
-> s are reported in parentheses. A */**/*** indicates significance at the 10/5/1\% levels."
+. local fn "Notes: Outcome variable is price (1978 dollars). Columns (1) and (2) report estimates of \(\beta\) from equation (\ref{eqn:model}) for domestic automobiles. Columns (3) and (4) report estimates for foreign automobiles. Robust
+>  standard errors are reported in parentheses. A */**/*** indicates significance at the 10/5/1\% levels."
 
 . texsave using "$MyProject/results/tables/my_regressions.tex", autonumber varlabels hlines(-2) nofix replace marker(tab:my_regressions) title("`title'") headerlines("`headerlines'") footnote("`fn'")
 
@@ -687,11 +669,11 @@ variable var was str13 now str16
   5.                 local replace append
   6.         }
   7. }
-(file C:\Users\jreif\AppData\Local\Temp\ST_2fd0_000005.tmp not found)
-file C:\Users\jreif\AppData\Local\Temp\ST_2fd0_000005.tmp saved as .dta format
-file C:\Users\jreif\AppData\Local\Temp\ST_2fd0_000005.tmp saved as .dta format
-file C:\Users\jreif\AppData\Local\Temp\ST_2fd0_000005.tmp saved as .dta format
-file C:\Users\jreif\AppData\Local\Temp\ST_2fd0_000005.tmp saved as .dta format
+(file C:\Users\jreif\AppData\Local\Temp\ST_2b8_000005.tmp not found)
+file C:\Users\jreif\AppData\Local\Temp\ST_2b8_000005.tmp saved as .dta format
+file C:\Users\jreif\AppData\Local\Temp\ST_2b8_000005.tmp saved as .dta format
+file C:\Users\jreif\AppData\Local\Temp\ST_2b8_000005.tmp saved as .dta format
+file C:\Users\jreif\AppData\Local\Temp\ST_2b8_000005.tmp saved as .dta format
 .         
 . * Format the table
 . use "`my_table_r'", clear
@@ -712,7 +694,7 @@ file C:\Users\jreif\AppData\Local\Temp\ST_2fd0_000005.tmp saved as .dta format
 . 
 . * Append to prior table, reformat, and output
 . save "`my_table_r'", replace
-file C:\Users\jreif\AppData\Local\Temp\ST_2fd0_000005.tmp saved as .dta format
+file C:\Users\jreif\AppData\Local\Temp\ST_2b8_000005.tmp saved as .dta format
 . restore
 . append using "`my_table_r'"
 (variable var was str16, now str18 to accommodate using data's values)
@@ -744,13 +726,15 @@ variable var was str18 now str25
 end of do-file
 
 . 
-. * End log
-. di "End date and time: $S_DATE $S_TIME"
-End date and time: 11 Dec 2022 08:38:36
+. * Display runtime and end the script
+. local datetime2 = clock("$S_DATE $S_TIME", "DMYhms")
+
+. di "Runtime (hours): " %-12.2fc (`datetime2' - `datetime1')/(1000*60*60)
+Runtime (hours): 0.00        
 
 . log close
       name:  <unnamed>
-       log:  C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/logs/2022.12.11-08.38.30.log.txt
+       log:  C:/Users/jreif/Documents/GitHub/my-project/analysis/scripts/logs/2024.07.15_14.41.27.log.txt
   log type:  text
- closed on:  11 Dec 2022, 08:38:36
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ closed on:  15 Jul 2024, 14:41:34
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

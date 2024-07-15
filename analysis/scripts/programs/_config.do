@@ -1,6 +1,8 @@
 ******
 * This script configures the Stata library environment and displays the value of system parameters
 ******
+* Stata version control
+version 15
 
 * The local macro ProjectDir must point to the folder path that contains the /scripts folder
 local ProjectDir "$MyProject"
@@ -19,6 +21,7 @@ while `"`1'"' != "" {
 }
 adopath ++ "`ProjectDir'/scripts/libraries/stata"
 adopath ++ "`ProjectDir'/scripts/programs"
+mata: mata mlib index
 
 * Display system parameters and record the date and time
 cap program drop _print_timestamp 
@@ -39,7 +42,16 @@ program define _print_timestamp
 end
 noi _print_timestamp
 
+* Create directories for output files
+cap mkdir "`ProjectDir'/processed"
+cap mkdir "`ProjectDir'/processed/intermediate"
+cap mkdir "`ProjectDir'/results"
+cap mkdir "`ProjectDir'/results/figures"
+cap mkdir "`ProjectDir'/results/intermediate"
+cap mkdir "`ProjectDir'/results/tables"
+
 * Additional code you want automatically executed
 set varabbrev off
+set more off
 
 ** EOF

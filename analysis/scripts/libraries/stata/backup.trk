@@ -1,4 +1,4 @@
-* 00000015
+* 00000018
 *! version 1.0.0
 * Do not erase or edit this file
 * It is used by Stata to track the ado and help
@@ -191,6 +191,39 @@ S https://raw.githubusercontent.com/reifjulian/texsave/master
 N texsave.pkg
 D 11 Dec 2022
 U 15
+d texsave. Save dataset in LaTeX format.
+d Julian Reif, University of Illinois (jreif@illinois.edu)
+f t\texsave.ado
+f t\texsave.sthlp
+f a\appendfile.ado
+f a\appendfile.hlp
+e
+S https://raw.githubusercontent.com/reifjulian/texsave/footer
+N texsave.pkg
+D 11 Dec 2022
+U 16
+d texsave. Save dataset in LaTeX format.
+d Julian Reif, University of Illinois (jreif@illinois.edu)
+f t\texsave.ado
+f t\texsave.sthlp
+f a\appendfile.ado
+f a\appendfile.hlp
+e
+S https://raw.githubusercontent.com/reifjulian/regsave/master
+N regsave.pkg
+D 15 Jul 2024
+U 17
+d regsave. Extract and store regression results.
+d Julian Reif, University of Illinois (jreif@illinois.edu)
+f r\regsave.ado
+f r\regsave.hlp
+f r\regsave_tbl.ado
+f r\regsave_tbl.hlp
+e
+S https://raw.githubusercontent.com/reifjulian/texsave/master
+N texsave.pkg
+D 15 Jul 2024
+U 18
 d texsave. Save dataset in LaTeX format.
 d Julian Reif, University of Illinois (jreif@illinois.edu)
 f t\texsave.ado

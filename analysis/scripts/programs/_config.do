@@ -36,7 +36,9 @@ program define _print_timestamp
 	di "OS:            `c(os)' `c(osdtl)'"
 	di "Machine type:  `c(machine_type)'"
 	local hostname : env HOSTNAME
+	local shell : env SHELL
 	if !mi("`hostname'") di "Hostname:      `hostname'"
+	if !mi("`shell'") di "Shell:         `shell'"
 	
 	di "{hline `=min(79, c(linesize))'}"
 end
